@@ -1,4 +1,4 @@
-package persistence.repository;
+package infrastructure.persistence.repository;
 
 import Infrastructure.persistence.entity.InstituteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

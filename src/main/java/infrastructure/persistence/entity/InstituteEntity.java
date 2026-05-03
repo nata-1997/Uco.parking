@@ -1,4 +1,4 @@
-package persistence.entity;
+package infrastructure.persistence.entity;
 
 
 import jakarta.persistence.Column;
