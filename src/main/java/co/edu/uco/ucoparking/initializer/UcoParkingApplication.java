@@ -1,4 +1,4 @@
-package initializer;
+package co.edu.uco.ucoparking.initializer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

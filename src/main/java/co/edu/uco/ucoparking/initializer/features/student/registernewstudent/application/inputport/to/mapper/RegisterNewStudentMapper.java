@@ -1,4 +1,4 @@
-package initializer.features.student.registernewstudent.application.inputport.to.mapper;
+package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.mapper;
 
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input.RegisterNewStudentInputTO;

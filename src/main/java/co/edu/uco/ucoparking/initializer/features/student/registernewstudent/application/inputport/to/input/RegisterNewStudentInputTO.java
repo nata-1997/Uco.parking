@@ -1,4 +1,4 @@
-package initializer.features.student.registernewstudent.application.inputport.to.input;
+package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input;
 
 import java.util.UUID;
 

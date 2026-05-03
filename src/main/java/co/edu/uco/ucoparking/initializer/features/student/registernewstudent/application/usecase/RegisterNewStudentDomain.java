@@ -1,4 +1,4 @@
-package initializer.features.student.registernewstudent.application.usecase;
+package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase;
 
 import java.util.UUID;
 

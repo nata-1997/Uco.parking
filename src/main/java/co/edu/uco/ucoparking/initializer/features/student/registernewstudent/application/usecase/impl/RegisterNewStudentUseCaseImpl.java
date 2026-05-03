@@ -1,4 +1,4 @@
-package initializer.features.student.registernewstudent.application.usecase.impl;
+package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.impl;
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.domain.RegisterNewStudentUseCase;
