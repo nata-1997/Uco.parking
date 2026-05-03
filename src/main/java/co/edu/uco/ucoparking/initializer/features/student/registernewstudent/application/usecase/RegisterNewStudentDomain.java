@@ -12,8 +12,7 @@ public class RegisterNewStudentDomain {
     private String email;
     private String mobileNumber;
 
-    public RegisterNewStudentDomain(UUID id, UUID academicProgram, UUID idType, String name, String lastName, String idNumber, String email, String mobileNumber) {
-        super();
+    public RegisterNewStudentDomain(UUID academicProgram, UUID idType, String name, String lastName, String idNumber, String email, String mobileNumber) {
         generateId();
         setAcademicProgram(academicProgram);
         setIdType(idType);

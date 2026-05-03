@@ -10,7 +10,6 @@ public final class RegisterNewStudentMapper {
 
     public static RegisterNewStudentDomain toDomain(RegisterNewStudentInputTO to) {
         return new RegisterNewStudentDomain(
-                to.getId(),
                 to.getAcademicProgram(),
                 to.getIdType(),
                 to.getName(),
