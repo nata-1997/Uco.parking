@@ -3,5 +3,9 @@ package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.ap
 import application.outport.Outport;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
 
-public interface RegisterNewStudentOutPort extends Outport<RegisterNewStudentDomain,Void> {
+/**
+ * Puerto de persistencia del caso de uso: persiste un estudiante nuevo (dominio ya validado).
+ */
+public interface RegisterNewStudentOutPort extends Outport<RegisterNewStudentDomain, Void> {
 }
+
