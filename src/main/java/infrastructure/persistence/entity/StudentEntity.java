@@ -55,7 +55,9 @@ public class StudentEntity {
         return lastName;
     }
 
-    public String getIdNumber() {return idNumber;}
+    public String getIdNumber() {
+        return idNumber;
+    }
 
     public String geteMail() {
         return eMail;
@@ -85,7 +87,9 @@ public class StudentEntity {
         this.lastName = lastName;
     }
 
-    private void setIdNumber(String idNumber) {this.idNumber = idNumber;}
+    private void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
 
     private void seteMail(String eMail) {
         this.eMail = eMail;
@@ -95,5 +99,25 @@ public class StudentEntity {
         this.mobileNumber = mobileNumber;
     }
 
+    public static StudentEntity createNew(
+            UUID id,
+            AcademicProgramEntity academicProgramEntity,
+            IdTypeEntity idTypeEntity,
+            String name,
+            String lastName,
+            String idNumber,
+            String email,
+            String mobileNumber) {
+        StudentEntity entity = new StudentEntity();
+        entity.setId(id);
+        entity.setAcademicProgramEntity(academicProgramEntity);
+        entity.setIdTypeEntity(idTypeEntity);
+        entity.setName(name);
+        entity.setLastName(lastName);
+        entity.setIdNumber(idNumber);
+        entity.seteMail(email);
+        entity.setMobileNumber(mobileNumber);
+        return entity;
+    }
 
 }
