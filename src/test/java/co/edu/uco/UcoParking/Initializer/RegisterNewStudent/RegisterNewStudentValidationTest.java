@@ -6,10 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class RegisterNewStudentValidationTest {
+class RegisterNewStudentValidationTest {
 
     private static final UUID PROGRAM = UUID.fromString("11111111-1111-1111-1111-111111111111");
     private static final UUID ID_TYPE = UUID.fromString("22222222-2222-2222-2222-222222222222");

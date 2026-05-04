@@ -1,6 +1,5 @@
 package co.edu.uco.UcoParking.Initializer.RegisterNewStudent;
 
-
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.impl.RegisterNewStudentInteractor;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input.RegisterNewStudentInputTO;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
@@ -15,9 +14,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
-
 @ExtendWith(MockitoExtension.class)
 public class RegisterNewStudentInteractorTest {
 
