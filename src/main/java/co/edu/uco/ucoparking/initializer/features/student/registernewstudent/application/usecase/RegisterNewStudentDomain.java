@@ -1,5 +1,7 @@
 package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase;
 
+import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.domain.specification.StudentRegistrationSpecifications;
+
 import java.util.UUID;
 
 public class RegisterNewStudentDomain {
@@ -22,15 +24,8 @@ public class RegisterNewStudentDomain {
         setEmail(email);
         setMobileNumber(mobileNumber);
 
-        //¿cómo garantizar que el objeto de dominio se cree de forma integral validado a nivel de tipo de dato, longitud, obligatoriedad, formato, rango, sobre cada uno de los atributos involucrados//
-        //selfvalidation//
-        //Pistas//
-        //Validation pattern//
-        //Rule patern//
         //Especification patteern//<--The best//
-        //Custom exceptions//
-
-        //Clean code//
+        StudentRegistrationSpecifications.assertAll(this);
     }
 
     public UUID getId() {
@@ -78,22 +73,33 @@ public class RegisterNewStudentDomain {
     }
 
     private void setName(String name) {
-        this.name = name;
+        this.name = trimToNull(name);
     }
 
     private void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = trimToNull(lastName);
     }
 
     private void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+        this.idNumber = trimToNull(idNumber);
     }
 
     private void setEmail(String email) {
-        this.email = email;
+        this.email = trimToNull(email);
     }
 
     private void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+        this.mobileNumber = trimToNull(mobileNumber);
+
+    }
+
+    private static String trimToNull(String value) {
+        if (value == null){
+            return null;
+        }
+
+        String t= value.trim();
+        return t.isEmpty() ? null : t;
+
     }
 }

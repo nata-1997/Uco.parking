@@ -26,6 +26,9 @@ public class StudentEntity {
     @Column(name = "LastName")
     private String lastName;
 
+    @Column(name = "IdNumber", nullable = false)
+    private String idNumber;
+
     @Column(name = "eMail")
     private String eMail;
 
@@ -51,6 +54,8 @@ public class StudentEntity {
     public String getLastName() {
         return lastName;
     }
+
+    public String getIdNumber() {return idNumber;}
 
     public String geteMail() {
         return eMail;
@@ -80,6 +85,8 @@ public class StudentEntity {
         this.lastName = lastName;
     }
 
+    private void setIdNumber(String idNumber) {this.idNumber = idNumber;}
+
     private void seteMail(String eMail) {
         this.eMail = eMail;
     }
@@ -87,4 +94,6 @@ public class StudentEntity {
     private void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
+
+
 }
