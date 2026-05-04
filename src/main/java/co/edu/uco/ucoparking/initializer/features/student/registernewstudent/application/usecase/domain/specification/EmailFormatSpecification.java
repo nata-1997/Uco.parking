@@ -4,7 +4,7 @@ import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.app
 
 import java.util.regex.Pattern;
 
-public class mailFormatSpecification implements StudentRegistrationSpecification{
+public final class EmailFormatSpecification implements StudentRegistrationSpecification{
     private static final Pattern EMAIL = Pattern.compile(
             "^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$",
             Pattern.CASE_INSENSITIVE);

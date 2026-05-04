@@ -2,7 +2,7 @@ package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.ap
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
 
-public class DocumentNumberSpecification implements StudentRegistrationSpecification{
+public final class DocumentNumberSpecification implements StudentRegistrationSpecification{
 
     private static final int MIN_LEN = 5;
     private static final int MAX_LEN = 30;
