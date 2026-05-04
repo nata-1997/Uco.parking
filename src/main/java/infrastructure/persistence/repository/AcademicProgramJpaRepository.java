@@ -1,6 +1,6 @@
 package infrastructure.persistence.repository;
 
-import Infrastructure.persistence.entity.AcademicProgramEntity;
+import infrastructure.persistence.entity.AcademicProgramEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
