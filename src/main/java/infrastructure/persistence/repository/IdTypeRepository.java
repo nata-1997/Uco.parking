@@ -1,4 +1,4 @@
 package infrastructure.persistence.repository;
 
-public class InstituteRepository {
+public interface IdTypeRepository {
 }
