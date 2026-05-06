@@ -13,7 +13,7 @@ import java.util.UUID;
 public class InstituteJPAEntity {
 
     @Id
-    @Column(columnDefinition = "uniqueidentifier")
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "Name")
@@ -24,11 +24,11 @@ public class InstituteJPAEntity {
         setId(id);
         setName(name);
     }
-    public void setId(UUID id) {
+    private void setId(UUID id) {
         this.id = id;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
