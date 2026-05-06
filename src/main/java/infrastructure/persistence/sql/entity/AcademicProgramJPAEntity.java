@@ -9,21 +9,21 @@ import java.util.UUID;
 public class AcademicProgramJPAEntity {
 
     @Id
-    @Column(columnDefinition = "uniqueidentifier")
+    @Column(name ="id")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Institute", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "Institute")
     private InstituteJPAEntity instituteEntity;
 
     @Column(name="Name")
     private String name;
 
-    public AcademicProgramJPAEntity(UUID id, InstituteJPAEntity instituteEntity, String name) {
+    public AcademicProgramJPAEntity(UUID id, InstituteJPAEntity institute, String name) {
         super();
         generateId();
-        this.instituteEntity = instituteEntity;
-        this.name = name;
+        setName(name);
+        setInstitute(institute);
     }
 
     public UUID getId() {
@@ -42,8 +42,8 @@ public class AcademicProgramJPAEntity {
         this.id = UUID.randomUUID();
     }
 
-    private void setInstituteEntity(InstituteJPAEntity instituteEntity) {
-        this.instituteEntity = instituteEntity;
+    private void setInstitute(InstituteJPAEntity institute) {
+        this.instituteEntity = institute;
     }
 
     private void setName(String name) {

@@ -9,15 +9,15 @@ import java.util.UUID;
 public class StudentJPAEntity {
 
     @Id
-    @Column(columnDefinition = "uniqueidentifier")
+    @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "AcademicProgram", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "AcademicProgram")
     private AcademicProgramJPAEntity academicProgramEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdType", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "IdType")
     private IdTypeJPAEntity idTypeEntity;
 
     @Column(name = "Name")
@@ -26,7 +26,7 @@ public class StudentJPAEntity {
     @Column(name = "LastName")
     private String lastName;
 
-    @Column(name = "IdNumber", nullable = false)
+    @Column(name = "IdNumber")
     private String idNumber;
 
     @Column(name = "eMail")
@@ -34,6 +34,18 @@ public class StudentJPAEntity {
 
     @Column(name = "MobileNumber")
     private String mobileNumber;
+
+    public StudentJPAEntity(UUID id, AcademicProgramJPAEntity academicProgramEntity, IdTypeJPAEntity idTypeEntity, String name, String lastName, String idNumber, String eMail, String mobileNumber) {
+        super();
+        setId(id);
+        setAcademicProgramEntity(academicProgramEntity);
+        setIdTypeEntity(idTypeEntity);
+        setName(name);
+        setLastName(lastName);
+        setIdNumber(idNumber);
+        seteMail(eMail);
+        setMobileNumber(mobileNumber);
+    }
 
     public UUID getId() {
         return id;
@@ -99,25 +111,6 @@ public class StudentJPAEntity {
         this.mobileNumber = mobileNumber;
     }
 
-    public static StudentJPAEntity createNew(
-            UUID id,
-            AcademicProgramJPAEntity academicProgramEntity,
-            IdTypeJPAEntity idTypeEntity,
-            String name,
-            String lastName,
-            String idNumber,
-            String email,
-            String mobileNumber) {
-        StudentJPAEntity entity = new StudentJPAEntity();
-        entity.setId(id);
-        entity.setAcademicProgramEntity(academicProgramEntity);
-        entity.setIdTypeEntity(idTypeEntity);
-        entity.setName(name);
-        entity.setLastName(lastName);
-        entity.setIdNumber(idNumber);
-        entity.seteMail(email);
-        entity.setMobileNumber(mobileNumber);
-        return entity;
-    }
+
 
 }

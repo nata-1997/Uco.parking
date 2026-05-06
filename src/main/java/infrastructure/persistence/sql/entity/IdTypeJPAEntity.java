@@ -13,11 +13,25 @@ import java.util.UUID;
 public class IdTypeJPAEntity {
 
     @Id
-    @Column(columnDefinition = "uniqueidentifier")
+    @Column(name = "id")
     private UUID id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "name")
     private String name;
+
+    public IdTypeJPAEntity(UUID id, String name) {
+        super ();
+        setId(id);
+        setName(name);
+    }
+
+    private void setId(UUID id) {
+        this.id = id;
+    }
+
+    private void setName(String name) {
+        this.name = name;
+    }
 
     public UUID getId() {
         return id;
