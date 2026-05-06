@@ -1,4 +1,4 @@
-package infrastructure.persistence.entity;
+package infrastructure.persistence.sql.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name="IdType")
-public class IdTypeEntity {
+public class IdTypeJPAEntity {
 
     @Id
     @Column(columnDefinition = "uniqueidentifier")

@@ -1,4 +1,4 @@
-package infrastructure.persistence.entity;
+package infrastructure.persistence.sql.entity;
 
 import jakarta.persistence.*;
 
@@ -6,20 +6,20 @@ import java.util.UUID;
 
 @Entity
 @Table(name="AcademicProgram")
-public class AcademicProgramEntity {
+public class AcademicProgramJPAEntity {
 
     @Id
     @Column(columnDefinition = "uniqueidentifier")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "InstituteId", nullable = false)
-    private InstituteEntity instituteEntity;
+    @JoinColumn(name = "Institute", nullable = false)
+    private InstituteJPAEntity instituteEntity;
 
     @Column(name="Name")
     private String name;
 
-    public AcademicProgramEntity(UUID id, InstituteEntity instituteEntity, String name) {
+    public AcademicProgramJPAEntity(UUID id, InstituteJPAEntity instituteEntity, String name) {
         super();
         generateId();
         this.instituteEntity = instituteEntity;
@@ -30,7 +30,7 @@ public class AcademicProgramEntity {
         return id;
     }
 
-    public InstituteEntity getInstituteEntity() {
+    public InstituteJPAEntity getInstituteEntity() {
         return instituteEntity;
     }
 
@@ -42,7 +42,7 @@ public class AcademicProgramEntity {
         this.id = UUID.randomUUID();
     }
 
-    private void setInstituteEntity(InstituteEntity instituteEntity) {
+    private void setInstituteEntity(InstituteJPAEntity instituteEntity) {
         this.instituteEntity = instituteEntity;
     }
 

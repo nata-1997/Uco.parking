@@ -1,4 +1,4 @@
-package infrastructure.persistence.entity;
+package infrastructure.persistence.sql.entity;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "Student")
-public class StudentEntity {
+public class StudentJPAEntity {
 
     @Id
     @Column(columnDefinition = "uniqueidentifier")
@@ -14,11 +14,11 @@ public class StudentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AcademicProgram", nullable = false)
-    private AcademicProgramEntity academicProgramEntity;
+    private AcademicProgramJPAEntity academicProgramEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdType", nullable = false)
-    private IdTypeEntity idTypeEntity;
+    private IdTypeJPAEntity idTypeEntity;
 
     @Column(name = "Name")
     private String name;
@@ -39,11 +39,11 @@ public class StudentEntity {
         return id;
     }
 
-    public AcademicProgramEntity getAcademicProgramEntity() {
+    public AcademicProgramJPAEntity getAcademicProgramEntity() {
         return academicProgramEntity;
     }
 
-    public IdTypeEntity getIdTypeEntity() {
+    public IdTypeJPAEntity getIdTypeEntity() {
         return idTypeEntity;
     }
 
@@ -71,11 +71,11 @@ public class StudentEntity {
         this.id = id;
     }
 
-    private void setAcademicProgramEntity(AcademicProgramEntity academicProgramEntity) {
+    private void setAcademicProgramEntity(AcademicProgramJPAEntity academicProgramEntity) {
         this.academicProgramEntity = academicProgramEntity;
     }
 
-    private void setIdTypeEntity(IdTypeEntity idTypeEntity) {
+    private void setIdTypeEntity(IdTypeJPAEntity idTypeEntity) {
         this.idTypeEntity = idTypeEntity;
     }
 
@@ -99,16 +99,16 @@ public class StudentEntity {
         this.mobileNumber = mobileNumber;
     }
 
-    public static StudentEntity createNew(
+    public static StudentJPAEntity createNew(
             UUID id,
-            AcademicProgramEntity academicProgramEntity,
-            IdTypeEntity idTypeEntity,
+            AcademicProgramJPAEntity academicProgramEntity,
+            IdTypeJPAEntity idTypeEntity,
             String name,
             String lastName,
             String idNumber,
             String email,
             String mobileNumber) {
-        StudentEntity entity = new StudentEntity();
+        StudentJPAEntity entity = new StudentJPAEntity();
         entity.setId(id);
         entity.setAcademicProgramEntity(academicProgramEntity);
         entity.setIdTypeEntity(idTypeEntity);

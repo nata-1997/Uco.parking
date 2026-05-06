@@ -4,12 +4,12 @@ import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.app
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.exception.DuplicateStudentDocumentException;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.exception.ReferenceEntityNotFoundException;
-import infrastructure.persistence.entity.AcademicProgramEntity;
-import infrastructure.persistence.entity.IdTypeEntity;
-import infrastructure.persistence.entity.StudentEntity;
-import infrastructure.persistence.repository.AcademicProgramJpaRepository;
-import infrastructure.persistence.repository.IdTypeJpaRepository;
-import infrastructure.persistence.repository.StudentJpaRepository;
+import infrastructure.persistence.sql.entity.AcademicProgramJPAEntity;
+import infrastructure.persistence.sql.entity.IdTypeJPAEntity;
+import infrastructure.persistence.sql.entity.StudentJPAEntity;
+import infrastructure.persistence.sql.AcademicProgramJpaRepository;
+import infrastructure.persistence.sql.IdTypeJpaRepository;
+import infrastructure.persistence.sql.StudentJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -35,10 +35,10 @@ public class RegisterNewStudentPersistenceAdapter implements RegisterNewStudentO
         UUID programId = data.getAcademicProgram();
         UUID idTypeId = data.getIdType();
 
-        AcademicProgramEntity program = academicProgramJpaRepository.findById(programId)
+        AcademicProgramJPAEntity program = academicProgramJpaRepository.findById(programId)
                 .orElseThrow(() -> new ReferenceEntityNotFoundException(
                         "No existe el programa académico indicado."));
-        IdTypeEntity idType = idTypeJpaRepository.findById(idTypeId).
+        IdTypeJPAEntity idType = idTypeJpaRepository.findById(idTypeId).
                 orElseThrow(() -> new ReferenceEntityNotFoundException(
                         "No existe el tipo de documento indicado."));
 
@@ -47,7 +47,7 @@ public class RegisterNewStudentPersistenceAdapter implements RegisterNewStudentO
                     "Ya existe un estudiante registrado con el mismo tipo y número de documento.");
         }
 
-        StudentEntity entity = RegisterNewStudentEntityMapper.toNewEntity(data, program, idType);
+        StudentJPAEntity entity = RegisterNewStudentEntityMapper.toNewEntity(data, program, idType);
 
         studentJpaRepository.save(entity);
         return null;

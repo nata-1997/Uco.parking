@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan(basePackages = "Infrastructure.persistence.entity")
-@EnableJpaRepositories(basePackages = "infrastructure.persistence.repository")
+@EnableJpaRepositories(basePackages = "infrastructure.persistence.sql")
 
 public class UcoParkingApplication {
 

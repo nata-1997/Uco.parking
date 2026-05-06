@@ -1,20 +1,20 @@
 package co.edu.uco.ucoparking.initializer.infrastructure.persistence;
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
-import infrastructure.persistence.entity.AcademicProgramEntity;
-import infrastructure.persistence.entity.IdTypeEntity;
-import infrastructure.persistence.entity.StudentEntity;
+import infrastructure.persistence.sql.entity.AcademicProgramJPAEntity;
+import infrastructure.persistence.sql.entity.IdTypeJPAEntity;
+import infrastructure.persistence.sql.entity.StudentJPAEntity;
 
 public class RegisterNewStudentEntityMapper {
 
     private RegisterNewStudentEntityMapper() {
     }
 
-    public static StudentEntity toNewEntity(
+    public static StudentJPAEntity toNewEntity(
             RegisterNewStudentDomain domain,
-            AcademicProgramEntity academicProgram,
-            IdTypeEntity idType) {
-        return StudentEntity.createNew(
+            AcademicProgramJPAEntity academicProgram,
+            IdTypeJPAEntity idType) {
+        return StudentJPAEntity.createNew(
                 domain.getId(),
                 academicProgram,
                 idType,
