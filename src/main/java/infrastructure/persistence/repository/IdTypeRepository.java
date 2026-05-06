@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface IdTypeRepository {
     void create (IdTypeEntity entity);
     void update (IdTypeEntity entity);
-    void delete (IdTypeEntity entity);
+    void delete (UUID id);
     IdTypeEntity findById(UUID id);
     List<IdTypeEntity> findByFilter(IdTypeEntity entity);
     List<IdTypeEntity> findAll();
