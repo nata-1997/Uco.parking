@@ -1,4 +1,4 @@
 package infrastructure.persistence.repository.adapter.sql.jpa;
 
-public class IdTypeRepository {
+public class AcademicProgramRepositoryJpaAdapter {
 }
