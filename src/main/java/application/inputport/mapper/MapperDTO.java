@@ -1,5 +1,7 @@
 package application.inputport.mapper;
 
+import org.mapstruct.Mapper;
+
 @Mapper
 public interface MapperDTO <T, D> {
 
