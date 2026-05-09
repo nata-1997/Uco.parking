@@ -5,6 +5,7 @@ import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.app
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
 
 // RegisterNewStudentMapper.java
+//mapstructure//
 public final class RegisterNewStudentMapper {
     private RegisterNewStudentMapper() {}
 

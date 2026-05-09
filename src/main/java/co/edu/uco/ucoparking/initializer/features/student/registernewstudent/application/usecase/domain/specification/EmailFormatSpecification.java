@@ -9,6 +9,8 @@ public final class EmailFormatSpecification implements StudentRegistrationSpecif
             "^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$",
             Pattern.CASE_INSENSITIVE);
 
+    //helper// crear los Helpers//
+    //buscar catalogos de mensajes, parampetros, baúl de secretos, apiGetway//
     @Override
     public boolean isSatisfiedBy(RegisterNewStudentDomain candidate) {
         String email = candidate.getEmail();

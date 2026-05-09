@@ -8,6 +8,7 @@ import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.app
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.domain.RegisterNewStudentUseCase;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.Mapping;
 
 //Interactor//
 @Service
@@ -23,7 +24,7 @@ public class RegisterNewStudentInteractor implements RegisterNewStudentInputPort
     public Void execute(RegisterNewStudentInputTO data) {
 
         //Recuerde que el USecas recibe un Domain y el interactor recibe un DTO//
-        //MApper o MapStruct//
+        //ModelMApper o MapStruct//
         RegisterNewStudentDomain domain = RegisterNewStudentMapper.toDomain(data);
         return useCase.execute(domain);
     }
