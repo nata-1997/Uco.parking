@@ -1,6 +1,7 @@
 package infrastructure.persistence.entity;
 
 import infrastructure.persistence.crossscutting.Helper.ObjectHelper;
+import infrastructure.persistence.crossscutting.Helper.EmailHelper;
 import infrastructure.persistence.crossscutting.Helper.TextHelper;
 import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
 
@@ -107,7 +108,7 @@ public class StudentEntity {
     }
 
     private void seteMail(String eMail) {
-        this.eMail = TextHelper.getDefaultWithTrim(eMail);
+        this.eMail = EmailHelper.getdefaultWithvalidation(eMail);
     }
 
     private void setMobileNumber(String mobileNumber) {

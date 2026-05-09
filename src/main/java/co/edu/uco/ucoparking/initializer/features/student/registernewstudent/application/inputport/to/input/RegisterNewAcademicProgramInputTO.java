@@ -14,13 +14,13 @@ public class RegisterNewAcademicProgramInputTO {
 
     public RegisterNewAcademicProgramInputTO() {
         setId(UUIDHelper.getUUIDHelper().getDefault());
-        setInstitute(institute, new RegisterNewInstituteInputTO());
+        setInstitute(new RegisterNewInstituteInputTO());
         setName(TextHelper.getDefaultWithTrim(name));
     }
 
     public RegisterNewAcademicProgramInputTO(final UUID id) {
         setId(id);
-        setInstitute(institute, new RegisterNewInstituteInputTO());
+        setInstitute(new RegisterNewInstituteInputTO());
         setName(TextHelper.getDefaultWithTrim(name));
     }
 
@@ -48,7 +48,7 @@ public class RegisterNewAcademicProgramInputTO {
     }
 
     private void setInstitute(final UUID institute) {
-        this.institute = ObjectHelper.getDefault(institute, RegisterNewInstituteInputTo());
+        this.institute = ObjectHelper.getDefault(institute, new RegisterNewInstituteInputTO());
     }
 
     private void setName(final String name) {
