@@ -1,15 +1,27 @@
 package infrastructure.persistence.entity;
 
+import infrastructure.persistence.crossscutting.Helper.TextHelper;
+import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
+
 import java.util.UUID;
 
 public class InstituteEntity {
     private UUID id;
     private String name;
 
-    public InstituteEntity(UUID id, String name) {
+    public InstituteEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+    }
+
+    public InstituteEntity(final UUID id) {
+        setId(id);
+        setName(TextHelper.getDefault());
+    }
+
+    public InstituteEntity(final UUID id, final String name) {
         super();
         setId(id);
-        setName(name);
+        setName(TextHelper.getDefaultWithTrim(name));
     }
 
     public UUID getId() {
@@ -21,10 +33,10 @@ public class InstituteEntity {
     }
 
     private void setId(UUID id) {
-        this.id = id;
+        this.id = UUIDHelper.getUUIDHelper().getDefault();
     }
 
     private void setName(String name) {
-        this.name = name;
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
 }

@@ -1,5 +1,9 @@
 package infrastructure.persistence.entity;
 
+import infrastructure.persistence.crossscutting.Helper.ObjectHelper;
+import infrastructure.persistence.crossscutting.Helper.TextHelper;
+import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
+
 import java.util.UUID;
 
 public class StudentEntity {
@@ -12,7 +16,29 @@ public class StudentEntity {
     private String eMail;
     private String mobileNumber;
 
-    public StudentEntity(UUID id, AcademicProgramEntity academicProgramEntity, IdTypeEntity idTypeEntity, String name, String lastName, String idNumber, String eMail, String mobileNumber) {
+    public  StudentEntity() {
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setAcademicProgramEntity(new AcademicProgramEntity());
+        setIdTypeEntity(new IdTypeEntity());
+        setName(TextHelper.getDefault());
+        setLastName(TextHelper.getDefault());
+        setIdNumber(TextHelper.getDefault());
+        seteMail(TextHelper.getDefault());
+        setMobileNumber(TextHelper.getDefault());
+    }
+
+    public StudentEntity(final UUID id) {
+        setId(id);
+        setAcademicProgramEntity(new AcademicProgramEntity());
+        setIdTypeEntity(new IdTypeEntity());
+        setName(TextHelper.getDefault());
+        setLastName(TextHelper.getDefault());
+        setIdNumber(TextHelper.getDefault());
+        seteMail(TextHelper.getDefault());
+        setMobileNumber(TextHelper.getDefault());
+
+    }
+    public StudentEntity(final UUID id, final AcademicProgramEntity academicProgramEntity, final IdTypeEntity idTypeEntity, final String name, final String lastName, final String idNumber, final String eMail, final String mobileNumber) {
         super();
         setId(id);
         setAcademicProgramEntity(academicProgramEntity);
@@ -56,35 +82,36 @@ public class StudentEntity {
         return mobileNumber;
     }
 
-    private void setId(UUID id) {
-        this.id = id;
+    private void setId(final UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
-    private void setAcademicProgramEntity(AcademicProgramEntity academicProgramEntity) {
-        this.academicProgramEntity = academicProgramEntity;
+    private void setAcademicProgramEntity(final AcademicProgramEntity academicProgramEntity) {
+        this.academicProgramEntity = ObjectHelper.getDefault(academicProgramEntity, new AcademicProgramEntity());
     }
 
-    private void setIdTypeEntity(IdTypeEntity idTypeEntity) {
-        this.idTypeEntity = idTypeEntity;
+    private void setIdTypeEntity(final IdTypeEntity idTypeEntity) {
+        this.idTypeEntity = ObjectHelper.getDefault(idTypeEntity, new IdTypeEntity());
     }
 
-    private void setName(String name) {
-        this.name = name;
+    private void setName(final String name) {
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
 
-    private void setLastName(String lastName) {
-        this.lastName = lastName;
+    private void setLastName(final String lastName) {
+        this.lastName = TextHelper.getDefaultWithTrim(lastName);
     }
 
     private void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+        this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
     }
 
     private void seteMail(String eMail) {
-        this.eMail = eMail;
+        this.eMail = TextHelper.getDefaultWithTrim(eMail);
     }
 
     private void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+        this.mobileNumber = TextHelper.getDefaultWithTrim(mobileNumber);
     }
+
 }

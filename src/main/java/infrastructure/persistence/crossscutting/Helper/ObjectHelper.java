@@ -9,7 +9,7 @@ public final class ObjectHelper {
         return object == null;
     }
 
-    public static  <O> O getDefaultIfNull(final O object, final O defaultValue){
+    public static  <O> O getDefault(final O object, final O defaultValue){
         return (isNull(object) ? defaultValue : object);
     }
 
