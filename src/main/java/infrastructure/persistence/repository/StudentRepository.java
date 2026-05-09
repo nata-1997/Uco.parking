@@ -13,4 +13,5 @@ public interface StudentRepository {
     StudentEntity findById(UUID id);
     List<StudentEntity> findByFilter(StudentEntity entity);
     List<StudentEntity> findAll();
+
 }
