@@ -10,12 +10,18 @@ public class RegisterNewIdTypeInputTo {
     private String name;
 
     public RegisterNewIdTypeInputTo(final UUID id, final String name) {
+        super();
         setId(id);
         setName(name);
     }
 
     public RegisterNewIdTypeInputTo(final UUID id){
         setId(id);
+        setName(TextHelper.getDefault());
+    }
+
+    public RegisterNewIdTypeInputTo(){
+        setId(UUIDHelper.getUUIDHelper().getDefault());
         setName(TextHelper.getDefault());
     }
 
