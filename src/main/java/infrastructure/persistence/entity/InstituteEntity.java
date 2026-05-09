@@ -33,7 +33,7 @@ public class InstituteEntity {
     }
 
     private void setId(UUID id) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault();
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
     private void setName(String name) {

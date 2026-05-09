@@ -1,5 +1,10 @@
 package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input;
 
+import infrastructure.persistence.crossscutting.Helper.ObjectHelper;
+import infrastructure.persistence.crossscutting.Helper.TextHelper;
+import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
+
+
 import java.util.UUID;
 
 public class RegisterNewStudentInputTO {
@@ -12,6 +17,41 @@ public class RegisterNewStudentInputTO {
     private String email;
     private String mobileNumber;
 
+
+    public RegisterNewStudentInputTO(){
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setAcademicProgram(academicProgram, new RegisterNewAcademicProgramInputTO());
+        setIdType(idType, new IdTypeInputTO());
+        setName(TextHelper.getDefaultWithTrim(name));
+        setLastName(TextHelper.getDefaultWithTrim(lastName));
+        setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
+        setEmail(TextHelper.getDefaultWithTrim(email));
+        setMobileNumber(TextHelper.getDefaultWithTrim(mobileNumber));
+
+    }
+
+    public RegisterNewStudentInputTO(final UUID){
+        setId(id);
+        setAcademicProgram(academicProgram, new RegisterNewAcademicProgramInputTO();
+        setIdType(idType, new IdTypeInputTO);
+        setName(TextHelper.getDefaultWithTrim(name));
+        setLastName(TextHelper.getDefaultWithTrim(lastName));
+        setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
+        setEmail(TextHelper.getDefaultWithTrim(email));
+        setMobileNumber(TextHelper.getDefaultWithTrim(mobileNumber));
+    }
+
+    public RegisterNewStudentInputTO(final UUID id, final UUID academicProgram, final UUID idType, final String lastName, final String name, final String idNumber, final String email, final String mobileNumber) {
+        super();
+        setId(id);
+        setAcademicProgram(academicProgram, new RegisterNewAcademicProgramInputTO());
+        setIdType(idType, new IdTypeInputTo);
+        setName(TextHelper.getDefaultWithTrim(name));
+        setLastName(TextHelper.getDefaultWithTrim(lastName));
+        setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
+        setEmail(TextHelper.getDefaultWithTrim(email));
+        setMobileNumber(TextHelper.getDefaultWithTrim(mobileNumber));
+    }
 
     public UUID getId() {
         return id;
@@ -45,35 +85,35 @@ public class RegisterNewStudentInputTO {
         return mobileNumber;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    private void setId(final UUID id)| {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
-    public void setAcademicProgram(UUID academicProgram) {
-        this.academicProgram = academicProgram;
+    private  void setAcademicProgram(final UUID academicProgram) {
+        this.academicProgram = ObjectHelper.getDefault(academicProgram, new RegisterNewAcademicProgramInputTO());
     }
 
-    public void setIdType(UUID idType) {
-        this.idType = idType;
+    private  void setIdType(final UUID idType) {
+        this.idType =  ObjectHelper.getDefault(idType, new IdTypeInputTO);
+    }
+|
+    private void setName(final String name) {
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private void setLastName(final String lastName) {
+        this.lastName = TextHelper.getDefaultWithTrim(lastName);
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    private void setIdNumber(final String idNumber) {
+        this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+    private void setEmail(final String email) {
+        this.email = TextHelper.getDefaultWithTrim(email);
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    private void setMobileNumber(final String mobileNumber) {
+        this.mobileNumber = TextHelper.getDefaultWithTrim(mobileNumber);
     }
 }
