@@ -1,6 +1,6 @@
 package infrastructure.persistence.crossscutting.Helper;
 
-public class ObjectHelper {
+public final class ObjectHelper {
 
     private ObjectHelper() {
     }
