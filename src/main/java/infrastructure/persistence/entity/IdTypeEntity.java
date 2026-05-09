@@ -9,7 +9,7 @@ public class IdTypeEntity {
     private UUID id;
     private String name;
 
-    public IdTypeEntity(UUID id, String name) {
+    public IdTypeEntity(final UUID id, final String name) {
         super();
         setId(id);
         setName(name);
@@ -20,7 +20,7 @@ public class IdTypeEntity {
         setName(TextHelper.getDefault());
     }
 
-    public IdTypeEntity(UUID id){
+    public IdTypeEntity(final UUID id){
         setId(id);
         setName(TextHelper.getDefault());
     }
@@ -29,7 +29,7 @@ public class IdTypeEntity {
         return id;
     }
 
-    private void setId(UUID id) {
+    private void setId(final UUID id) {
         this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
