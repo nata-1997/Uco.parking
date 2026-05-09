@@ -1,6 +1,6 @@
 package infrastructure.persistence.crossscutting.Helper;
 
-public class EmailHelper {
+public final class EmailHelper {
 
     private static final  String DEFAULT_EMAIL = "default@example.com";
 
