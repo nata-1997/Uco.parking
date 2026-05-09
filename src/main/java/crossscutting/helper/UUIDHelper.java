@@ -1,4 +1,4 @@
-package infrastructure.persistence.crossscutting.Helper;
+package crossscutting.helper;
 
 import java.util.UUID;
 

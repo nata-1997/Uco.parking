@@ -1,7 +1,7 @@
 package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input;
 
-import infrastructure.persistence.crossscutting.Helper.TextHelper;
-import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
+import crossscutting.helper.TextHelper;
+import crossscutting.helper.UUIDHelper;
 
 import java.util.UUID;
 

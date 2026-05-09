@@ -1,4 +1,4 @@
-package infrastructure.persistence.crossscutting.Helper;
+package crossscutting.helper;
 
 public final class ObjectHelper {
 

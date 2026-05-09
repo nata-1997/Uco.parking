@@ -1,7 +1,7 @@
-package infrastructure.persistence.crossscutting.Exception;
+package crossscutting.exception;
 
-import infrastructure.persistence.crossscutting.Helper.ObjectHelper;
-import infrastructure.persistence.crossscutting.Helper.TextHelper;
+import crossscutting.helper.ObjectHelper;
+import crossscutting.helper.TextHelper;
 
 public class UcoParkingException extends RuntimeException {
 

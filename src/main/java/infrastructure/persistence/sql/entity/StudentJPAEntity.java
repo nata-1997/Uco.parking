@@ -1,7 +1,7 @@
 package infrastructure.persistence.sql.entity;
 
 import jakarta.persistence.*;
-import infrastructure.persistence.crossscutting.Helper.EmailHelper;
+import crossscutting.helper.EmailHelper;
 
 import java.util.UUID;
 
@@ -111,7 +111,5 @@ public class StudentJPAEntity {
     private void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
-
-
 
 }

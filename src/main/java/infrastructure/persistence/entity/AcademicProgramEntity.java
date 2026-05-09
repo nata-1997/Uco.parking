@@ -1,8 +1,8 @@
 package infrastructure.persistence.entity;
 
-import infrastructure.persistence.crossscutting.Helper.ObjectHelper;
-import infrastructure.persistence.crossscutting.Helper.TextHelper;
-import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
+import crossscutting.helper.ObjectHelper;
+import crossscutting.helper.TextHelper;
+import crossscutting.helper.UUIDHelper;
 
 import java.util.UUID;
 
