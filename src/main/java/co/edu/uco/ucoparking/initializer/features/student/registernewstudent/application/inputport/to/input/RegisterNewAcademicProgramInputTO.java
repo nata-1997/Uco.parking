@@ -9,25 +9,25 @@ import java.util.UUID;
 public class RegisterNewAcademicProgramInputTO {
 
     private UUID id;
-    private UUID Institute;
+    private UUID institute;
     private String name;
 
     public RegisterNewAcademicProgramInputTO() {
         setId(UUIDHelper.getUUIDHelper().getDefault());
-        setInstitute(institute, new RegisterNewInstituteInputTo());
+        setInstitute(institute, new RegisterNewInstituteInputTO());
         setName(TextHelper.getDefaultWithTrim(name));
     }
 
     public RegisterNewAcademicProgramInputTO(final UUID id) {
         setId(id);
-        setInstitute(institute, new RegisterNewInstituteInputTo());
+        setInstitute(institute, new RegisterNewInstituteInputTO());
         setName(TextHelper.getDefaultWithTrim(name));
     }
 
     public RegisterNewAcademicProgramInputTO(final UUID id, final  UUID institute, final String name) {
         super();
         setId(id);
-        setInstitute(institute, new RegisterNewInstituteInputTo());
+        setInstitute(institute, new RegisterNewInstituteInputTO());
         setName(TextHelper.getDefaultWithTrim(name));
     }
 
@@ -36,7 +36,7 @@ public class RegisterNewAcademicProgramInputTO {
     }
 
     public UUID getInstitute() {
-        return Institute;
+        return institute;
     }
 
     public String getName() {
@@ -48,7 +48,7 @@ public class RegisterNewAcademicProgramInputTO {
     }
 
     private void setInstitute(final UUID institute) {
-        Institute = ObjectHelper.getDefault(institute, RegisterNewInstituteInputTo());
+        this.institute = ObjectHelper.getDefault(institute, RegisterNewInstituteInputTo());
     }
 
     private void setName(final String name) {

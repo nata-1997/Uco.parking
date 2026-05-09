@@ -5,22 +5,22 @@ import infrastructure.persistence.crossscutting.Helper.UUIDHelper;
 
 import java.util.UUID;
 
-public class RegisterNewInstituteInputTo {
+public class RegisterNewInstituteInputTO {
     private UUID id;
     private String name;
 
-    public RegisterNewInstituteInputTo(final UUID id, final String name) {
+    public RegisterNewInstituteInputTO(final UUID id, final String name) {
         super();
         setId(id);
         setName(name);
     }
 
-    public RegisterNewInstituteInputTo(){
+    public RegisterNewInstituteInputTO(){
         setId(UUIDHelper.getUUIDHelper().getDefault());
         setName(TextHelper.getDefault());
     }
 
-    public RegisterNewInstituteInputTo(final UUID id){
+    public RegisterNewInstituteInputTO(final UUID id){
         setId(id);
         setName(TextHelper.getDefault());
     }

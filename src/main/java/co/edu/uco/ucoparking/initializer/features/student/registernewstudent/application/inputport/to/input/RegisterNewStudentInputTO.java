@@ -21,7 +21,7 @@ public class RegisterNewStudentInputTO {
     public RegisterNewStudentInputTO(){
         setId(UUIDHelper.getUUIDHelper().getDefault());
         setAcademicProgram(academicProgram, new RegisterNewAcademicProgramInputTO());
-        setIdType(idType, new IdTypeInputTO());
+        setIdType(idType, new RegisterNewIdTypeInputTo());
         setName(TextHelper.getDefaultWithTrim(name));
         setLastName(TextHelper.getDefaultWithTrim(lastName));
         setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
@@ -33,7 +33,7 @@ public class RegisterNewStudentInputTO {
     public RegisterNewStudentInputTO(final UUID){
         setId(id);
         setAcademicProgram(academicProgram, new RegisterNewAcademicProgramInputTO();
-        setIdType(idType, new IdTypeInputTO);
+        setIdType(idType, new RegisterNewIdTypeInputTo());
         setName(TextHelper.getDefaultWithTrim(name));
         setLastName(TextHelper.getDefaultWithTrim(lastName));
         setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
@@ -45,7 +45,7 @@ public class RegisterNewStudentInputTO {
         super();
         setId(id);
         setAcademicProgram(academicProgram, new RegisterNewAcademicProgramInputTO());
-        setIdType(idType, new IdTypeInputTo);
+        setIdType(idType, new RegisterNewIdTypeInputTo());
         setName(TextHelper.getDefaultWithTrim(name));
         setLastName(TextHelper.getDefaultWithTrim(lastName));
         setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
@@ -94,7 +94,7 @@ public class RegisterNewStudentInputTO {
     }
 
     private  void setIdType(final UUID idType) {
-        this.idType =  ObjectHelper.getDefault(idType, new IdTypeInputTO);
+        this.idType =  ObjectHelper.getDefault(idType, new RegisterNewIdTypeInputTo());
     }
 |
     private void setName(final String name) {
