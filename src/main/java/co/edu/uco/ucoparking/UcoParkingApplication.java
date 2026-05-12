@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "infrastructure",
         "crossscutting"
 })
-@EntityScan(basePackages = "Infrastructure.persistence.entity")
+@EntityScan(basePackages = "infrastructure.persistence.sql.entity")
 @EnableJpaRepositories(basePackages = "infrastructure.persistence.sql")
 
 public class UcoParkingApplication {
