@@ -7,7 +7,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {AcademicProgramMapperJPA.class, IdTypeMapperJPA.class})
 public interface StudentMapperJPA extends MapperJPA<StudentEntity, StudentJPAEntity>{
-    //Source y target opcionales//
+
+    //Source y target opcionales?//
     @Mapping(target = "id", ignore = true)
     StudentJPAEntity ToJPAEntity(StudentEntity entity);
 
