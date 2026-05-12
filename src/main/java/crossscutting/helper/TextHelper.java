@@ -1,9 +1,11 @@
 package crossscutting.helper;
 
 
+import crossscutting.constants.DefaultValues;
+
 public final class TextHelper {
 
-    private static final String empty = " ";
+    private static final String empty = DefaultValues.EMPTY_TEXT;
 
     private TextHelper() {
     }
@@ -28,10 +30,10 @@ public final class TextHelper {
         return ObjectHelper.isNull(value) || value.trim().isEmpty();
     }
 
-    public static boolean lengthIsValid(final String value, final int minLength, final int maxLength, final boolean mustApplytrim) {
-        var valueToValidate = (mustApplytrim) ? getDefault(value) : getDefaultWithTrim(value);
+    public static boolean lengthIsValid(final String value, final int minLength, final int maxLength, final boolean mustApplyTrim) {
+        var valueToValidate = mustApplyTrim ? getDefaultWithTrim(value) : getDefault(value);
         var length = valueToValidate.length();
-        return length >= maxLength && length <= minLength;
+        return length >= minLength && length <= maxLength;
     }
 
     public static boolean lengthIsValidWithTrim(final String value, final int minLength, final int maxLength, final boolean mustApplytrim) {

@@ -1,14 +1,14 @@
 package crossscutting.helper;
 
-public final class EmailHelper {
+import crossscutting.constants.DefaultValues;
 
-    private static final  String DEFAULT_EMAIL = "default@example.com";
+public final class EmailHelper {
 
     private EmailHelper() {
     }
 
     public static String getDefault(){
-        return DEFAULT_EMAIL;
+        return DefaultValues.EMAIL_SENTINEL;
     }
 
     public static String getdefaultWithvalidation(final String email){
