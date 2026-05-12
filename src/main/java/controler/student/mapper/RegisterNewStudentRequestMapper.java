@@ -1,7 +1,7 @@
-package infrastructure.controller.student.mapper;
+package controler.student.mapper;
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input.RegisterNewStudentInputTO;
-import infrastructure.controller.student.RegisterNewStudentRequest;
+import controler.student.RegisterNewStudentRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

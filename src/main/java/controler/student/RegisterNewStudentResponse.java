@@ -1,4 +1,4 @@
-package infrastructure.controller.student;
+package controler.student;
 
 public class RegisterNewStudentResponse {
 

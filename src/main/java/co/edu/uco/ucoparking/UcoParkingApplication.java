@@ -1,4 +1,4 @@
-package co.edu.uco.UcoParking;
+package co.edu.uco.ucoparking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "co.edu.uco",
         "application",
         "infrastructure",
-        "crossscutting"
+        "crossscutting",
+        "controler"
 })
 @EntityScan(basePackages = "infrastructure.persistence.sql.entity")
 @EnableJpaRepositories(basePackages = "infrastructure.persistence.sql")

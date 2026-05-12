@@ -1,7 +1,7 @@
-package infrastructure.controller.student;
+package controler.student;
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.RegisterNewStudentInputPort;
-import infrastructure.controller.student.mapper.RegisterNewStudentRequestMapper;
+import controler.student.mapper.RegisterNewStudentRequestMapper;
 import crossscutting.messagescatalog.MessageCatalog;
 import crossscutting.messagescatalog.MessagesEnum;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 
 @RestController
-@RequestMapping("uco-parcking/api/v1/students")
+@RequestMapping("/api/v1/students")
 public class RegisterNewStudentController {
 
     private final RegisterNewStudentInputPort inputPort;
