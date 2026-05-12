@@ -1,7 +1,5 @@
 package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase;
 
-import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.domain.specification.StudentRegistrationSpecifications;
-
 import java.util.UUID;
 
 public class RegisterNewStudentDomain {

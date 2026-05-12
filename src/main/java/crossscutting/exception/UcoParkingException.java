@@ -6,19 +6,19 @@ import crossscutting.helper.TextHelper;
 public class UcoParkingException extends RuntimeException {
 
     private static final long serialVersionUID = -5881677798523712233L;
-
     private Throwable rootException;
-    private String UserMessage;
-    private String TechnicalMessage;
+    private String userMessage;
+    private String technicalMessage;
 
-    public UcoParkingException(final Throwable rootException, final String userMessage, final String technicalMessage) {
+
+    private UcoParkingException(final Throwable rootException, final String userMessage, final String technicalMessage) {
         setRootException(rootException);
         setUserMessage(userMessage);
         setTechnicalMessage(technicalMessage);
     }
 
     public static UcoParkingException create(final String userMessage) {
-        return new UcoParkingException(new Exception(), userMessage, technicalMessage);
+        return new UcoParkingException(new Exception(), userMessage, userMessage);
     }
 
     public static UcoParkingException create(final String userMessage, final String technicalMessage) {
@@ -26,33 +26,35 @@ public class UcoParkingException extends RuntimeException {
     }
 
     public static UcoParkingException create(final Throwable rootException, final String userMessage, final String technicalMessage) {
-        return new UcoParkingException(new Exception(), userMessage, technicalMessage);
+        return new UcoParkingException(rootException, userMessage, technicalMessage);
     }
 
     public Throwable getRootException() {
         return rootException;
     }
 
-    public void setRootException(final Throwable rootException) {
+    private void setRootException(final Throwable rootException) {
         this.rootException = ObjectHelper.getDefault(rootException, new Exception());
     }
 
     public String getUserMessage() {
-        return UserMessage;
+        return userMessage;
     }
 
-    public void setUserMessage(final String userMessage) {
-        this.UserMessage = TextHelper.getDefaultWithTrim(userMessage);
+    private void setUserMessage(final String userMessage) {
+        this.userMessage = TextHelper.getDefaultWithTrim(userMessage);
     }
 
-    public String setTechnicalMessage(final String technicalMessage) {
+    public String getTechnicalMessage() {
+        return technicalMessage;
+    }
+
+    private void setTechnicalMessage(final String technicalMessage) {
         this.technicalMessage = TextHelper.getDefaultWithTrim(technicalMessage);
     }
 
-    public String
-
-    long getSerialVersionuid() {
+    public static long getSerialversionuid() {
         return serialVersionUID;
     }
-}
 
+}
