@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-@Mapper
 public interface StudentRepository {
 
     void create (StudentEntity entity);
