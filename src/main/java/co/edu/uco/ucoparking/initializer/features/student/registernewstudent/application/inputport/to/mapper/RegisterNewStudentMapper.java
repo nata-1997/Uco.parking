@@ -5,6 +5,6 @@ import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.app
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring")
 public interface RegisterNewStudentMapper extends MapperDTO<RegisterNewStudentInputTO, RegisterNewStudentDomain> {
 }

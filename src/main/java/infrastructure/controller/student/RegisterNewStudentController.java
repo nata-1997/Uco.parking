@@ -1,6 +1,7 @@
 package infrastructure.controller.student;
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.RegisterNewStudentInputPort;
+import infrastructure.controller.student.mapper.RegisterNewStudentRequestMapper;
 import crossscutting.messagescatalog.MessageCatalog;
 import crossscutting.messagescatalog.MessagesEnum;
 import org.springframework.http.HttpStatus;
