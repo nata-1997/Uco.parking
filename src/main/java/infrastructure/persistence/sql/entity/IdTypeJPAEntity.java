@@ -19,9 +19,6 @@ public class IdTypeJPAEntity {
     @Column(name = "name")
     private String name;
 
-    public IdTypeJPAEntity() {
-        super();
-    }
 
     public IdTypeJPAEntity(UUID id, String name) {
         super ();

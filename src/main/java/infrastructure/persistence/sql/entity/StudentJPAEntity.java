@@ -36,13 +36,8 @@ public class StudentJPAEntity {
     @Column(name = "MobileNumber")
     private String mobileNumber;
 
-    public StudentJPAEntity() {
-        super();
-        generateId();
 
-    }
-
-    public StudentJPAEntity(UUID id, AcademicProgramJPAEntity academicProgramEntity, IdTypeJPAEntity idTypeEntity, String name, String lastName, String idNumber, String eMail, String mobileNumber) {
+    public StudentJPAEntity(AcademicProgramJPAEntity academicProgramEntity, IdTypeJPAEntity idTypeEntity, String name, String lastName, String idNumber, String eMail, String mobileNumber) {
         super();
         generateId();
         setAcademicProgramEntity(academicProgramEntity);

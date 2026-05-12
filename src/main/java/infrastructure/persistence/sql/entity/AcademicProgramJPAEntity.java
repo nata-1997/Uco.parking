@@ -19,9 +19,6 @@ public class AcademicProgramJPAEntity {
     @Column(name="Name")
     private String name;
 
-    public AcademicProgramJPAEntity() {
-        super();
-    }
 
     public AcademicProgramJPAEntity(UUID id, InstituteJPAEntity institute, String name) {
         super();
