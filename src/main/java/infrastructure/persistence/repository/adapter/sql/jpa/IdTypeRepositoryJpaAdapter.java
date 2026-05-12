@@ -1,37 +1,35 @@
 package infrastructure.persistence.repository.adapter.sql.jpa;
 
-
 import infrastructure.persistence.entity.IdTypeEntity;
+import infrastructure.persistence.mapper.IdTypeMapperJPA;
 import infrastructure.persistence.repository.IdTypeRepository;
 import infrastructure.persistence.sql.IdTypeJpaRepository;
-import infrastructure.persistence.sql.entity.IdTypeJPAEntity;
-
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class IdTypeRepositoryJpaAdapter implements IdTypeRepository {
 
 
-    private IdTypeJpaRepository repository;
+    private final IdTypeJpaRepository repository;
+    private final IdTypeMapperJPA mapper;
 
-    public IdTypeRepositoryJpaAdapter(IdTypeJpaRepository repository) {
-        super();
+    public IdTypeRepositoryJpaAdapter(IdTypeJpaRepository repository, IdTypeMapperJPA mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public void create(IdTypeEntity entity) {
-        IdTypeJPAEntity jpaEntity = null; //Mappper
-        repository.save (jpaEntity);
+        repository.save (mapper.toJPAEntity(entity));
 
     }
 
     @Override
     public void update(IdTypeEntity entity) {
-        IdTypeJPAEntity jpaEntity = null; //Mappper
-        repository.save (jpaEntity);
+        repository.save (mapper.toJPAEntity(entity));
 
     }
 
@@ -43,9 +41,7 @@ public class IdTypeRepositoryJpaAdapter implements IdTypeRepository {
 
     @Override
     public IdTypeEntity findById(UUID id) {
-        Optional<IdTypeJPAEntity> jpaEntity = repository.findById(id);
-        IdTypeEntity entityReturn = null; //Mapper//
-        return entityReturn;
+        return repository.findById (id).map(mapper::toEntity).orElse(null);
 
     }
 
@@ -56,6 +52,6 @@ public class IdTypeRepositoryJpaAdapter implements IdTypeRepository {
 
     @Override
     public List<IdTypeEntity> findAll() {
-        return List.of();
+        return repository.findAll().stream().map(mapper::toEntity).toList();
     }
 }
