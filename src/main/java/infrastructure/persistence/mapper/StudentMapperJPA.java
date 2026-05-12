@@ -8,10 +8,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {AcademicProgramMapperJPA.class, IdTypeMapperJPA.class})
 public interface StudentMapperJPA extends MapperJPA<StudentEntity, StudentJPAEntity>{
     //Source y target opcionales//
-    @Mapping(source = "eMail", target = "eMail")
+    @Mapping(target = "id", ignore = true)
     StudentJPAEntity ToJPAEntity(StudentEntity entity);
 
-    @Mapping(source = "eMail", target = "eMail")
+    @Mapping(target = "id", ignore = true)
     StudentEntity toEntity(StudentJPAEntity jpaEntity);
 
 
