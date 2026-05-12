@@ -13,7 +13,7 @@ public final class TextHelper {
     }
 
     public static String getDefault(final String value) {
-        return ObjectHelper.getDefaultIfNull(value, getDefault());
+        return ObjectHelper.getDefault(value, getDefault());
     }
 
     public static String getDefaultWithTrim(final String value) {
@@ -37,5 +37,14 @@ public final class TextHelper {
     public static boolean lengthIsValidWithTrim(final String value, final int minLength, final int maxLength, final boolean mustApplytrim) {
         return lengthIsValid(value, minLength, maxLength, true);
     }
+
+    public static boolean formatIsValid(final String value, final String pattern, final boolean mustApplyTrim) {
+        var text = (mustApplyTrim
+                ? getDefaultWithTrim(value)
+                :getDefault(value));
+
+        return text.matches(pattern);
+    }
+
 }
 
