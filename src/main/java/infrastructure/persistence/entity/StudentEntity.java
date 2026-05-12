@@ -9,12 +9,12 @@ import java.util.UUID;
 
 public class StudentEntity {
     private UUID id;
-    private AcademicProgramEntity academicProgramEntity;
-    private IdTypeEntity idTypeEntity;
+    private UUID academicProgramEntity;
+    private UUID idTypeEntity;
     private String name;
     private String lastName;
     private String idNumber;
-    private String eMail;
+    private String email;
     private String mobileNumber;
 
     public  StudentEntity() {
@@ -76,42 +76,42 @@ public class StudentEntity {
     }
 
     public String geteMail() {
-        return eMail;
+        return email;
     }
 
     public String getMobileNumber() {
         return mobileNumber;
     }
 
-    private void setId(final UUID id) {
+    public void setId(final UUID id) {
         this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
-    private void setAcademicProgramEntity(final AcademicProgramEntity academicProgramEntity) {
-        this.academicProgramEntity = ObjectHelper.getDefault(academicProgramEntity, new AcademicProgramEntity());
+    public void setAcademicProgramEntity(final UUID academicProgramEntity) {
+        this.academicProgramEntity = academicProgramEntity;
     }
 
-    private void setIdTypeEntity(final IdTypeEntity idTypeEntity) {
-        this.idTypeEntity = ObjectHelper.getDefault(idTypeEntity, new IdTypeEntity());
+    public void setIdTypeEntity(final UUID idTypeEntity) {
+        this.idTypeEntity =  idTypeEntity;
     }
 
-    private void setName(final String name) {
+    public void setName(final String name) {
         this.name = TextHelper.getDefaultWithTrim(name);
     }
 
-    private void setLastName(final String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = TextHelper.getDefaultWithTrim(lastName);
     }
 
-    private void setIdNumber(String idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
     }
 
-    private void seteMail(String eMail) {
-        this.eMail = EmailHelper.getdefaultWithvalidation(eMail);
+    public void seteMail(String eMail) {
+        this.email = EmailHelper.getdefaultWithvalidation(eMail);
     }
 
-    private void setMobileNumber(String mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = TextHelper.getDefaultWithTrim(mobileNumber);
     }
 
