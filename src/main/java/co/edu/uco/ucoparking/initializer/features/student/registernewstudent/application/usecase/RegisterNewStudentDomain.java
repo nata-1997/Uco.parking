@@ -23,7 +23,7 @@ public class RegisterNewStudentDomain {
         setMobileNumber(mobileNumber);
 
         //Especification patteern//<--The best//
-        StudentRegistrationSpecifications.assertAll(this);
+        //StudentRegistrationSpecifications.assertAll(this);
     }
 
     public UUID getId() {
