@@ -1,4 +1,4 @@
-package co.edu.uco.ucoparking.initializer.features.student.registernewstudent/application/usecase/impl;
+package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.impl;
 
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.mapper.RegisterNewStudentDomainToStudentEntityMapper;
 import co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.usecase.RegisterNewStudentDomain;

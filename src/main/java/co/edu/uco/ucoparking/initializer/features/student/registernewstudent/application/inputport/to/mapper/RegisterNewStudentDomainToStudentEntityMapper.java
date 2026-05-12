@@ -8,8 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface RegisterNewStudentDomainToStudentEntityMapper {
 
-    @Mapping(target = "academicProgramEntity",expression = "java(new AcademicProgramEntity(domain.getAcademicProgram()))")
-    @Mapping(target = "idTypeEntity",expression = "java(new IdTypeEntity(domain.getIdType()))")
+    @Mapping(source = "academicProgram", target = "academicProgramEntity")
+    @Mapping(source = "idType", target = "idTypeEntity")
     StudentEntity toEntity(RegisterNewStudentDomain domain);
 }
-
