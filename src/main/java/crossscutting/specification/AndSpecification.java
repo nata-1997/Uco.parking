@@ -1,4 +1,4 @@
-package crossscutting.Specification;
+package crossscutting.specification;
 
 public final class AndSpecification <T> extends Specification<T> {
 

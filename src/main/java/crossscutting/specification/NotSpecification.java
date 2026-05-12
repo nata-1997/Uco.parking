@@ -1,4 +1,4 @@
-package crossscutting.Specification;
+package crossscutting.specification;
 
 public final class NotSpecification <T> extends Specification<T> {
     Specification<T> condition;

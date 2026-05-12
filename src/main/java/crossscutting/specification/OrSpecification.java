@@ -1,4 +1,4 @@
-package crossscutting.Specification;
+package crossscutting.specification;
 
 public final class OrSpecification <T> extends Specification<T> {
     Specification<T> left;

@@ -1,4 +1,4 @@
-package crossscutting.Specification;
+package crossscutting.specification;
 
 
 

@@ -1,6 +1,6 @@
-package application.usecase.Specification;
+package application.usecase.specification;
 
-import crossscutting.Specification.Specification;
+import crossscutting.specification.Specification;
 import crossscutting.helper.EmailHelper;
 
 public class IsEmailValuePresentSpecification extends Specification<String> {
