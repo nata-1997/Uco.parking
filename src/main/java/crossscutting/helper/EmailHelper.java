@@ -13,11 +13,14 @@ public final class EmailHelper {
 
     public static String getdefaultWithvalidation(final String email){
         String trimmedEmail = TextHelper.getDefaultWithTrim(email);
-        return (TextHelper.isNullOrWhiteSpace(trimmedEmail) || !isValidEmail(trimmedEmail)) ? getDefault() : trimmedEmail;
+        return (TextHelper.isNullOrWhiteSpace(trimmedEmail) || !isValidFormat(trimmedEmail)) ? getDefault() : trimmedEmail;
+    }
+
+    public static boolean isValidFormat(final String email) {
+        return email != null && email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
 
     private static boolean isValidEmail(final String email){
-        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        return email != null && email.matches(emailRegex);
+        return isValidFormat(email);
     }
 }

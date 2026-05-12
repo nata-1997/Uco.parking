@@ -1,4 +1,31 @@
 package crossscutting.messagescatalog;
 
 public enum MessagesEnum {
+
+    COMMON_UNEXPECTED_ERROR("UCOPARKING-COMMON-001"),
+    COMMON_INVALID_REQUEST("UCOPARKING-COMMON-002"),
+    COMMON_RESOURCE_NOT_FOUND("UCOPARKING-COMMON-003"),
+    COMMON_VALIDATION_ERROR("UCOPARKING-COMMON-004"),
+
+    STUDENT_EMAIL_INVALID("UCOPARKING-STUDENT-001"),
+    STUDENT_MANDATORY_FIELD_MISSING("UCOPARKING-STUDENT-002"),
+    STUDENT_ACADEMIC_PROGRAM_REQUIRED("UCOPARKING-STUDENT-003"),
+    STUDENT_ID_TYPE_REQUIRED("UCOPARKING-STUDENT-004"),
+    STUDENT_ID_NUMBER_INVALID("UCOPARKING-STUDENT-005"),
+    STUDENT_MOBILE_NUMBER_INVALID("UCOPARKING-STUDENT-006"),
+    STUDENT_SUCCESSFULLY_REGISTERED("UCOPARKING-STUDENT-007");
+
+    private final String code;
+
+    MessagesEnum(final String code) {
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getTechnicalMessageKey() {
+        return code + ".technical";
+    }
 }

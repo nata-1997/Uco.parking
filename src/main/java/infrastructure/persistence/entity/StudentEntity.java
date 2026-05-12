@@ -1,9 +1,5 @@
 package infrastructure.persistence.entity;
 
-import crossscutting.helper.EmailHelper;
-import crossscutting.helper.TextHelper;
-import crossscutting.helper.UUIDHelper;
-
 import java.util.UUID;
 
 public class StudentEntity {
@@ -16,16 +12,23 @@ public class StudentEntity {
     private String email;
     private String mobileNumber;
 
-    public StudentEntity(final UUID id, final UUID academicProgramEntity, final UUID idTypeEntity, final String name, final String lastName, final String idNumber, final String eMail, final String mobileNumber) {
-        super();
-        setId(id);
-        setAcademicProgramEntity(academicProgramEntity);
-        setIdTypeEntity(idTypeEntity);
-        setName(name);
-        setLastName(lastName);
-        setIdNumber(idNumber);
-        seteMail(eMail);
-        setMobileNumber(mobileNumber);
+    public StudentEntity(
+            final UUID id,
+            final UUID academicProgramEntity,
+            final UUID idTypeEntity,
+            final String name,
+            final String lastName,
+            final String idNumber,
+            final String eMail,
+            final String mobileNumber) {
+        this.id = id;
+        this.academicProgramEntity = academicProgramEntity;
+        this.idTypeEntity = idTypeEntity;
+        this.name = name;
+        this.lastName = lastName;
+        this.idNumber = idNumber;
+        this.email = eMail;
+        this.mobileNumber = mobileNumber;
     }
 
     public UUID getId() {
@@ -61,7 +64,7 @@ public class StudentEntity {
     }
 
     public void setId(final UUID id) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
+        this.id = id;
     }
 
     public void setAcademicProgramEntity(final UUID academicProgramEntity) {
@@ -69,27 +72,26 @@ public class StudentEntity {
     }
 
     public void setIdTypeEntity(final UUID idTypeEntity) {
-        this.idTypeEntity =  idTypeEntity;
+        this.idTypeEntity = idTypeEntity;
     }
 
     public void setName(final String name) {
-        this.name = TextHelper.getDefaultWithTrim(name);
+        this.name = name;
     }
 
     public void setLastName(final String lastName) {
-        this.lastName = TextHelper.getDefaultWithTrim(lastName);
+        this.lastName = lastName;
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
+    public void setIdNumber(final String idNumber) {
+        this.idNumber = idNumber;
     }
 
-    public void seteMail(String eMail) {
-        this.email = EmailHelper.getdefaultWithvalidation(eMail);
+    public void seteMail(final String eMail) {
+        this.email = eMail;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = TextHelper.getDefaultWithTrim(mobileNumber);
+    public void setMobileNumber(final String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
-
 }

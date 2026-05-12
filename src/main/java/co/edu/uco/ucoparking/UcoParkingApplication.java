@@ -5,7 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "co.edu.uco",
+        "application",
+        "infrastructure",
+        "crossscutting"
+})
 @EntityScan(basePackages = "Infrastructure.persistence.entity")
 @EnableJpaRepositories(basePackages = "infrastructure.persistence.sql")
 

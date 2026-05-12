@@ -1,11 +1,9 @@
 package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input;
 
-import crossscutting.helper.EmailHelper;
-import crossscutting.helper.TextHelper;
-
 import java.util.UUID;
 
 public class RegisterNewStudentInputTO {
+
     private UUID id;
     private UUID academicProgram;
     private UUID idType;
@@ -15,17 +13,23 @@ public class RegisterNewStudentInputTO {
     private String email;
     private String mobileNumber;
 
-
-    public RegisterNewStudentInputTO(final UUID id, final UUID academicProgram, final UUID idType, final String lastName, final String name, final String idNumber, final String email, final String mobileNumber) {
-        super();
-        generateId(id);
-        setAcademicProgram(academicProgram);
-        setIdType(idType);
-        setName(TextHelper.getDefaultWithTrim(name));
-        setLastName(TextHelper.getDefaultWithTrim(lastName));
-        setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
-        setEmail(TextHelper.getDefaultWithTrim(email));
-        setMobileNumber(TextHelper.getDefaultWithTrim(mobileNumber));
+    public RegisterNewStudentInputTO(
+            final UUID id,
+            final UUID academicProgram,
+            final UUID idType,
+            final String lastName,
+            final String name,
+            final String idNumber,
+            final String email,
+            final String mobileNumber) {
+        this.id = id;
+        this.academicProgram = academicProgram;
+        this.idType = idType;
+        this.name = name;
+        this.lastName = lastName;
+        this.idNumber = idNumber;
+        this.email = email;
+        this.mobileNumber = mobileNumber;
     }
 
     public UUID getId() {
@@ -58,37 +62,5 @@ public class RegisterNewStudentInputTO {
 
     public String getMobileNumber() {
         return mobileNumber;
-    }
-
-    private void generateId(final UUID id) {
-        this.id = UUID.randomUUID();
-    }
-
-    private  void setAcademicProgram(final UUID academicProgram) {
-        this.academicProgram = academicProgram;
-    }
-
-    private  void setIdType(final UUID idType) {
-        this.idType = idType;
-    }
-
-    private void setName(final String name) {
-        this.name = TextHelper.getDefaultWithTrim(name);
-    }
-
-    private void setLastName(final String lastName) {
-        this.lastName = TextHelper.getDefaultWithTrim(lastName);
-    }
-
-    private void setIdNumber(final String idNumber) {
-        this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
-    }
-
-    private void setEmail(final String email) {
-        this.email = EmailHelper.getdefaultWithvalidation(email);
-    }
-
-    private void setMobileNumber(final String mobileNumber) {
-        this.mobileNumber = TextHelper.getDefaultWithTrim(mobileNumber);
     }
 }

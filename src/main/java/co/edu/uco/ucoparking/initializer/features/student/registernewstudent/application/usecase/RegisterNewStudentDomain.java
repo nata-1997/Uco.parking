@@ -21,9 +21,6 @@ public class RegisterNewStudentDomain {
         setIdNumber(idNumber);
         setEmail(email);
         setMobileNumber(mobileNumber);
-
-        //Especification patteern//<--The best//
-        //StudentRegistrationSpecifications.assertAll(this);
     }
 
     public UUID getId() {
