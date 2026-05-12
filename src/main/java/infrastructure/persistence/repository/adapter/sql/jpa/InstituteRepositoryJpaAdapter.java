@@ -1,36 +1,33 @@
 package infrastructure.persistence.repository.adapter.sql.jpa;
 
 import infrastructure.persistence.entity.InstituteEntity;
+import infrastructure.persistence.mapper.InstituteMapperJPA;
 import infrastructure.persistence.repository.InstituteRepository;
 import infrastructure.persistence.sql.InstituteJpaRepository;
-import infrastructure.persistence.sql.entity.InstituteJPAEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public class InstituteRepositoryJpaAdapter implements InstituteRepository {
 
-    private InstituteJpaRepository repository;
+    private final InstituteJpaRepository repository;
+    private final InstituteMapperJPA mapper;
 
-    public InstituteRepositoryJpaAdapter(InstituteJpaRepository repository) {
-        super();
+    public InstituteRepositoryJpaAdapter(InstituteJpaRepository repository,InstituteMapperJPA mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public void create(InstituteEntity entity) {
-        InstituteJPAEntity jpaEntity = null; //Mappper
-        repository.save (jpaEntity);
-
+        repository.save (mapper.toJPAEntity(entity));
     }
 
     @Override
     public void update(InstituteEntity entity) {
-        InstituteJPAEntity jpaEntity = null; //Mappper
-        repository.save (jpaEntity);
+        repository.save (mapper.toJPAEntity(entity));
     }
 
     @Override
@@ -41,9 +38,7 @@ public class InstituteRepositoryJpaAdapter implements InstituteRepository {
 
     @Override
     public InstituteEntity findById(UUID id) {
-        Optional<InstituteJPAEntity> jpaEntity = repository.findById(id);
-        InstituteEntity entityReturn = null; //Mapper//
-        return entityReturn;
+        return repository.findById(id).map(mapper::toEntity).orElse(null);
     }
 
 
@@ -54,6 +49,6 @@ public class InstituteRepositoryJpaAdapter implements InstituteRepository {
 
     @Override
     public List<InstituteEntity> findAll() {
-        return List.of();
+        return repository.findAll().stream().map(mapper::toEntity).toList();
     }
 }
