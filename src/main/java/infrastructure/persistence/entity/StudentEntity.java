@@ -1,6 +1,5 @@
 package infrastructure.persistence.entity;
 
-import crossscutting.helper.ObjectHelper;
 import crossscutting.helper.EmailHelper;
 import crossscutting.helper.TextHelper;
 import crossscutting.helper.UUIDHelper;
@@ -17,29 +16,7 @@ public class StudentEntity {
     private String email;
     private String mobileNumber;
 
-    public  StudentEntity() {
-        setId(UUIDHelper.getUUIDHelper().getDefault());
-        setAcademicProgramEntity(new AcademicProgramEntity());
-        setIdTypeEntity(new IdTypeEntity());
-        setName(TextHelper.getDefault());
-        setLastName(TextHelper.getDefault());
-        setIdNumber(TextHelper.getDefault());
-        seteMail(TextHelper.getDefault());
-        setMobileNumber(TextHelper.getDefault());
-    }
-
-    public StudentEntity(final UUID id) {
-        setId(id);
-        setAcademicProgramEntity(new AcademicProgramEntity());
-        setIdTypeEntity(new IdTypeEntity());
-        setName(TextHelper.getDefault());
-        setLastName(TextHelper.getDefault());
-        setIdNumber(TextHelper.getDefault());
-        seteMail(TextHelper.getDefault());
-        setMobileNumber(TextHelper.getDefault());
-
-    }
-    public StudentEntity(final UUID id, final AcademicProgramEntity academicProgramEntity, final IdTypeEntity idTypeEntity, final String name, final String lastName, final String idNumber, final String eMail, final String mobileNumber) {
+    public StudentEntity(final UUID id, final UUID academicProgramEntity, final UUID idTypeEntity, final String name, final String lastName, final String idNumber, final String eMail, final String mobileNumber) {
         super();
         setId(id);
         setAcademicProgramEntity(academicProgramEntity);
@@ -55,11 +32,11 @@ public class StudentEntity {
         return id;
     }
 
-    public AcademicProgramEntity getAcademicProgramEntity() {
+    public UUID getAcademicProgramEntity() {
         return academicProgramEntity;
     }
 
-    public IdTypeEntity getIdTypeEntity() {
+    public UUID getIdTypeEntity() {
         return idTypeEntity;
     }
 

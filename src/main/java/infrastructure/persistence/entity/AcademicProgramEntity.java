@@ -1,6 +1,5 @@
 package infrastructure.persistence.entity;
 
-import crossscutting.helper.ObjectHelper;
 import crossscutting.helper.TextHelper;
 import crossscutting.helper.UUIDHelper;
 
@@ -8,23 +7,10 @@ import java.util.UUID;
 
 public class AcademicProgramEntity {
     private UUID id;
-    private InstituteEntity instituteEntity;
+    private UUID instituteEntity;
     private String name;
 
-
-    public AcademicProgramEntity() {
-        setId(UUIDHelper.getUUIDHelper().getDefault());
-        setInstituteEntity(new InstituteEntity());
-        setName(TextHelper.getDefault());
-    }
-
-    public AcademicProgramEntity(final UUID id) {
-        setId(id);
-        setInstituteEntity(new InstituteEntity());
-        setName(TextHelper.getDefault());
-    }
-
-    public AcademicProgramEntity(final UUID id, final InstituteEntity instituteEntity, final String name) {
+    public AcademicProgramEntity(final UUID id, final UUID instituteEntity, final String name) {
         super();
         setId(id);
         setInstituteEntity(instituteEntity);
@@ -35,7 +21,7 @@ public class AcademicProgramEntity {
         return id;
     }
 
-    public InstituteEntity getInstituteEntity() {
+    public UUID getInstituteEntity() {
         return instituteEntity;
     }
 
@@ -47,8 +33,8 @@ public class AcademicProgramEntity {
         this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
-    private void setInstituteEntity(final InstituteEntity instituteEntity) {
-        this.instituteEntity = ObjectHelper.getDefault(instituteEntity, new InstituteEntity());
+    private void setInstituteEntity(final UUID instituteEntity) {
+        this.instituteEntity = instituteEntity;
     }
 
     private void setName(final String name) {
