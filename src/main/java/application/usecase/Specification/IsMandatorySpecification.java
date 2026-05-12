@@ -1,4 +1,11 @@
 package application.usecase.Specification;
 
-public class IsMandatorySpecification {
+import crossscutting.Specification.Specification;
+import crossscutting.helper.ObjectHelper;
+
+public class IsMandatorySpecification extends Specification<Object> {
+    @Override
+    public boolean isSatisfiedBy(Object object) {
+        return !ObjectHelper.isNull(object);
+    }
 }

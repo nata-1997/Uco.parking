@@ -1,4 +1,16 @@
 package application.usecase.Specification;
 
-public class IsEmailValuePresentSpecification {
+import crossscutting.Specification.Specification;
+import crossscutting.helper.EmailHelper;
+
+public class IsEmailValuePresentSpecification extends Specification<String> {
+
+    public IsEmailValuePresentSpecification() {
+        super();
+    }
+
+    @Override
+    public boolean isSatisfiedBy(String email) {
+        return !EmailHelper.getdefaultWithvalidation(email).equals(EmailHelper.getDefault());
+    }
 }
