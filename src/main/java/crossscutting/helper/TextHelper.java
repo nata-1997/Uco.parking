@@ -1,9 +1,11 @@
 package crossscutting.helper;
 
 
+import crossscutting.constants.DefaultValues;
+
 public final class TextHelper {
 
-    private static final String empty = " ";
+    private static final String empty = DefaultValues.EMPTY_TEXT;
 
     private TextHelper() {
     }

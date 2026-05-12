@@ -1,11 +1,13 @@
 package crossscutting.helper;
 
+import crossscutting.constants.DefaultValues;
+
 import java.util.UUID;
 
 public final class UUIDHelper {
 
     private static final UUIDHelper INSTANCE = new UUIDHelper();
-    private static final String UUID_DEFAULT_AS_STRING = "00000000-0000-0000-0000-000000000000";
+    private static final String UUID_DEFAULT_AS_STRING = DefaultValues.UUID_ZERO;
 
     private UUIDHelper() {
     }
@@ -19,7 +21,7 @@ public final class UUIDHelper {
     }
 
     public  UUID getDefault(final UUID value) {
-        return ObjectHelper.getDefaultIfNull(value,getDefault());
+        return ObjectHelper.getDefault(value, getDefault());
     }
 
     public  UUID getFromString(final String uuidAsString) {
