@@ -18,9 +18,4 @@ public abstract class Specification <T> {
         return new NotSpecification<T>(this);
     }
 
-
-
-
-
-
 }
