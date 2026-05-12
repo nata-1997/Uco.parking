@@ -1,12 +1,11 @@
 package infrastructure.persistence.repository.adapter.sql.jpa;
 
-import infrastructure.persistence.entity.AcademicProgramEntity;
+
 import infrastructure.persistence.entity.IdTypeEntity;
 import infrastructure.persistence.repository.IdTypeRepository;
 import infrastructure.persistence.sql.IdTypeJpaRepository;
-import infrastructure.persistence.sql.entity.AcademicProgramJPAEntity;
 import infrastructure.persistence.sql.entity.IdTypeJPAEntity;
-import infrastructure.persistence.sql.entity.InstituteJPAEntity;
+
 
 import java.util.List;
 import java.util.Optional;

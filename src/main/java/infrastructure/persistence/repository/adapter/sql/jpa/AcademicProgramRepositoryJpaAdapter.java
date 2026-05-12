@@ -1,35 +1,34 @@
 package infrastructure.persistence.repository.adapter.sql.jpa;
 
 import infrastructure.persistence.entity.AcademicProgramEntity;
+import infrastructure.persistence.mapper.AcademicProgramMapperJPA;
 import infrastructure.persistence.repository.AcademicProgramRepository;
 import infrastructure.persistence.sql.AcademicProgramJpaRepository;
-import infrastructure.persistence.sql.entity.AcademicProgramJPAEntity;
-
+import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class AcademicProgramRepositoryJpaAdapter implements AcademicProgramRepository {
 
-    private AcademicProgramJpaRepository repository;
+    private final AcademicProgramJpaRepository repository;
+    private final AcademicProgramMapperJPA mapper;
 
-    public AcademicProgramRepositoryJpaAdapter(AcademicProgramJpaRepository repository) {
-        super();
+    public AcademicProgramRepositoryJpaAdapter(AcademicProgramJpaRepository repository, AcademicProgramMapperJPA mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public void create(AcademicProgramEntity entity) {
-        AcademicProgramJPAEntity jpaEntity = null; //Mappper
-        repository.save (jpaEntity);
+        repository.save (mapper.toJPAEntity(entity));
     }
 
     @Override
     public void update(AcademicProgramEntity entity) {
-        AcademicProgramJPAEntity jpaEntity = null; //Mappper
-        repository.save (jpaEntity);
+        repository.save (mapper.toJPAEntity(entity));
     }
 
     @Override
@@ -40,9 +39,7 @@ public class AcademicProgramRepositoryJpaAdapter implements AcademicProgramRepos
 
     @Override
     public AcademicProgramEntity findById(UUID id) {
-        Optional<AcademicProgramJPAEntity> jpaEntity = repository.findById(id);
-        AcademicProgramEntity entityReturn = null; //Mapper//
-        return entityReturn;
+        return repository.findById(id).map(mapper::toEntity).orElse(null);
     }
 
     @Override
@@ -52,6 +49,6 @@ public class AcademicProgramRepositoryJpaAdapter implements AcademicProgramRepos
 
     @Override
     public List<AcademicProgramEntity> findAll() {
-        return List.of();
+        return repository.findAll().stream().map(mapper::toEntity).toList();
     }
 }
