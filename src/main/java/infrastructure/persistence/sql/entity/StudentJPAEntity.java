@@ -36,9 +36,15 @@ public class StudentJPAEntity {
     @Column(name = "MobileNumber")
     private String mobileNumber;
 
+    public StudentJPAEntity() {
+        super();
+        generateId();
+
+    }
+
     public StudentJPAEntity(UUID id, AcademicProgramJPAEntity academicProgramEntity, IdTypeJPAEntity idTypeEntity, String name, String lastName, String idNumber, String eMail, String mobileNumber) {
         super();
-        setId(id);
+        generateId();
         setAcademicProgramEntity(academicProgramEntity);
         setIdTypeEntity(idTypeEntity);
         setName(name);
@@ -80,35 +86,35 @@ public class StudentJPAEntity {
         return mobileNumber;
     }
 
-    private void setId(UUID id) {
-        this.id = id;
+    public void generateId() {
+        this.id = UUID.randomUUID();
     }
 
-    private void setAcademicProgramEntity(AcademicProgramJPAEntity academicProgramEntity) {
+    public void setAcademicProgramEntity(AcademicProgramJPAEntity academicProgramEntity) {
         this.academicProgramEntity = academicProgramEntity;
     }
 
-    private void setIdTypeEntity(IdTypeJPAEntity idTypeEntity) {
+    public void setIdTypeEntity(IdTypeJPAEntity idTypeEntity) {
         this.idTypeEntity = idTypeEntity;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    private void setIdNumber(String idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
-    private void seteMail(String eMail) {
+    public void seteMail(String eMail) {
         this.eMail = EmailHelper.getdefaultWithvalidation(eMail);
     }
 
-    private void setMobileNumber(String mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 

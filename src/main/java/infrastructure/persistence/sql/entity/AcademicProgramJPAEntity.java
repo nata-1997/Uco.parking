@@ -19,9 +19,13 @@ public class AcademicProgramJPAEntity {
     @Column(name="Name")
     private String name;
 
+    public AcademicProgramJPAEntity() {
+        super();
+    }
+
     public AcademicProgramJPAEntity(UUID id, InstituteJPAEntity institute, String name) {
         super();
-        generateId();
+        setId(id);
         setName(name);
         setInstitute(institute);
     }
@@ -38,15 +42,15 @@ public class AcademicProgramJPAEntity {
         return name;
     }
 
-    private void generateId() {
-        this.id = UUID.randomUUID();
+    private void setId (UUID id) {
+        this.id = id;
     }
 
-    private void setInstitute(InstituteJPAEntity institute) {
+    public void setInstitute(InstituteJPAEntity institute) {
         this.instituteEntity = institute;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

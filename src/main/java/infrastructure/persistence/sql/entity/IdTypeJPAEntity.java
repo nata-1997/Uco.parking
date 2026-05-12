@@ -19,17 +19,21 @@ public class IdTypeJPAEntity {
     @Column(name = "name")
     private String name;
 
+    public IdTypeJPAEntity() {
+        super();
+    }
+
     public IdTypeJPAEntity(UUID id, String name) {
         super ();
         setId(id);
         setName(name);
     }
 
-    private void setId(UUID id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
