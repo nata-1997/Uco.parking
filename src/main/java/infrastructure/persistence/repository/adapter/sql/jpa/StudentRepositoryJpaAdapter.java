@@ -14,7 +14,6 @@ import java.util.UUID;
 public class StudentRepositoryJpaAdapter implements StudentRepository {
 
     private final StudentJpaRepository repository;
-
     private final StudentMapperJPA mapper;
 
     public StudentRepositoryJpaAdapter(StudentJpaRepository repository, StudentMapperJPA mapper) {

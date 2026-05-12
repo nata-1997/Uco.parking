@@ -4,11 +4,9 @@ import infrastructure.persistence.entity.InstituteEntity;
 import infrastructure.persistence.mapper.InstituteMapperJPA;
 import infrastructure.persistence.repository.InstituteRepository;
 import infrastructure.persistence.sql.InstituteJpaRepository;
-import infrastructure.persistence.sql.entity.InstituteJPAEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
