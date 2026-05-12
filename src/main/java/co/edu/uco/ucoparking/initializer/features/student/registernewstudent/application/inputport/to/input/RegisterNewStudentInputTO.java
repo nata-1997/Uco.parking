@@ -1,10 +1,7 @@
 package co.edu.uco.ucoparking.initializer.features.student.registernewstudent.application.inputport.to.input;
 
-import crossscutting.helper.ObjectHelper;
 import crossscutting.helper.EmailHelper;
 import crossscutting.helper.TextHelper;
-import crossscutting.helper.UUIDHelper;
-
 
 import java.util.UUID;
 
@@ -19,34 +16,11 @@ public class RegisterNewStudentInputTO {
     private String mobileNumber;
 
 
-    public RegisterNewStudentInputTO(){
-        setId(UUIDHelper.getUUIDHelper().getDefault());
-        setAcademicProgram(new RegisterNewAcademicProgramInputTO());
-        setIdType(new RegisterNewIdTypeInputTO());
-        setName(TextHelper.getDefaultWithTrim(name));
-        setLastName(TextHelper.getDefaultWithTrim(lastName));
-        setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
-        setEmail(TextHelper.getDefaultWithTrim(email));
-        setMobileNumber(TextHelper.getDefaultWithTrim(mobileNumber));
-
-    }
-
-    public RegisterNewStudentInputTO(final UUID){
-        setId(id);
-        setAcademicProgram(new RegisterNewAcademicProgramInputTO();
-        setIdType(new RegisterNewIdTypeInputTO());
-        setName(TextHelper.getDefaultWithTrim(name));
-        setLastName(TextHelper.getDefaultWithTrim(lastName));
-        setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
-        setEmail(TextHelper.getDefaultWithTrim(email));
-        setMobileNumber(TextHelper.getDefaultWithTrim(mobileNumber));
-    }
-
     public RegisterNewStudentInputTO(final UUID id, final UUID academicProgram, final UUID idType, final String lastName, final String name, final String idNumber, final String email, final String mobileNumber) {
         super();
-        setId(id);
-        setAcademicProgram(new RegisterNewAcademicProgramInputTO());
-        setIdType(new RegisterNewIdTypeInputTO());
+        generateId(id);
+        setAcademicProgram(academicProgram);
+        setIdType(idType);
         setName(TextHelper.getDefaultWithTrim(name));
         setLastName(TextHelper.getDefaultWithTrim(lastName));
         setIdNumber(TextHelper.getDefaultWithTrim(idNumber));
@@ -86,18 +60,18 @@ public class RegisterNewStudentInputTO {
         return mobileNumber;
     }
 
-    private void setId(final UUID id) {
-        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
+    private void generateId(final UUID id) {
+        this.id = UUID.randomUUID();
     }
 
     private  void setAcademicProgram(final UUID academicProgram) {
-        this.academicProgram = ObjectHelper.getDefault(academicProgram, new RegisterNewAcademicProgramInputTO());
+        this.academicProgram = academicProgram;
     }
 
     private  void setIdType(final UUID idType) {
-        this.idType =  ObjectHelper.getDefault(idType, new RegisterNewIdTypeInputTO());
+        this.idType = idType;
     }
-|
+
     private void setName(final String name) {
         this.name = TextHelper.getDefaultWithTrim(name);
     }
