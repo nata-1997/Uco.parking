@@ -5,9 +5,5 @@ import co.edu.uco.ucoparking.infrastructure.persistence.sql.entity.InstituteJPAE
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface InstituteMapperJPA {
-
-    InstituteJPAEntity toJPAEntity(InstituteEntity entity);
-
-    InstituteEntity toEntity(InstituteJPAEntity jpaEntity);
+public interface InstituteMapperJPA extends MapperJPA<InstituteEntity, InstituteJPAEntity> {
 }

@@ -5,9 +5,6 @@ import co.edu.uco.ucoparking.infrastructure.persistence.sql.entity.IdTypeJPAEnti
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface IdTypeMapperJPA {
 
-    IdTypeJPAEntity toJPAEntity(IdTypeEntity entity);
-
-    IdTypeEntity toEntity(IdTypeJPAEntity jpaEntity);
+public interface IdTypeMapperJPA extends MapperJPA<IdTypeEntity, IdTypeJPAEntity> {
 }
