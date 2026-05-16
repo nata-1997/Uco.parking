@@ -1,4 +1,4 @@
-package co.edu.uco.ucoparking.controler.student;
+package co.edu.uco.ucoparking.infrastructure.persistence.controler.student;
 
 public class RegisterNewStudentResponse {
 

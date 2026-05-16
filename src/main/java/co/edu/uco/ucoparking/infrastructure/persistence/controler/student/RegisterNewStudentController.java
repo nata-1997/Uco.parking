@@ -1,7 +1,7 @@
-package co.edu.uco.ucoparking.controler.student;
+package co.edu.uco.ucoparking.infrastructure.persistence.controler.student;
 
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.inputport.RegisterNewStudentInputPort;
-import co.edu.uco.ucoparking.controler.student.mapper.RegisterNewStudentRequestMapper;
+import co.edu.uco.ucoparking.infrastructure.persistence.controler.student.mapper.RegisterNewStudentRequestMapper;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessageCatalog;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessagesEnum;
 import org.springframework.http.HttpStatus;
