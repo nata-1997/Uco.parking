@@ -2,7 +2,7 @@ package co.edu.uco.ucoparking.features.student.registernewstudent.application.ap
 
 public interface MapperDomain <D,E> {
 
-    D toEntity(D domain);
+    E toEntity(D domain);
 
-    E toDomain(D entity);
+    D toDomain(E entity);
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 
 @RestController
-@RequestMapping("/uco-parking/api/v1/students")
+@RequestMapping("/api/v1/students")
 public class RegisterNewStudentController {
 
     private final RegisterNewStudentInputPort inputPort;

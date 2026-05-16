@@ -5,20 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = {
-        "co.edu.uco",
-        "co/edu/uco/ucoparking/application",
-        "infrastructure",
-        "co/edu/uco/ucoparking/crossscutting",
-        "controler"
-})
-@EntityScan(basePackages = "infrastructure.persistence.sql.entity")
-@EnableJpaRepositories(basePackages = "infrastructure.persistence.sql")
-
+@SpringBootApplication(scanBasePackages = "co.edu.uco")
+@EntityScan(basePackages = "co.edu.uco.ucoparking.infrastructure.persistence.sql.entity")
+@EnableJpaRepositories(basePackages = "co.edu.uco.ucoparking.infrastructure.persistence.sql")
 public class UcoParkingApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(UcoParkingApplication.class, args);
 	}
-
 }
