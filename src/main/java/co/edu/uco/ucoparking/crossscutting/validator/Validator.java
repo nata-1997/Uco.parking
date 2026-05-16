@@ -1,4 +1,4 @@
-package co.edu.uco.ucoparking.application.usecase.validator;
+package co.edu.uco.ucoparking.crossscutting.validator;
 
 public interface Validator {
 

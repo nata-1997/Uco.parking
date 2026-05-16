@@ -1,10 +1,10 @@
 package co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.domain.validator;
 
-import co.edu.uco.ucoparking.application.usecase.specification.EmailFormatSpecification;
-import co.edu.uco.ucoparking.application.usecase.specification.StringLengthSpecification;
-import co.edu.uco.ucoparking.application.usecase.specification.StringValuePresentSpecification;
-import co.edu.uco.ucoparking.application.usecase.specification.UuidValuePresentSpecification;
-import co.edu.uco.ucoparking.application.usecase.validator.Validator;
+import co.edu.uco.ucoparking.crossscutting.specification.generics.EmailFormatSpecification;
+import co.edu.uco.ucoparking.crossscutting.specification.generics.StringLengthSpecification;
+import co.edu.uco.ucoparking.crossscutting.specification.generics.StringValuePresentSpecification;
+import co.edu.uco.ucoparking.crossscutting.specification.generics.UuidValuePresentSpecification;
+import co.edu.uco.ucoparking.crossscutting.validator.Validator;
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.RegisterNewStudentDomain;
 import co.edu.uco.ucoparking.crossscutting.exception.UcoParkingException;
 import co.edu.uco.ucoparking.crossscutting.helper.ObjectHelper;
