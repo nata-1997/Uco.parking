@@ -1,8 +1,8 @@
 package co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.mapper;
 
-public interface MapperDTO <T, D> {
+public interface MapperDomain <D,E> {
 
-    T toDTO(D domain);
+    D toEntity(D domain);
 
-    D toDomain(T dto);
+    E toDomain(D entity);
 }
