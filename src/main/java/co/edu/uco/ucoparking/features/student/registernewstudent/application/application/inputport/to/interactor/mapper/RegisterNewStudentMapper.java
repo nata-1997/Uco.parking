@@ -1,4 +1,4 @@
-package co.edu.uco.ucoparking.features.student.registernewstudent.application.application.inputport.to.mapper;
+package co.edu.uco.ucoparking.features.student.registernewstudent.application.application.inputport.to.interactor.mapper;
 
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.mapper.MapperDTO;
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.inputport.to.input.RegisterNewStudentInputTO;

@@ -1,6 +1,6 @@
 package co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.impl;
 
-import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.inputport.to.mapper.RegisterNewStudentDomainToStudentEntityMapper;
+import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.inputport.to.interactor.mapper.RegisterNewStudentDomainToStudentEntityMapper;
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.RegisterNewStudentDomain;
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.domain.RegisterNewStudentUseCase;
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.domain.validator.ValidateStudentRegistration;
