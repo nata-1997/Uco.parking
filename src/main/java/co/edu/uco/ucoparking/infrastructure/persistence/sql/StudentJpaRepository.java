@@ -10,5 +10,4 @@ import java.util.UUID;
 @Repository
 public interface StudentJpaRepository extends JpaRepository<StudentJPAEntity, UUID> {
 
-    boolean existsByIdTypeEntity_IdAndIdNumber(UUID idTypeId, String idNumber);
 }
