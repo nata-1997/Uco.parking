@@ -5,6 +5,13 @@ import co.edu.uco.ucoparking.infrastructure.persistence.sql.entity.IdTypeJPAEnti
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-
 public interface IdTypeMapperJPA extends MapperJPA<IdTypeEntity, IdTypeJPAEntity> {
+
+    @Override
+    default IdTypeEntity toEntity(final IdTypeJPAEntity jpaEntity) {
+        if (jpaEntity == null) {
+            return null;
+        }
+        return new IdTypeEntity(jpaEntity.getId(), jpaEntity.getName());
+    }
 }
