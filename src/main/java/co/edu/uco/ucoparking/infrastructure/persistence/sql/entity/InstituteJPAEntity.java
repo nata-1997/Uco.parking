@@ -19,6 +19,8 @@ public class InstituteJPAEntity {
     @Column(name = "Name")
     private String name;
 
+    protected InstituteJPAEntity() {
+    }
 
     public InstituteJPAEntity(UUID id, String name) {
         super();

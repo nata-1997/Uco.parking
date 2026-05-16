@@ -4,8 +4,10 @@ import co.edu.uco.ucoparking.infrastructure.persistence.entity.StudentEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.sql.entity.AcademicProgramJPAEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.sql.entity.IdTypeJPAEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.sql.entity.StudentJPAEntity;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
 import java.util.UUID;
@@ -17,6 +19,16 @@ public interface StudentMapperJPA extends MapperJPA<StudentEntity, StudentJPAEnt
     @Mapping(source = "academicProgramEntity", target = "academicProgramEntity", qualifiedByName = "academicProgramRef")
     @Mapping(source = "idTypeEntity", target = "idTypeEntity", qualifiedByName = "idTypeRef")
     StudentJPAEntity toJPAEntity(StudentEntity entity);
+
+    @AfterMapping
+    default void assignStudentId(@MappingTarget final StudentJPAEntity target, final StudentEntity source) {
+        target.markAsNew();
+        if (source != null && source.getId() != null) {
+            target.setId(source.getId());
+        } else if (target.getId() == null) {
+            target.generateId();
+        }
+    }
 
     @Override
     @Mapping(source = "academicProgramEntity.id", target = "academicProgramEntity")

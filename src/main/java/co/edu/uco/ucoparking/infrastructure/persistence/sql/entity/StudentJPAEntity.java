@@ -1,12 +1,16 @@
 package co.edu.uco.ucoparking.infrastructure.persistence.sql.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.domain.Persistable;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "Student")
-public class StudentJPAEntity {
+public class StudentJPAEntity implements Persistable<UUID> {
+
+    @Transient
+    private boolean isNew = true;
 
     @Id
     @Column(name = "id")
@@ -35,10 +39,11 @@ public class StudentJPAEntity {
     @Column(name = "MobileNumber")
     private String mobileNumber;
 
+    protected StudentJPAEntity() {
+    }
 
     public StudentJPAEntity(AcademicProgramJPAEntity academicProgramEntity, IdTypeJPAEntity idTypeEntity, String name, String lastName, String idNumber, String eMail, String mobileNumber) {
         super();
-        generateId();
         setAcademicProgramEntity(academicProgramEntity);
         setIdTypeEntity(idTypeEntity);
         setName(name);
@@ -48,8 +53,24 @@ public class StudentJPAEntity {
         setMobileNumber(mobileNumber);
     }
 
+    @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
+
+    @PostPersist
+    @PostLoad
+    void markNotNew() {
+        this.isNew = false;
+    }
+
+    public void markAsNew() {
+        this.isNew = true;
     }
 
     public AcademicProgramJPAEntity getAcademicProgramEntity() {
@@ -78,6 +99,10 @@ public class StudentJPAEntity {
 
     public String getMobileNumber() {
         return mobileNumber;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public void generateId() {

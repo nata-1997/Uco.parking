@@ -13,12 +13,14 @@ public class AcademicProgramJPAEntity {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "Institute")
+    @JoinColumn(name = "InstituteId")
     private InstituteJPAEntity instituteEntity;
 
     @Column(name="Name")
     private String name;
 
+    protected AcademicProgramJPAEntity() {
+    }
 
     public AcademicProgramJPAEntity(UUID id, InstituteJPAEntity institute, String name) {
         super();

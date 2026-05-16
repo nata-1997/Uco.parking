@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -31,13 +31,12 @@ public class RegisterNewStudentController {
 
     @PostMapping
     public ResponseEntity<RegisterNewStudentResponse> register(
-            @RequestBody final RegisterNewStudentRequest request,
-            final ServerWebExchange exchange) {
+            @RequestBody final RegisterNewStudentRequest request) {
         inputPort.execute(requestMapper.toInputPort(request));
 
         final String message = messageCatalog.getUserMessage(
                 MessagesEnum.STUDENT_SUCCESSFULLY_REGISTERED,
-                exchange.getLocaleContext().getLocale());
+                LocaleContextHolder.getLocale());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
