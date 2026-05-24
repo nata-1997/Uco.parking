@@ -34,7 +34,21 @@
     <properties>
         <java.version>26</java.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
+        <!-- Spring Boot 4.0.x → Spring Cloud Azure 7.x (BOM unifica versiones Azure) -->
+        <spring-cloud-azure.version>7.2.0</spring-cloud-azure.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.azure.spring</groupId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
+                <version>${spring-cloud-azure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -62,6 +76,12 @@
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- Key Vault: artefacto antiguo com.azure:azure-security-keyvault-secrets-spring-boot-starter no está en Central. -->
+        <dependency>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
         </dependency>
 
         <dependency>

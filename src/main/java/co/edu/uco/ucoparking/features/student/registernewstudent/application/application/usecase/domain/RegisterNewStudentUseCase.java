@@ -1,7 +1,0 @@
-package co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.domain;
-
-import co.edu.uco.ucoparking.application.usecase.UseCase;
-import co.edu.uco.ucoparking.features.student.registernewstudent.application.application.usecase.RegisterNewStudentDomain;
-
-public interface RegisterNewStudentUseCase extends UseCase<RegisterNewStudentDomain, Void> {
-}
