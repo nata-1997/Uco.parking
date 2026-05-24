@@ -1,0 +1,75 @@
+package co.edu.uco.ucoparking.infrastructure.persistence.controler.parking;
+
+import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.ListParkingSpotsInputPort;
+import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.ReleaseParkingSpotInputPort;
+import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.ReserveParkingSpotInputPort;
+import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.to.input.ListParkingSpotsInputTO;
+import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.to.input.ReleaseParkingSpotInputTO;
+import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.to.input.ReserveParkingSpotInputTO;
+import co.edu.uco.ucoparking.infrastructure.persistence.entity.ParkingSpotEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/parking-spots")
+@CrossOrigin(originPatterns = {"http://localhost:*", "http://127.0.0.1:*"})
+public class ParkingSpotController {
+
+    private final ListParkingSpotsInputPort listParkingSpotsInputPort;
+    private final ReserveParkingSpotInputPort reserveParkingSpotInputPort;
+    private final ReleaseParkingSpotInputPort releaseParkingSpotInputPort;
+
+    public ParkingSpotController(
+            final ListParkingSpotsInputPort listParkingSpotsInputPort,
+            final ReserveParkingSpotInputPort reserveParkingSpotInputPort,
+            final ReleaseParkingSpotInputPort releaseParkingSpotInputPort) {
+        this.listParkingSpotsInputPort = listParkingSpotsInputPort;
+        this.reserveParkingSpotInputPort = reserveParkingSpotInputPort;
+        this.releaseParkingSpotInputPort = releaseParkingSpotInputPort;
+    }
+
+    @GetMapping
+    public Mono<ResponseEntity<List<ParkingSpotResponse>>> list() {
+        return Mono.fromCallable(() -> {
+            final List<ParkingSpotEntity> entities =
+                    listParkingSpotsInputPort.execute(new ListParkingSpotsInputTO());
+            return entities.stream().map(ParkingSpotResponse::fromEntity).toList();
+        })
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(ResponseEntity::ok);
+    }
+
+    @PostMapping("/{spotCode}/reserve")
+    public Mono<ResponseEntity<Void>> reserve(
+            @PathVariable final String spotCode,
+            @RequestBody final ReserveParkingSpotRequest request) {
+        return Mono.fromCallable(() -> {
+            final ReserveParkingSpotInputTO input = new ReserveParkingSpotInputTO();
+            input.setSpotCode(spotCode);
+            input.setPlate(request.getPlate());
+            input.setStartTime(request.getStartTime());
+            input.setEndTime(request.getEndTime());
+            reserveParkingSpotInputPort.execute(input);
+            return ResponseEntity.noContent().<Void>build();
+        }).subscribeOn(Schedulers.boundedElastic());
+    }
+
+    @PostMapping("/{spotCode}/release")
+    public Mono<ResponseEntity<Void>> release(@PathVariable final String spotCode) {
+        return Mono.fromCallable(() -> {
+            final ReleaseParkingSpotInputTO input = new ReleaseParkingSpotInputTO(spotCode);
+            releaseParkingSpotInputPort.execute(input);
+            return ResponseEntity.noContent().<Void>build();
+        }).subscribeOn(Schedulers.boundedElastic());
+    }
+}

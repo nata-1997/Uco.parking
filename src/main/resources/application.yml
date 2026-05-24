@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: UcoParking
+
+  profiles:
+    active: dev
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
+
+  # --- SQL Server (pruebas locales sin Key Vault) ---
+  # Sobrescribe con variables de entorno o con application-secrets.properties (perfil dev).
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};databaseName=${DB_NAME:UCOParking};encrypt=true;trustServerCertificate=true
+    username: ${DB_USERNAME:sa}
+    # Valor por defecto = MSSQL_SA_PASSWORD típico en Docker; sobrescribe con DB_PASSWORD o secrets.
+    password: '${DB_PASSWORD:TuPassword#123}'
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.SQLServerDialect
+
+  # Key Vault (Spring Cloud Azure 7). En dev suele ir en false; prod activa y define URI.
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          enabled: ${AZURE_KEYVAULT_ENABLED:false}
+          property-sources:
+            - endpoint: ${AZURE_KEYVAULT_URI:}
+              enabled: ${AZURE_KEYVAULT_ENABLED:false}
+
+# (Propiedades antiguas azure.keyvault.* sustituidas por spring.cloud.azure.*)
+
+server:
+  port: 8080
+  servlet:
+    # Prefijo para MVC/Tomcat (websocket trae servlet). El front usa /uco-parking/api/v1/...
+    context-path: /uco-parking

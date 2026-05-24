@@ -1,0 +1,21 @@
+# Perfil dev: sin Key Vault; credenciales por defecto vienen de application.yml (o env / secrets).
+spring:
+  config:
+    import: optional:file:./application-secrets.properties
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          enabled: false
+          property-sources:
+            - enabled: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG

@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://${DB-SERVER}:1433;databaseName=${DB-NAME};encrypt=true;trustServerCertificate=false
+    username: ${DB-USERNAME}
+    password: ${DB-PASSWORD}
+
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          enabled: true
+          property-sources:
+            - endpoint: https://ucoparking-vault.vault.azure.net/
+              enabled: true
+
+logging:
+  level:
+    root: WARN
