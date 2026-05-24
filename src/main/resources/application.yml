@@ -2,6 +2,10 @@ spring:
   application:
     name: UcoParking
 
+  main:
+    # Evita modo reactivo cuando hay spring-webflux en classpath sin starter-webflux (HttpSecurity = servlet).
+    web-application-type: servlet
+
   profiles:
     active: dev
 
@@ -18,6 +22,14 @@ spring:
     username: ${DB_USERNAME:sa}
     # Valor por defecto = MSSQL_SA_PASSWORD típico en Docker; sobrescribe con DB_PASSWORD o secrets.
     password: '${DB_PASSWORD:TuPassword#123}'
+
+  # JWT Auth0 (resource server). Vacío = API sin exigir Bearer (desarrollo local).
+  # Ej. issuer: https://TU-TENANT.auth0.com/  (barra final recomendada).
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH0_ISSUER_URI:}
 
   jpa:
     hibernate:

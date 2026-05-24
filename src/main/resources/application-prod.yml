@@ -1,4 +1,10 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH0_ISSUER_URI}
+
   datasource:
     url: jdbc:sqlserver://${DB-SERVER}:1433;databaseName=${DB-NAME};encrypt=true;trustServerCertificate=false
     username: ${DB-USERNAME}
