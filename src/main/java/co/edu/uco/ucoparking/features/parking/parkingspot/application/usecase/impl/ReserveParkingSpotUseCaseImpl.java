@@ -26,6 +26,7 @@ public class ReserveParkingSpotUseCaseImpl implements ReserveParkingSpotUseCase 
 
     @Override
     public Void execute(final ReserveParkingSpotDomain data) {
+        repository.releaseExpiredReservations();
         validateReserveParkingSpot.validate(data);
 
         final long active = repository.countActiveReservationsForStudent(data.getStudentId());

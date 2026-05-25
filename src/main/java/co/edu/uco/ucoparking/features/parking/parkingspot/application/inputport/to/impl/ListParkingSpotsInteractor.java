@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class ListParkingSpotsInteractor implements ListParkingSpotsInputPort {
 
     private final ListParkingSpotsUseCase useCase;

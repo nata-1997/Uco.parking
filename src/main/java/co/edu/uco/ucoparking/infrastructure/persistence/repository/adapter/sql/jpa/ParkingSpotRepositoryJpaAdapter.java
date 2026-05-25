@@ -53,4 +53,34 @@ public class ParkingSpotRepositoryJpaAdapter implements ParkingSpotRepository {
                         && !ParkingSpotReservationSchedule.isSlotEndedByClock(j.getEndTime()))
                 .count();
     }
+
+    @Override
+    public boolean existsActiveSpotWithNormalizedPlate(final String normalizedPlate) {
+        return jpaRepository.countActiveSpotsWithNormalizedPlate(normalizedPlate) > 0;
+    }
+
+    @Override
+    public int releaseExpiredReservations() {
+        int released = 0;
+        released += releaseExpiredSlotsWithStatus(ParkingSpotStoredStatus.RESERVED);
+        released += releaseExpiredSlotsWithStatus(ParkingSpotStoredStatus.OCCUPIED);
+        return released;
+    }
+
+    private int releaseExpiredSlotsWithStatus(final String status) {
+        int n = 0;
+        for (var row : jpaRepository.findByStatus(status)) {
+            if (row.getEndTime() != null
+                    && ParkingSpotReservationSchedule.isSlotEndedByClock(row.getEndTime())) {
+                row.setStatus(ParkingSpotStoredStatus.AVAILABLE);
+                row.setPlate(null);
+                row.setStartTime(null);
+                row.setEndTime(null);
+                row.setReservedByStudentId(null);
+                jpaRepository.save(row);
+                n++;
+            }
+        }
+        return n;
+    }
 }

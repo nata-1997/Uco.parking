@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="Organización lógica">
-      <change beforePath="$PROJECT_DIR$/docs/PRUEBAS_CONEXION_FRONT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRUEBAS_CONEXION_FRONT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/StudentRepositoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/StudentRepositoryJpaAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/StudentJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/StudentJpaRepository.java" afterDir="false" />
+    <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="Organización lógica casi lista">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/crossscutting/messagescatalog/MessagesEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/crossscutting/messagescatalog/MessagesEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/impl/ListParkingSpotsInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/impl/ListParkingSpotsInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/domain/validator/ValidateReserveParkingSpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/domain/validator/ValidateReserveParkingSpot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ListParkingSpotsUseCaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ListParkingSpotsUseCaseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ReserveParkingSpotUseCaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ReserveParkingSpotUseCaseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/ParkingSpotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/ParkingSpotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/ParkingSpotRepositoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/ParkingSpotRepositoryJpaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/ParkingSpotJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/ParkingSpotJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages_es.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779692390800</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Organización lógica casi lista">
+      <option name="closed" value="true" />
+      <created>1779712139484</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1779712139484</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,7 +205,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Organización lógica" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organización lógica" />
+    <MESSAGE value="Organización lógica casi lista" />
+    <option name="LAST_COMMIT_MESSAGE" value="Organización lógica casi lista" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

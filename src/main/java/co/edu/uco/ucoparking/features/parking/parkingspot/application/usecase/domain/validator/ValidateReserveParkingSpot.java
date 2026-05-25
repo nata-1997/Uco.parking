@@ -7,6 +7,7 @@ import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessagesEnum;
 import co.edu.uco.ucoparking.features.parking.parkingspot.ParkingSpotReservationSchedule;
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.ReserveParkingSpotDomain;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.StudentEntity;
+import co.edu.uco.ucoparking.infrastructure.persistence.repository.ParkingSpotRepository;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.StudentRepository;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +23,13 @@ public class ValidateReserveParkingSpot {
     private static final LocalTime LOT_CLOSE = LocalTime.of(21, 40);
 
     private final StudentRepository studentRepository;
+    private final ParkingSpotRepository parkingSpotRepository;
 
-    public ValidateReserveParkingSpot(final StudentRepository studentRepository) {
+    public ValidateReserveParkingSpot(
+            final StudentRepository studentRepository,
+            final ParkingSpotRepository parkingSpotRepository) {
         this.studentRepository = studentRepository;
+        this.parkingSpotRepository = parkingSpotRepository;
     }
 
     public void validate(final ReserveParkingSpotDomain candidate) {
@@ -41,6 +46,10 @@ public class ValidateReserveParkingSpot {
         if (TextHelper.isNullOrWhiteSpace(candidate.getPlate())
                 || !PLATE.matcher(candidate.getPlate().trim()).matches()) {
             throw UcoParkingException.of(MessagesEnum.PARKING_PLATE_INVALID);
+        }
+        final String plateNorm = candidate.getPlate().trim().toUpperCase();
+        if (parkingSpotRepository.existsActiveSpotWithNormalizedPlate(plateNorm)) {
+            throw UcoParkingException.of(MessagesEnum.PARKING_PLATE_ALREADY_IN_USE);
         }
         if (TextHelper.isNullOrWhiteSpace(candidate.getStartTime())
                 || TextHelper.isNullOrWhiteSpace(candidate.getEndTime())) {

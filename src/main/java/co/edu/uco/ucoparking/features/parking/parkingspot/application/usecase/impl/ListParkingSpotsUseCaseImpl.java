@@ -19,6 +19,7 @@ public class ListParkingSpotsUseCaseImpl implements ListParkingSpotsUseCase {
 
     @Override
     public List<ParkingSpotEntity> execute(final Void data) {
+        repository.releaseExpiredReservations();
         return repository.findAll().stream()
                 .sorted(Comparator.comparing(ParkingSpotEntity::getSpotCode))
                 .toList();
