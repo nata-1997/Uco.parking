@@ -7,6 +7,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -24,6 +25,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UcoParkingException.class)
     public ResponseEntity<ApiErrorResponse> handleUcoParkingException(final UcoParkingException exception) {
         return buildResponse(exception);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ApiErrorResponse> handleAuthenticationException() {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(apiErrorResponseFactory.fromUcoParkingException(
+                        UcoParkingException.of(MessagesEnum.COMMON_UNAUTHORIZED_API),
+                        LocaleContextHolder.getLocale()));
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

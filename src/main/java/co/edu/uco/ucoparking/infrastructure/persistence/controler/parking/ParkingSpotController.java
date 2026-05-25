@@ -7,6 +7,8 @@ import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.to.input.ReleaseParkingSpotInputTO;
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.to.input.ReserveParkingSpotInputTO;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.ParkingSpotEntity;
+import co.edu.uco.ucoparking.infrastructure.security.Auth0ApiAuthorization;
+import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,14 +32,17 @@ public class ParkingSpotController {
     private final ListParkingSpotsInputPort listParkingSpotsInputPort;
     private final ReserveParkingSpotInputPort reserveParkingSpotInputPort;
     private final ReleaseParkingSpotInputPort releaseParkingSpotInputPort;
+    private final Auth0ApiAuthorization auth0ApiAuthorization;
 
     public ParkingSpotController(
             final ListParkingSpotsInputPort listParkingSpotsInputPort,
             final ReserveParkingSpotInputPort reserveParkingSpotInputPort,
-            final ReleaseParkingSpotInputPort releaseParkingSpotInputPort) {
+            final ReleaseParkingSpotInputPort releaseParkingSpotInputPort,
+            final Auth0ApiAuthorization auth0ApiAuthorization) {
         this.listParkingSpotsInputPort = listParkingSpotsInputPort;
         this.reserveParkingSpotInputPort = reserveParkingSpotInputPort;
         this.releaseParkingSpotInputPort = releaseParkingSpotInputPort;
+        this.auth0ApiAuthorization = auth0ApiAuthorization;
     }
 
     /**
@@ -45,10 +50,12 @@ public class ParkingSpotController {
      */
     @GetMapping
     public Mono<ResponseEntity<List<ParkingSpotResponse>>> list(
-            @RequestParam(name = "forStudentId", required = false) final UUID forStudentId) {
+            @RequestParam(name = "forStudentId", required = false) final UUID forStudentId,
+            final Authentication authentication) {
         return Mono.fromCallable(() -> {
-            final List<ParkingSpotEntity> entities =
-                    listParkingSpotsInputPort.execute(new ListParkingSpotsInputTO());
+                    auth0ApiAuthorization.assertForStudentIdAllowed(forStudentId, authentication);
+                    final List<ParkingSpotEntity> entities =
+                            listParkingSpotsInputPort.execute(new ListParkingSpotsInputTO());
             return entities.stream()
                     .map(e -> ParkingSpotResponse.fromEntity(e, forStudentId))
                     .toList();
@@ -60,9 +67,11 @@ public class ParkingSpotController {
     @PostMapping("/{spotCode}/reserve")
     public Mono<ResponseEntity<Void>> reserve(
             @PathVariable final String spotCode,
-            @RequestBody final ReserveParkingSpotRequest request) {
+            @RequestBody final ReserveParkingSpotRequest request,
+            final Authentication authentication) {
         return Mono.fromCallable(() -> {
-            final ReserveParkingSpotInputTO input = new ReserveParkingSpotInputTO();
+                    auth0ApiAuthorization.assertStudentIdAllowed(request.getStudentId(), authentication);
+                    final ReserveParkingSpotInputTO input = new ReserveParkingSpotInputTO();
             input.setSpotCode(spotCode);
             input.setStudentId(request.getStudentId());
             input.setPlate(request.getPlate());
@@ -76,9 +85,11 @@ public class ParkingSpotController {
     @PostMapping("/{spotCode}/release")
     public Mono<ResponseEntity<Void>> release(
             @PathVariable final String spotCode,
-            @RequestBody final ReleaseParkingSpotRequest request) {
+            @RequestBody final ReleaseParkingSpotRequest request,
+            final Authentication authentication) {
         return Mono.fromCallable(() -> {
-            final ReleaseParkingSpotInputTO input = new ReleaseParkingSpotInputTO();
+                    auth0ApiAuthorization.assertStudentIdAllowed(request.getStudentId(), authentication);
+                    final ReleaseParkingSpotInputTO input = new ReleaseParkingSpotInputTO();
             input.setSpotCode(spotCode);
             input.setStudentId(request.getStudentId());
             releaseParkingSpotInputPort.execute(input);

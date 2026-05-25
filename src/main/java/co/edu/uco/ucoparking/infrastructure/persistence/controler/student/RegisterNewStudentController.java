@@ -2,6 +2,8 @@ package co.edu.uco.ucoparking.infrastructure.persistence.controler.student;
 
 import co.edu.uco.ucoparking.features.student.registernewstudent.application.inputport.RegisterNewStudentInputPort;
 import co.edu.uco.ucoparking.infrastructure.persistence.controler.student.mapper.RegisterNewStudentRequestMapper;
+import co.edu.uco.ucoparking.infrastructure.security.Auth0ApiAuthorization;
+import org.springframework.security.core.Authentication;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessageCatalog;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessagesEnum;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -23,14 +25,17 @@ public class RegisterNewStudentController {
     private final RegisterNewStudentInputPort inputPort;
     private final RegisterNewStudentRequestMapper requestMapper;
     private final MessageCatalog messageCatalog;
+    private final Auth0ApiAuthorization auth0ApiAuthorization;
 
     public RegisterNewStudentController(
             final RegisterNewStudentInputPort inputPort,
             final RegisterNewStudentRequestMapper requestMapper,
-            final MessageCatalog messageCatalog) {
+            final MessageCatalog messageCatalog,
+            final Auth0ApiAuthorization auth0ApiAuthorization) {
         this.inputPort = inputPort;
         this.requestMapper = requestMapper;
         this.messageCatalog = messageCatalog;
+        this.auth0ApiAuthorization = auth0ApiAuthorization;
     }
 
     /**
@@ -38,8 +43,10 @@ public class RegisterNewStudentController {
      */
     @PostMapping
     public Mono<ResponseEntity<RegisterNewStudentResponse>> register(
-            @RequestBody final RegisterNewStudentRequest request) {
+            @RequestBody final RegisterNewStudentRequest request,
+            final Authentication authentication) {
         return Mono.fromCallable(() -> {
+                    auth0ApiAuthorization.assertRegisterEmailAllowed(request.getEmail(), authentication);
                     inputPort.execute(requestMapper.toInputPort(request));
                     final String message = messageCatalog.getUserMessage(
                             MessagesEnum.STUDENT_SUCCESSFULLY_REGISTERED,

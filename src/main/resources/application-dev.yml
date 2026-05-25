@@ -19,3 +19,8 @@ logging:
   level:
     root: INFO
     org.springframework: DEBUG
+
+# Opcional (misma app Auth0 que el front): descomenta y ajusta o exporta variables de entorno.
+# uco.auth0 se rellena por env: AUTH0_ISSUER_URI, AUTH0_AUDIENCE (opcional, si el API en Auth0 exige aud).
+# AUTH0_ISSUER_URI=https://tu-tenant.us.auth0.com/
+# AUTH0_AUDIENCE=https://tu-api-identifier

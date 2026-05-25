@@ -2,6 +2,9 @@ spring:
   application:
     name: UcoParking
 
+  main:
+    web-application-type: servlet
+
   profiles:
     active: dev
 
@@ -43,3 +46,10 @@ server:
   servlet:
     # Prefijo para MVC/Tomcat (websocket trae servlet). El front usa /uco-parking/api/v1/...
     context-path: /uco-parking
+
+# Auth0 (JWT). Si defines issuer, /api/v1/** exige Bearer token alineado con el front (VITE_AUTH0_*).
+# Ej. issuer: https://TU-TENANT.us.auth0.com/ (con barra final recomendada por Spring)
+uco:
+  auth0:
+    issuer-uri: ${AUTH0_ISSUER_URI:}
+    audience: ${AUTH0_AUDIENCE:}
