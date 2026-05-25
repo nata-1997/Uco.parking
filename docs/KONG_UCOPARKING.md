@@ -11,6 +11,14 @@ Kong actúa como **proxy** delante del Spring Boot: el navegador o el proxy de V
    infisical run --env=dev -- docker compose -f docker-compose-kong.yml up -d
    ```
 
+   **Opcional — WAF (ModSecurity + CRS)** delante de Kong:
+
+   ```bash
+   infisical run --env=dev -- docker compose -f docker-compose-kong.yml --profile waf up -d
+   ```
+
+   Detalle: [MODSECURITY_UCOPARKING.md](MODSECURITY_UCOPARKING.md).
+
 3. El contenedor **`kong-bootstrap-ucoparking`** (una sola vez por `up`) registra en Kong:
    - **Servicio** `ucoparking-backend` → `http://host.docker.internal:8080` (tu JVM en el host).
    - **Ruta** con prefijo `/uco-parking` y `strip_path=false` (coincide con Tomcat).
@@ -21,11 +29,12 @@ Kong actúa como **proxy** delante del Spring Boot: el navegador o el proxy de V
 |-----|-----|
 | Sin Kong (directo) | `http://127.0.0.1:8080/uco-parking/api/v1/...` |
 | Con Kong | `http://127.0.0.1:8000/uco-parking/api/v1/...` |
+| Con Kong + WAF (`--profile waf`) | `http://127.0.0.1:9080/uco-parking/api/v1/...` |
 | Admin API Kong | `http://127.0.0.1:8001` (p. ej. `GET /services`) |
 
 ## Frontend (Vite)
 
-Define en **Infisical** (entorno `dev`) el secreto `VITE_DEV_API_PROXY_TARGET=http://127.0.0.1:8000` y arranca el front con `npm run dev:secrets` (rama `BaúlSecretos`).
+Define en **Infisical** (entorno `dev`) el secreto `VITE_DEV_API_PROXY_TARGET=http://127.0.0.1:8000` (solo Kong) o `http://127.0.0.1:9080` si usas el perfil **waf** ([MODSECURITY_UCOPARKING.md](MODSECURITY_UCOPARKING.md)). Arranca el front con `npm run dev:secrets` (rama `BaúlSecretos`).
 
 Las rutas del front siguen siendo relativas (`/uco-parking/...`); solo cambia el **origen** del proxy.
 

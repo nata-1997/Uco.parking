@@ -49,13 +49,15 @@ En desarrollo, define **`VITE_DEV_API_PROXY_TARGET`** en Infisical para que el p
 | `KONG_DB_NAME` | Nombre de la base PostgreSQL (por defecto `kong`). Se mapea a `KONG_PG_DATABASE` / `POSTGRES_DB`. |
 | `KONG_PG_USER` | Opcional; por defecto `kong`. |
 
+Variables opcionales del **WAF** (ModSecurity delante de Kong, perfil `waf`): `MODSEC_RULE_ENGINE`, `BLOCKING_PARANOIA`, `WAF_HOST_PORT`, `WAF_UPSTREAM_KONG`, etc. — ver [MODSECURITY_UCOPARKING.md](MODSECURITY_UCOPARKING.md).
+
 ### Base de datos (SQL Server en Docker, perfil `sql`)
 
 Si usas el servicio `sqlserver` del `docker-compose-kong.yml`:
 
 | Nombre | Uso |
 |--------|-----|
-| `MSSQL_SA_PASSWORD` | Contraseña del usuario `sa` dentro del contenedor. Debe ser **la misma** que uses en el JDBC (`SPRING_DATASOURCE_URL` / contraseña) si conectas al contenedor. |
+| `MSSQL_SA_PASSWORD` | Contraseña del usuario `sa` dentro del contenedor. Debe ser **la misma** que uses en el JDBC (`SPRING_DATASOURCE_URL` / contraseña) si conectas al contenedor. Si no la defines, los scripts `diagnose-docker-sql` / `create-ucoparking-database` pueden usar `SPRING_DATASOURCE_PASSWORD` o `DB_PASSWORD` como respaldo (deben coincidir con el `sa` del contenedor). |
 
 Si SQL Server está **en el host** (Windows), suele bastar con `SPRING_DATASOURCE_*` apuntando a `localhost` y el usuario/contraseña que ya tengas.
 

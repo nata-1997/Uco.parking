@@ -21,6 +21,9 @@ secrets.local.env
 # Log file
 *.log
 
+# Copias de seguridad SQL locales (nunca subir a Git)
+backups/*.bak
+
 # BlueJ files
 *.ctxt
 

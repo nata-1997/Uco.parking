@@ -119,6 +119,31 @@ services:
     entrypoint: ["/bin/sh", "/bootstrap.sh"]
     restart: "no"
 
+  # WAF: Nginx + ModSecurity + OWASP CRS → upstream Kong (misma red Docker).
+  # Perfil "waf": no se arranca salvo que uses --profile waf (ver docs/MODSECURITY_UCOPARKING.md).
+  modsecurity-waf:
+    profiles:
+      - waf
+    image: owasp/modsecurity-crs:nginx
+    container_name: ucoparking-modsecurity-waf
+    depends_on:
+      kong:
+        condition: service_healthy
+    environment:
+      BACKEND: ${WAF_UPSTREAM_KONG:-http://kong:8000}
+      PORT: "8080"
+      # Dev recomendado: solo log, sin bloqueo. Producción: On tras afinar exclusiones CRS.
+      MODSEC_RULE_ENGINE: ${MODSEC_RULE_ENGINE:-DetectionOnly}
+      BLOCKING_PARANOIA: ${BLOCKING_PARANOIA:-1}
+      SERVER_NAME: ${WAF_SERVER_NAME:-localhost}
+      # Timeouts alineados con Kong por defecto (60s en imagen CRS); sube si hay subidas grandes.
+      PROXY_TIMEOUT: ${WAF_PROXY_TIMEOUT:-120s}
+    ports:
+      # Entrada HTTP con WAF; mismo path-prefix /uco-parking que expone Kong.
+      - "${WAF_HOST_PORT:-9080}:8080"
+    networks:
+      - kong-network
+
 volumes:
   kong-db-data:
   sqlserver-data:
