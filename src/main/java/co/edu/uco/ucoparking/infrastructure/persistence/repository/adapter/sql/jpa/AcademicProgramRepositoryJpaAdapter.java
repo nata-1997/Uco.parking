@@ -4,8 +4,9 @@ import co.edu.uco.ucoparking.infrastructure.persistence.entity.AcademicProgramEn
 import co.edu.uco.ucoparking.infrastructure.persistence.mapper.AcademicProgramMapperJPA;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.AcademicProgramRepository;
 import co.edu.uco.ucoparking.infrastructure.persistence.sql.AcademicProgramJpaRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 import java.util.UUID;
@@ -16,38 +17,42 @@ public class AcademicProgramRepositoryJpaAdapter implements AcademicProgramRepos
     private final AcademicProgramJpaRepository repository;
     private final AcademicProgramMapperJPA mapper;
 
-    public AcademicProgramRepositoryJpaAdapter(AcademicProgramJpaRepository repository, AcademicProgramMapperJPA mapper) {
+    public AcademicProgramRepositoryJpaAdapter(final AcademicProgramJpaRepository repository, final AcademicProgramMapperJPA mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
     @Override
-    public void create(AcademicProgramEntity entity) {
-        repository.save (mapper.toJPAEntity(entity));
+    @CacheEvict(value = "academicPrograms", allEntries = true)
+    public void create(final AcademicProgramEntity entity) {
+        repository.save(mapper.toJPAEntity(entity));
     }
 
     @Override
-    public void update(AcademicProgramEntity entity) {
-        repository.save (mapper.toJPAEntity(entity));
+    @CacheEvict(value = "academicPrograms", allEntries = true)
+    public void update(final AcademicProgramEntity entity) {
+        repository.save(mapper.toJPAEntity(entity));
     }
 
     @Override
-    public void delete(UUID id) {
-        repository.deleteById (id);
-
+    @CacheEvict(value = "academicPrograms", allEntries = true)
+    public void delete(final UUID id) {
+        repository.deleteById(id);
     }
 
     @Override
-    public AcademicProgramEntity findById(UUID id) {
+    @Cacheable(value = "academicPrograms", key = "#id")
+    public AcademicProgramEntity findById(final UUID id) {
         return repository.findById(id).map(mapper::toEntity).orElse(null);
     }
 
     @Override
-    public List<AcademicProgramEntity> findByFilter(AcademicProgramEntity entity) {
+    public List<AcademicProgramEntity> findByFilter(final AcademicProgramEntity entity) {
         return List.of();
     }
 
     @Override
+    @Cacheable(value = "academicPrograms")
     public List<AcademicProgramEntity> findAll() {
         return repository.findAll().stream().map(mapper::toEntity).toList();
     }

@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="Organización lógica casi lista">
-      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/config/CacheConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/config/aaaa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/AcademicProgramRepositoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/AcademicProgramRepositoryJpaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/IdTypeRepositoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/IdTypeRepositoryJpaAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
