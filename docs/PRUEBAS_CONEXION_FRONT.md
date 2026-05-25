@@ -31,7 +31,7 @@ Para dejar **todos los cupos libres** en la base (placa, franja y dueño en blan
 1. `npm install`
 2. Copia `.env.example` a **`.env.local`** (ya ignorado por Git).
 3. Configura **Auth0** (`VITE_AUTH0_DOMAIN`, `VITE_AUTH0_CLIENT_ID`).
-4. Registra un estudiante desde la app (o API) y copia su **UUID** a `VITE_STUDENT_UUID` en `.env.local` (obligatorio para reservar/liberar con el back actual).
+4. Tras iniciar sesión con Auth0, el front consulta `GET /api/v1/students/lookup?email=...` (mismo correo que Auth0): si existe estudiante, guarda el **UUID** en sesión y entra a reservas (`/dashboard`). Si no existe, redirige a **Registrar estudiante**. Opcional en dev: `VITE_STUDENT_UUID` en `.env.local` fuerza un UUID fijo si no hay sesión.
 5. Si el API no está en `127.0.0.1:8080`, ajusta `VITE_DEV_API_PROXY_TARGET` en `.env.local`.
 6. `npm run dev` → suele ser `http://localhost:5173`
 

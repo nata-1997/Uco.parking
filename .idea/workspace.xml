@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="Organización lógica" />
+    <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="Organización lógica">
+      <change beforePath="$PROJECT_DIR$/docs/PRUEBAS_CONEXION_FRONT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRUEBAS_CONEXION_FRONT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/StudentRepositoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/StudentRepositoryJpaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/StudentJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/StudentJpaRepository.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -161,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779692035793</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Organización lógica">
+      <option name="closed" value="true" />
+      <created>1779692390800</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1779692390800</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -41,6 +42,14 @@ public class StudentRepositoryJpaAdapter implements StudentRepository {
     @Override
     public StudentEntity findById(UUID id) {
         return repository.findById(id).map(mapper::toEntity).orElse(null);
+    }
+
+    @Override
+    public Optional<StudentEntity> findByEmail(String email) {
+        if (email == null || email.isBlank()) {
+            return Optional.empty();
+        }
+        return repository.findOneByEmailNormalized(email).map(mapper::toEntity);
     }
 
     @Override
