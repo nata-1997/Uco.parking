@@ -4,7 +4,6 @@ import co.edu.uco.ucoparking.crossscutting.exception.UcoParkingException;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessagesEnum;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.StudentEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -14,23 +13,24 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * Cuando {@code uco.auth0.issuer-uri} está definido, exige que el JWT de Auth0
+ * Cuando el issuer de Auth0 está configurado ({@link Auth0RuntimeSettings}), exige que el JWT
  * (claim {@code email}) coincida con el recurso solicitado (alineado con el SPA).
  */
 @Component
 public class Auth0ApiAuthorization {
 
-    @Value("${uco.auth0.issuer-uri:}")
-    private String issuerUri;
-
+    private final Auth0RuntimeSettings auth0RuntimeSettings;
     private final StudentRepository studentRepository;
 
-    public Auth0ApiAuthorization(final StudentRepository studentRepository) {
+    public Auth0ApiAuthorization(
+            final Auth0RuntimeSettings auth0RuntimeSettings,
+            final StudentRepository studentRepository) {
+        this.auth0RuntimeSettings = auth0RuntimeSettings;
         this.studentRepository = studentRepository;
     }
 
     public boolean isAuth0SecurityEnabled() {
-        return issuerUri != null && !issuerUri.isBlank();
+        return auth0RuntimeSettings.isJwtSecurityEnabled();
     }
 
     public void assertLookupEmailAllowed(final String email, final Authentication authentication) {

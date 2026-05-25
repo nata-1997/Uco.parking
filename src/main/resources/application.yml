@@ -13,13 +13,14 @@ spring:
     encoding: UTF-8
     fallback-to-system-locale: false
 
-  # --- SQL Server (pruebas locales sin Key Vault) ---
-  # Sobrescribe con variables de entorno o con application-secrets.properties (perfil dev).
+  # --- SQL Server ---
+  # Secretos: Infisical (recomendado) u otras variables de entorno. Ver docs/INFISICAL_UCOPARKING.md.
+  # Estándar Spring: SPRING_DATASOURCE_URL / SPRING_DATASOURCE_USERNAME / SPRING_DATASOURCE_PASSWORD
+  # Alternativa: DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD.
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};databaseName=${DB_NAME:UCOParking};encrypt=true;trustServerCertificate=true
     username: ${DB_USERNAME:sa}
-    # Definir en application-secrets.properties (raíz del repo, gitignored) o variable DB_PASSWORD.
     password: ${DB_PASSWORD:}
 
   jpa:
@@ -42,14 +43,18 @@ spring:
 # (Propiedades antiguas azure.keyvault.* sustituidas por spring.cloud.azure.*)
 
 server:
+  # Escuchar en todas las interfaces para que Kong (Docker) llegue vía host.docker.internal:8080 en Windows/Mac.
+  address: 0.0.0.0
   port: 8080
   servlet:
     # Prefijo para MVC/Tomcat (websocket trae servlet). El front usa /uco-parking/api/v1/...
     context-path: /uco-parking
 
-# Auth0 (JWT). Variables de ENTORNO: AUTH0_ISSUER_URI, AUTH0_AUDIENCE (no son archivos; ver docs/AUTH0_BACKEND.md).
-# El front usa VITE_AUTH0_* en .env.local; el mismo valor de audience debe ir en AUTH0_AUDIENCE si validas aud.
+# Auth0 (JWT). Ver docs/AUTH0_BACKEND.md y docs/INFISICAL_UCOPARKING.md.
+# issuer: AUTH0_ISSUER_URI (recomendado, URL completa) o AUTH0_DOMAIN (p. ej. tu-tenant.us.auth0.com → https://…/)
+# El front usa VITE_AUTH0_*; AUTH0_AUDIENCE debe coincidir con VITE_AUTH0_AUDIENCE si validas aud.
 uco:
   auth0:
     issuer-uri: ${AUTH0_ISSUER_URI:}
+    domain: ${AUTH0_DOMAIN:}
     audience: ${AUTH0_AUDIENCE:}

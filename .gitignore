@@ -11,6 +11,13 @@ application-secrets.properties
 .env.development.local
 !.env.example
 
+# Secretos reales exportados para Infisical / import local (no subir)
+infisical-dev.env
+secrets.local.env
+
+# Infisical CLI: enlace local al proyecto (plantilla: .infisical.json.example)
+.infisical.json
+
 # Log file
 *.log
 

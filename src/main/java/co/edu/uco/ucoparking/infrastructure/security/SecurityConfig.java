@@ -17,9 +17,11 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,11 +30,14 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Value("${uco.auth0.issuer-uri:}")
-    private String issuerUri;
+    private final Auth0RuntimeSettings auth0RuntimeSettings;
 
     @Value("${uco.auth0.audience:}")
     private String audience;
+
+    public SecurityConfig(final Auth0RuntimeSettings auth0RuntimeSettings) {
+        this.auth0RuntimeSettings = auth0RuntimeSettings;
+    }
 
     @Bean
     @Order(1)
@@ -42,7 +47,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults());
 
-        if (issuerUri == null || issuerUri.isBlank()) {
+        if (!auth0RuntimeSettings.isJwtSecurityEnabled()) {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
             return http.build();
         }
@@ -75,8 +80,15 @@ public class SecurityConfig {
     }
 
     private NimbusJwtDecoder jwtDecoder() {
-        final String issuer = issuerUri.trim();
-        final NimbusJwtDecoder decoder = NimbusJwtDecoder.withIssuerLocation(issuer).build();
+        final String issuer = auth0RuntimeSettings.getIssuerLocation().trim();
+        // Discovery OIDC (/.well-known/openid-configuration): timeouts explícitos para redes lentas o proxy.
+        final SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(10_000);
+        factory.setReadTimeout(45_000);
+        final RestTemplate oidcRestTemplate = new RestTemplate(factory);
+        final NimbusJwtDecoder decoder = NimbusJwtDecoder.withIssuerLocation(issuer)
+                .restOperations(oidcRestTemplate)
+                .build();
         final OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
         if (audience == null || audience.isBlank()) {
             decoder.setJwtValidator(withIssuer);

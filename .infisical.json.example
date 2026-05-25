@@ -1,0 +1,8 @@
+{
+  "workspaceId": "<PEGA_AQUI_EL_PROJECT_ID_DESDE_INFISICAL>",
+  "defaultEnvironment": "dev",
+  "gitBranchToEnvironmentMapping": {
+    "BaúlSecretos": "dev",
+    "main": "dev"
+  }
+}

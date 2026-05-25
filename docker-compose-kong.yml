@@ -1,12 +1,12 @@
 services:
-  # PostgreSQL para Kong (solo configuración de Kong)
+  # PostgreSQL para Kong (solo configuración de Kong). KONG_PG_PASSWORD es obligatoria (p. ej. Infisical).
   kong-db:
     image: postgres:15-alpine
     container_name: kong-db
     environment:
-      POSTGRES_DB: kong
-      POSTGRES_USER: kong
-      POSTGRES_PASSWORD: kong_password
+      POSTGRES_DB: ${KONG_DB_NAME:-kong}
+      POSTGRES_USER: ${KONG_PG_USER:-kong}
+      POSTGRES_PASSWORD: ${KONG_PG_PASSWORD:?Defina KONG_PG_PASSWORD en el entorno (p. ej. infisical run --env=dev)}
     volumes:
       - kong-db-data:/var/lib/postgresql/data
     ports:
@@ -28,7 +28,7 @@ services:
     container_name: ucoparking-sqlserver
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "YourPassword@123"
+      SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Defina MSSQL_SA_PASSWORD al usar el perfil sql (p. ej. Infisical)}
       MSSQL_PID: "Developer"
     volumes:
       - sqlserver-data:/var/opt/mssql/data
@@ -38,7 +38,11 @@ services:
     networks:
       - kong-network
     healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "YourPassword@123" -Q "SELECT 1"
+      test:
+        [
+          "CMD-SHELL",
+          '/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1',
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -51,9 +55,9 @@ services:
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-db
-      KONG_PG_USER: kong
-      KONG_PG_PASSWORD: kong_password
-      KONG_PG_DATABASE: kong
+      KONG_PG_USER: ${KONG_PG_USER:-kong}
+      KONG_PG_PASSWORD: ${KONG_PG_PASSWORD:?Defina KONG_PG_PASSWORD en el entorno (p. ej. infisical run --env=dev)}
+      KONG_PG_DATABASE: ${KONG_DB_NAME:-kong}
     depends_on:
       kong-db:
         condition: service_healthy
@@ -73,9 +77,9 @@ services:
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-db
-      KONG_PG_USER: kong
-      KONG_PG_PASSWORD: kong_password
-      KONG_PG_DATABASE: kong
+      KONG_PG_USER: ${KONG_PG_USER:-kong}
+      KONG_PG_PASSWORD: ${KONG_PG_PASSWORD:?Defina KONG_PG_PASSWORD en el entorno (p. ej. infisical run --env=dev)}
+      KONG_PG_DATABASE: ${KONG_DB_NAME:-kong}
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
@@ -91,8 +95,9 @@ services:
     healthcheck:
       test: ["CMD", "kong", "health"]
       interval: 10s
-      timeout: 5s
-      retries: 5
+      timeout: 10s
+      retries: 12
+      start_period: 60s
     # Spring en el host (Windows/Mac/Linux con Docker 20.10+)
     extra_hosts:
       - "host.docker.internal:host-gateway"

@@ -1,34 +1,24 @@
 # SQL Server en desarrollo (sin Azure Key Vault)
 
-## Comportamiento actual
+## Enfoque actual (rama de pruebas con Infisical)
 
-- **`spring.profiles.active=dev`** (por defecto en `application.yml`).
-- **Key Vault** queda **desactivado** (`spring.cloud.azure.keyvault.secret.enabled=false` en `application-dev.yml` y por defecto en `application.yml`).
-- La **conexión JDBC** se define en `application.yml` con valores por defecto pensados para **SQL Server en Docker** en `localhost:1433`, base **`UCOParking`**, usuario **`sa`**, contraseña por defecto **`TuPassword#123`** (ajústala si la tuya es distinta).
+- Perfil **`dev`**: Key Vault **desactivado** (`application-dev.yml`).
+- **No** se usa `application-secrets.properties`: JDBC y Auth0 llegan por **variables de entorno** (inyectadas con `infisical run` u otro gestor).
+- Recomendado en Infisical: `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` (estándar Spring Boot).
 
-## Variables de entorno (opcional)
+## Variables alternativas (sin URL JDBC completa)
 
-| Variable        | Ejemplo por defecto | Descripción                          |
-|-----------------|---------------------|--------------------------------------|
-| `DB_HOST`       | `localhost`         | Host del contenedor SQL              |
-| `DB_PORT`       | `1433`              | Puerto                               |
-| `DB_NAME`       | `UCOParking`        | Nombre de la base                    |
-| `DB_USERNAME`   | `sa`                | Usuario                              |
-| `DB_PASSWORD`   | (ver `application.yml`) | Contraseña; usa comillas si tiene `#` |
+| Variable      | Descripción                |
+|---------------|----------------------------|
+| `DB_HOST`     | Host SQL Server            |
+| `DB_PORT`     | Puerto                     |
+| `DB_NAME`     | Nombre de la base          |
+| `DB_USERNAME` | Usuario                    |
+| `DB_PASSWORD` | Contraseña                 |
 
-## Archivo local de secretos (opcional)
+## Azure Key Vault (producción)
 
-1. Copia `src/main/resources/application-secrets.properties.example` a la **raíz del proyecto** como `application-secrets.properties` (ya está en `.gitignore`).
-2. Ajusta usuario/contraseña ahí si no quieres usar el valor por defecto.
-3. Con perfil **dev**, `application-dev.yml` importa **`optional:file:./application-secrets.properties`**: si el archivo no existe, no falla.
+- Perfil **`prod`** (`application-prod.yml`): Key Vault con Spring Cloud Azure y datasource propio de prod.
+- **Infisical** no sustituye a Key Vault en Azure: son sistemas distintos; en local/dev usamos Infisical; en Azure puedes seguir usando Key Vault.
 
-Ejecuta el back desde la **raíz del repo** (`mvn spring-boot:run`) para que `./application-secrets.properties` se resuelva bien.
-
-## Cuando vuelvas a Key Vault (prod)
-
-- Perfil **`prod`** (`application-prod.yml`): Key Vault con **Spring Cloud Azure** (`spring.cloud.azure.keyvault.secret.*`) y datasource con variables `DB-SERVER`, `DB-NAME`, etc.
-- Para pruebas locales **sin** tocar prod, sigue usando solo **`dev`**.
-
-## Cómo “deshacer” el modo local sin Key Vault
-
-Cuando indiques, se puede: volver a obligar `DB_PASSWORD` sin default en `application.yml`, quitar el import opcional de secrets, o reactivar solo lectura de secretos desde Key Vault en dev.
+Guía principal: [INFISICAL_UCOPARKING.md](INFISICAL_UCOPARKING.md).

@@ -1,8 +1,5 @@
-# Perfil dev: sin Key Vault; credenciales por defecto vienen de application.yml (o env / secrets).
+# Perfil dev: sin Key Vault. Secretos solo por variables de entorno (p. ej. Infisical: infisical run).
 spring:
-  config:
-    import: optional:file:./application-secrets.properties
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,6 +18,7 @@ logging:
     org.springframework: DEBUG
 
 # Opcional (misma app Auth0 que el front): descomenta y ajusta o exporta variables de entorno.
-# uco.auth0 se rellena por env: AUTH0_ISSUER_URI, AUTH0_AUDIENCE (opcional, si el API en Auth0 exige aud).
+# uco.auth0: AUTH0_ISSUER_URI o AUTH0_DOMAIN; AUTH0_AUDIENCE (opcional). Infisical: docs/INFISICAL_UCOPARKING.md
 # AUTH0_ISSUER_URI=https://tu-tenant.us.auth0.com/
+# AUTH0_DOMAIN=tu-tenant.us.auth0.com
 # AUTH0_AUDIENCE=https://tu-api-identifier

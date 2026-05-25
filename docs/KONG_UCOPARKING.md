@@ -4,11 +4,11 @@ Kong actúa como **proxy** delante del Spring Boot: el navegador o el proxy de V
 
 ## Arranque
 
-1. **SQL Server y Spring** como siempre (ver [PRUEBAS_CONEXION_FRONT.md](PRUEBAS_CONEXION_FRONT.md)): base `UCOParking`, `docker compose up -d` para MSSQL, Spring en **8080** con `context-path` `/uco-parking`.
-2. En la raíz del back:
+1. **SQL Server y Spring** con secretos desde **Infisical** (ver [PRUEBAS_CONEXION_FRONT.md](PRUEBAS_CONEXION_FRONT.md)): base `UCOParking`, Spring en **8080** con `context-path` `/uco-parking`.
+2. En la raíz del back (obligatorio `KONG_PG_PASSWORD` en Infisical o en el entorno):
 
    ```bash
-   docker compose -f docker-compose-kong.yml up -d
+   infisical run --env=dev -- docker compose -f docker-compose-kong.yml up -d
    ```
 
 3. El contenedor **`kong-bootstrap-ucoparking`** (una sola vez por `up`) registra en Kong:
@@ -25,17 +25,13 @@ Kong actúa como **proxy** delante del Spring Boot: el navegador o el proxy de V
 
 ## Frontend (Vite)
 
-En `.env.local` del front, apunta el proxy de desarrollo al gateway:
-
-```env
-VITE_DEV_API_PROXY_TARGET=http://127.0.0.1:8000
-```
+Define en **Infisical** (entorno `dev`) el secreto `VITE_DEV_API_PROXY_TARGET=http://127.0.0.1:8000` y arranca el front con `npm run dev:secrets` (rama `BaúlSecretos`).
 
 Las rutas del front siguen siendo relativas (`/uco-parking/...`); solo cambia el **origen** del proxy.
 
 ## Cambiar el upstream (Spring en otro host o puerto)
 
-Antes de `docker compose -f docker-compose-kong.yml up`, define en tu entorno o en `.env` en la raíz del back (Compose lee variables para sustitución):
+Antes de `docker compose -f docker-compose-kong.yml up`, define en Infisical o exporta en el shell (Compose sustituye desde el entorno del proceso, p. ej. `infisical run`):
 
 ```env
 UCOPARKING_UPSTREAM=http://host.docker.internal:9090
