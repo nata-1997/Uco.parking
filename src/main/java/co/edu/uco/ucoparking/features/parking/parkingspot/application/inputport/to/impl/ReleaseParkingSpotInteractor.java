@@ -19,7 +19,8 @@ public class ReleaseParkingSpotInteractor implements ReleaseParkingSpotInputPort
 
     @Override
     public Void execute(final ReleaseParkingSpotInputTO data) {
-        final ReleaseParkingSpotDomain domain = new ReleaseParkingSpotDomain(data.getSpotCode());
+        final ReleaseParkingSpotDomain domain =
+                new ReleaseParkingSpotDomain(data.getSpotCode(), data.getStudentId());
         return useCase.execute(domain);
     }
 }

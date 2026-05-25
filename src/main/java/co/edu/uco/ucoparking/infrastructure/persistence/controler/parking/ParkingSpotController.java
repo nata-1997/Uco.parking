@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/parking-spots")
@@ -38,12 +40,18 @@ public class ParkingSpotController {
         this.releaseParkingSpotInputPort = releaseParkingSpotInputPort;
     }
 
+    /**
+     * @param forStudentId opcional: UUID del estudiante en sesión; permite calcular {@code canRelease} en cada cupo.
+     */
     @GetMapping
-    public Mono<ResponseEntity<List<ParkingSpotResponse>>> list() {
+    public Mono<ResponseEntity<List<ParkingSpotResponse>>> list(
+            @RequestParam(name = "forStudentId", required = false) final UUID forStudentId) {
         return Mono.fromCallable(() -> {
             final List<ParkingSpotEntity> entities =
                     listParkingSpotsInputPort.execute(new ListParkingSpotsInputTO());
-            return entities.stream().map(ParkingSpotResponse::fromEntity).toList();
+            return entities.stream()
+                    .map(e -> ParkingSpotResponse.fromEntity(e, forStudentId))
+                    .toList();
         })
                 .subscribeOn(Schedulers.boundedElastic())
                 .map(ResponseEntity::ok);
@@ -56,6 +64,7 @@ public class ParkingSpotController {
         return Mono.fromCallable(() -> {
             final ReserveParkingSpotInputTO input = new ReserveParkingSpotInputTO();
             input.setSpotCode(spotCode);
+            input.setStudentId(request.getStudentId());
             input.setPlate(request.getPlate());
             input.setStartTime(request.getStartTime());
             input.setEndTime(request.getEndTime());
@@ -65,9 +74,13 @@ public class ParkingSpotController {
     }
 
     @PostMapping("/{spotCode}/release")
-    public Mono<ResponseEntity<Void>> release(@PathVariable final String spotCode) {
+    public Mono<ResponseEntity<Void>> release(
+            @PathVariable final String spotCode,
+            @RequestBody final ReleaseParkingSpotRequest request) {
         return Mono.fromCallable(() -> {
-            final ReleaseParkingSpotInputTO input = new ReleaseParkingSpotInputTO(spotCode);
+            final ReleaseParkingSpotInputTO input = new ReleaseParkingSpotInputTO();
+            input.setSpotCode(spotCode);
+            input.setStudentId(request.getStudentId());
             releaseParkingSpotInputPort.execute(input);
             return ResponseEntity.noContent().<Void>build();
         }).subscribeOn(Schedulers.boundedElastic());

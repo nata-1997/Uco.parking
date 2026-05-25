@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "ParkingSpot")
 public class ParkingSpotJPAEntity {
@@ -25,6 +27,9 @@ public class ParkingSpotJPAEntity {
     @Column(name = "EndTime", length = 5)
     private String endTime;
 
+    @Column(name = "ReservedByStudentId")
+    private UUID reservedByStudentId;
+
     protected ParkingSpotJPAEntity() {
     }
 
@@ -33,12 +38,14 @@ public class ParkingSpotJPAEntity {
             final String status,
             final String plate,
             final String startTime,
-            final String endTime) {
+            final String endTime,
+            final UUID reservedByStudentId) {
         this.spotCode = spotCode;
         this.status = status;
         this.plate = plate;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.reservedByStudentId = reservedByStudentId;
     }
 
     public String getSpotCode() {
@@ -61,6 +68,10 @@ public class ParkingSpotJPAEntity {
         return endTime;
     }
 
+    public UUID getReservedByStudentId() {
+        return reservedByStudentId;
+    }
+
     public void setSpotCode(final String spotCode) {
         this.spotCode = spotCode;
     }
@@ -79,5 +90,9 @@ public class ParkingSpotJPAEntity {
 
     public void setEndTime(final String endTime) {
         this.endTime = endTime;
+    }
+
+    public void setReservedByStudentId(final UUID reservedByStudentId) {
+        this.reservedByStudentId = reservedByStudentId;
     }
 }

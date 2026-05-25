@@ -1,5 +1,6 @@
 package co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.impl;
 
+import co.edu.uco.ucoparking.crossscutting.constants.DefaultValues;
 import co.edu.uco.ucoparking.crossscutting.exception.UcoParkingException;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessagesEnum;
 import co.edu.uco.ucoparking.features.parking.parkingspot.ParkingSpotStoredStatus;
@@ -27,6 +28,11 @@ public class ReserveParkingSpotUseCaseImpl implements ReserveParkingSpotUseCase 
     public Void execute(final ReserveParkingSpotDomain data) {
         validateReserveParkingSpot.validate(data);
 
+        final long active = repository.countActiveReservationsForStudent(data.getStudentId());
+        if (active >= DefaultValues.MAX_ACTIVE_PARKING_RESERVATIONS_PER_STUDENT) {
+            throw UcoParkingException.of(MessagesEnum.PARKING_MAX_TWO_ACTIVE_RESERVATIONS);
+        }
+
         final ParkingSpotEntity spot = repository
                 .findBySpotCode(data.getSpotCode())
                 .orElseThrow(() -> UcoParkingException.of(MessagesEnum.PARKING_SPOT_NOT_FOUND));
@@ -39,6 +45,7 @@ public class ReserveParkingSpotUseCaseImpl implements ReserveParkingSpotUseCase 
         spot.setPlate(data.getPlate().trim().toUpperCase());
         spot.setStartTime(data.getStartTime());
         spot.setEndTime(data.getEndTime());
+        spot.setReservedByStudentId(data.getStudentId());
         repository.save(spot);
         return null;
     }

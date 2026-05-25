@@ -1,8 +1,11 @@
 package co.edu.uco.ucoparking.features.parking.parkingspot.application.inputport.to.input;
 
+import java.util.UUID;
+
 public final class ReserveParkingSpotInputTO {
 
     private String spotCode;
+    private UUID studentId;
     private String plate;
     private String startTime;
     private String endTime;
@@ -12,10 +15,12 @@ public final class ReserveParkingSpotInputTO {
 
     public ReserveParkingSpotInputTO(
             final String spotCode,
+            final UUID studentId,
             final String plate,
             final String startTime,
             final String endTime) {
         this.spotCode = spotCode;
+        this.studentId = studentId;
         this.plate = plate;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -27,6 +32,14 @@ public final class ReserveParkingSpotInputTO {
 
     public void setSpotCode(final String spotCode) {
         this.spotCode = spotCode;
+    }
+
+    public UUID getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(final UUID studentId) {
+        this.studentId = studentId;
     }
 
     public String getPlate() {

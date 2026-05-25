@@ -80,8 +80,15 @@ BEGIN
         Status    NVARCHAR(20)  NOT NULL,
         Plate     NVARCHAR(10)  NULL,
         StartTime NVARCHAR(5)   NULL,
-        EndTime   NVARCHAR(5)   NULL
+        EndTime   NVARCHAR(5)   NULL,
+        ReservedByStudentId UNIQUEIDENTIFIER NULL
     );
+END
+GO
+
+IF COL_LENGTH(N'dbo.ParkingSpot', N'ReservedByStudentId') IS NULL
+BEGIN
+    ALTER TABLE dbo.ParkingSpot ADD ReservedByStudentId UNIQUEIDENTIFIER NULL;
 END
 GO
 

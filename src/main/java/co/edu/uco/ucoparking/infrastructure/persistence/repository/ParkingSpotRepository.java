@@ -4,6 +4,7 @@ import co.edu.uco.ucoparking.infrastructure.persistence.entity.ParkingSpotEntity
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface ParkingSpotRepository {
 
@@ -14,4 +15,9 @@ public interface ParkingSpotRepository {
     void save(ParkingSpotEntity entity);
 
     long count();
+
+    /**
+     * Reservas activas del estudiante: estado RESERVED, con hora de fin (hoy, Bogotá) aún no superada.
+     */
+    long countActiveReservationsForStudent(UUID studentId);
 }

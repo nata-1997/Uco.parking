@@ -46,6 +46,6 @@ public class ParkingSpotBootstrap implements ApplicationRunner {
     }
 
     private static ParkingSpotEntity spot(final String code, final String status) {
-        return new ParkingSpotEntity(code, status, null, null, null);
+        return new ParkingSpotEntity(code, status, null, null, null, null);
     }
 }

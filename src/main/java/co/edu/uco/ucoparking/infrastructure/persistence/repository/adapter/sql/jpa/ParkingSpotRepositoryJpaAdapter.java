@@ -1,5 +1,7 @@
 package co.edu.uco.ucoparking.infrastructure.persistence.repository.adapter.sql.jpa;
 
+import co.edu.uco.ucoparking.features.parking.parkingspot.ParkingSpotReservationSchedule;
+import co.edu.uco.ucoparking.features.parking.parkingspot.ParkingSpotStoredStatus;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.ParkingSpotEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.mapper.ParkingSpotMapperJPA;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.ParkingSpotRepository;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class ParkingSpotRepositoryJpaAdapter implements ParkingSpotRepository {
@@ -40,5 +43,14 @@ public class ParkingSpotRepositoryJpaAdapter implements ParkingSpotRepository {
     @Override
     public long count() {
         return jpaRepository.count();
+    }
+
+    @Override
+    public long countActiveReservationsForStudent(final UUID studentId) {
+        return jpaRepository.findByReservedByStudentId(studentId).stream()
+                .filter(j -> ParkingSpotStoredStatus.RESERVED.equals(j.getStatus()))
+                .filter(j -> j.getEndTime() != null
+                        && !ParkingSpotReservationSchedule.isSlotEndedByClock(j.getEndTime()))
+                .count();
     }
 }

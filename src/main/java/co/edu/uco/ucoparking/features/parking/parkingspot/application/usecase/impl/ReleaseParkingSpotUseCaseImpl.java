@@ -1,6 +1,7 @@
 package co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.impl;
 
 import co.edu.uco.ucoparking.crossscutting.exception.UcoParkingException;
+import co.edu.uco.ucoparking.crossscutting.helper.ObjectHelper;
 import co.edu.uco.ucoparking.crossscutting.messagescatalog.MessagesEnum;
 import co.edu.uco.ucoparking.features.parking.parkingspot.ParkingSpotStoredStatus;
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.ReleaseParkingSpotDomain;
@@ -20,6 +21,10 @@ public class ReleaseParkingSpotUseCaseImpl implements ReleaseParkingSpotUseCase 
 
     @Override
     public Void execute(final ReleaseParkingSpotDomain data) {
+        if (ObjectHelper.isNull(data.getStudentId())) {
+            throw UcoParkingException.of(MessagesEnum.PARKING_STUDENT_ID_REQUIRED);
+        }
+
         final ParkingSpotEntity spot = repository
                 .findBySpotCode(data.getSpotCode())
                 .orElseThrow(() -> UcoParkingException.of(MessagesEnum.PARKING_SPOT_NOT_FOUND));
@@ -29,10 +34,16 @@ public class ReleaseParkingSpotUseCaseImpl implements ReleaseParkingSpotUseCase 
             throw UcoParkingException.of(MessagesEnum.PARKING_SPOT_NOT_RESERVED);
         }
 
+        if (spot.getReservedByStudentId() == null
+                || !spot.getReservedByStudentId().equals(data.getStudentId())) {
+            throw UcoParkingException.of(MessagesEnum.PARKING_NOT_RESERVATION_OWNER);
+        }
+
         spot.setStatus(ParkingSpotStoredStatus.AVAILABLE);
         spot.setPlate(null);
         spot.setStartTime(null);
         spot.setEndTime(null);
+        spot.setReservedByStudentId(null);
         repository.save(spot);
         return null;
     }
