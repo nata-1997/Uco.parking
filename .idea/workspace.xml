@@ -117,6 +117,19 @@
   }
 }]]></component>
   <component name="RunManager">
+    <configuration name="UcoParkingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="co.edu.uco.ucoparking.initializer.UcoParkingApplication" />
+      <module name="uco.parking" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="co.edu.uco.ucoparking.initializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -126,6 +139,11 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UcoParkingApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
