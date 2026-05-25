@@ -47,8 +47,8 @@ server:
     # Prefijo para MVC/Tomcat (websocket trae servlet). El front usa /uco-parking/api/v1/...
     context-path: /uco-parking
 
-# Auth0 (JWT). Si defines issuer, /api/v1/** exige Bearer token alineado con el front (VITE_AUTH0_*).
-# Ej. issuer: https://TU-TENANT.us.auth0.com/ (con barra final recomendada por Spring)
+# Auth0 (JWT). Variables de ENTORNO: AUTH0_ISSUER_URI, AUTH0_AUDIENCE (no son archivos; ver docs/AUTH0_BACKEND.md).
+# El front usa VITE_AUTH0_* en .env.local; el mismo valor de audience debe ir en AUTH0_AUDIENCE si validas aud.
 uco:
   auth0:
     issuer-uri: ${AUTH0_ISSUER_URI:}
