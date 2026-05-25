@@ -16,7 +16,8 @@ import java.util.regex.Pattern;
 @Component
 public class ValidateReserveParkingSpot {
 
-    private static final Pattern PLATE = Pattern.compile("^[A-Za-z]{3}\\d{3}$");
+    /** Placa: 3 letras + 2 dígitos + 1 letra o dígito (6 caracteres). Ej: ABC12A, XYZ99Z */
+    private static final Pattern PLATE = Pattern.compile("^[A-Za-z]{3}\\d{2}[A-Za-z0-9]$");
     private static final LocalTime LOT_OPEN = LocalTime.of(7, 0);
     private static final LocalTime LOT_CLOSE = LocalTime.of(21, 40);
 

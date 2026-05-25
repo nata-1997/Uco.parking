@@ -35,11 +35,15 @@ public record ParkingSpotResponse(
         final UUID owner = entity.getReservedByStudentId();
         final String ownerStr = owner == null ? null : owner.toString();
 
-        final boolean canRelease = viewerStudentId != null
+        final boolean isOccupiedDemoNoOwner = viewerStudentId != null
+                && owner == null
+                && ParkingSpotStoredStatus.OCCUPIED.equals(stored);
+        final boolean canReleaseAsOwner = viewerStudentId != null
                 && owner != null
                 && owner.equals(viewerStudentId)
                 && (ParkingSpotStoredStatus.RESERVED.equals(stored)
                         || ParkingSpotStoredStatus.OCCUPIED.equals(stored));
+        final boolean canRelease = isOccupiedDemoNoOwner || canReleaseAsOwner;
 
         return new ParkingSpotResponse(
                 entity.getSpotCode(),

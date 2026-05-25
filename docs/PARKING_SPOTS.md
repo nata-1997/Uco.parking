@@ -9,9 +9,9 @@ Ejemplo: `GET http://localhost:8080/uco-parking/api/v1/parking-spots`
 | Método | Ruta | Descripción |
 |--------|------|-------------|
 | `GET` | `/api/v1/parking-spots` | Lista cupos. Query opcional: `forStudentId` (UUID del estudiante en sesión) para devolver `canRelease` en cada ítem. |
-| `GET` | `/api/v1/parking-spots?forStudentId={uuid}` | Igual; cada cupo incluye `reservedByStudentId` si hay reserva y `canRelease` solo si ese estudiante es el dueño y el cupo está `reserved` u `occupied` persistido. |
-| `POST` | `/api/v1/parking-spots/{spotCode}/reserve` | Cuerpo: `{ "studentId": "uuid", "plate": "ABC123", "startTime": "08:00", "endTime": "10:00" }`. Horas interpretadas en **America/Bogota**; no se acepta `startTime` anterior al instante actual en esa zona. Máximo **2** reservas activas por estudiante (reservas `RESERVED` cuya hora de fin aún no ha pasado en Bogotá). Respuesta **204**. |
-| `POST` | `/api/v1/parking-spots/{spotCode}/release` | Cuerpo: `{ "studentId": "uuid" }`. Solo el estudiante dueño de la reserva (`ReservedByStudentId`) puede liberar. Respuesta **204**. |
+| `GET` | `/api/v1/parking-spots?forStudentId={uuid}` | Igual; `canRelease` es `true` si el estudiante es dueño del cupo (`reserved` u `occupied` con su `ReservedByStudentId`), o si el cupo está `OCCUPIED` sin dueño (demo antigua) para poder liberarlo desde el mapa. |
+| `POST` | `/api/v1/parking-spots/{spotCode}/reserve` | Cuerpo: `{ "studentId": "uuid", "plate": "ABC12A", "startTime": "08:00", "endTime": "10:00" }`. **Placa:** 3 letras + 2 dígitos + 1 letra o dígito (6 caracteres). Horas interpretadas en **America/Bogota**; no se acepta `startTime` anterior al instante actual en esa zona. Máximo **2** reservas activas por estudiante (reservas `RESERVED` cuya hora de fin aún no ha pasado en Bogotá). Respuesta **204**. |
+| `POST` | `/api/v1/parking-spots/{spotCode}/release` | Cuerpo: `{ "studentId": "uuid" }`. El dueño (`ReservedByStudentId`) puede liberar reservas/ocupaciones propias. Cupos `OCCUPIED` **sin** dueño (datos demo viejos) pueden liberarse con cualquier `studentId` válido. Respuesta **204**. |
 
 ## Cuerpo de lista (`GET`)
 
@@ -26,7 +26,7 @@ Para reflejar reservas de otros usuarios sin WebSocket, el cliente debe **volver
 
 ## Datos iniciales
 
-`ParkingSpotBootstrap` inserta A1–B6 la primera vez que la tabla está vacía (misma distribución que el mock del front: algunos `OCCUPIED` sin `ReservedByStudentId`; esos cupos no son liberables por estudiantes vía API).
+`ParkingSpotBootstrap` inserta A1–B6 en **AVAILABLE** la primera vez que la tabla está vacía. Para bases ya pobladas con cupos ocupados de prueba, ejecuta `docs/reset-parking-spots-libres.sql`.
 
 ## Base de datos
 

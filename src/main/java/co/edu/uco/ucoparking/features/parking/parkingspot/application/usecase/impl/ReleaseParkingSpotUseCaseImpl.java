@@ -34,8 +34,11 @@ public class ReleaseParkingSpotUseCaseImpl implements ReleaseParkingSpotUseCase 
             throw UcoParkingException.of(MessagesEnum.PARKING_SPOT_NOT_RESERVED);
         }
 
-        if (spot.getReservedByStudentId() == null
-                || !spot.getReservedByStudentId().equals(data.getStudentId())) {
+        final boolean demoOccupiedNoOwner = ParkingSpotStoredStatus.OCCUPIED.equals(spot.getStatus())
+                && spot.getReservedByStudentId() == null;
+        if (!demoOccupiedNoOwner
+                && (spot.getReservedByStudentId() == null
+                        || !spot.getReservedByStudentId().equals(data.getStudentId()))) {
             throw UcoParkingException.of(MessagesEnum.PARKING_NOT_RESERVATION_OWNER);
         }
 

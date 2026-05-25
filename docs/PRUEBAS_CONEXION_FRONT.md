@@ -24,6 +24,8 @@ Variables útiles (alternativa al archivo secrets):
 
 - `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`
 
+Para dejar **todos los cupos libres** en la base (placa, franja y dueño en blanco): ejecuta `docs/reset-parking-spots-libres.sql` en SSMS o Azure Data Studio contra `UCOParking`.
+
 ## 3. Frontend (`D:\UcoParking-frontend\UcoParking`)
 
 1. `npm install`

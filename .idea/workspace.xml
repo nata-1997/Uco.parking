@@ -4,31 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="">
+    <list default="true" id="19b19f17-a82e-4430-8075-a606ce1ca169" name="Changes" comment="Organización lógica">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/PARKING_SPOTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PARKING_SPOTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PRUEBAS_CONEXION_FRONT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PRUEBAS_CONEXION_FRONT.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/sqlserver-ddl-UCOParking.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docs/sqlserver-ddl-UCOParking.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/crossscutting/constants/DefaultValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/crossscutting/constants/DefaultValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/crossscutting/messagescatalog/MessagesEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/crossscutting/messagescatalog/MessagesEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/impl/ReleaseParkingSpotInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/impl/ReleaseParkingSpotInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/input/ReleaseParkingSpotInputTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/input/ReleaseParkingSpotInputTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/input/ReserveParkingSpotInputTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/inputport/to/input/ReserveParkingSpotInputTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/ReleaseParkingSpotDomain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/ReleaseParkingSpotDomain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/ReserveParkingSpotDomain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/ReserveParkingSpotDomain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/domain/validator/ValidateReserveParkingSpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/domain/validator/ValidateReserveParkingSpot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ReleaseParkingSpotUseCaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ReleaseParkingSpotUseCaseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ReserveParkingSpotUseCaseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/features/parking/parkingspot/application/usecase/impl/ReserveParkingSpotUseCaseImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ParkingSpotBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ParkingSpotBootstrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ParkingSpotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ParkingSpotController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ParkingSpotResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ParkingSpotResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ReserveParkingSpotRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/controler/parking/ReserveParkingSpotRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/entity/ParkingSpotEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/entity/ParkingSpotEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/ParkingSpotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/ParkingSpotRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/ParkingSpotRepositoryJpaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/repository/adapter/sql/jpa/ParkingSpotRepositoryJpaAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/ParkingSpotJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/ParkingSpotJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/entity/ParkingSpotJPAEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uco/ucoparking/infrastructure/persistence/sql/entity/ParkingSpotJPAEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages_es.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-secrets.properties.example" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-secrets.properties.example" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +99,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
   }
@@ -153,6 +141,31 @@
       <option name="presentableId" value="Default" />
       <updated>1779675211559</updated>
     </task>
+    <task id="LOCAL-00001" summary="Organización lógica">
+      <option name="closed" value="true" />
+      <created>1779690038873</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779690038873</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Organización lógica">
+      <option name="closed" value="true" />
+      <created>1779690323288</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779690323288</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Organización lógica">
+      <option name="closed" value="true" />
+      <created>1779690671038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779690671038</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,6 +178,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Organización lógica" />
+    <option name="LAST_COMMIT_MESSAGE" value="Organización lógica" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

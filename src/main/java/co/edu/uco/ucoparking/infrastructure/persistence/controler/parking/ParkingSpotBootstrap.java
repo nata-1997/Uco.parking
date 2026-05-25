@@ -32,15 +32,15 @@ public class ParkingSpotBootstrap implements ApplicationRunner {
         }
         final List<ParkingSpotEntity> initial = List.of(
                 spot("A1", ParkingSpotStoredStatus.AVAILABLE),
-                spot("A2", ParkingSpotStoredStatus.OCCUPIED),
+                spot("A2", ParkingSpotStoredStatus.AVAILABLE),
                 spot("A3", ParkingSpotStoredStatus.AVAILABLE),
                 spot("A4", ParkingSpotStoredStatus.AVAILABLE),
-                spot("A5", ParkingSpotStoredStatus.OCCUPIED),
+                spot("A5", ParkingSpotStoredStatus.AVAILABLE),
                 spot("B1", ParkingSpotStoredStatus.AVAILABLE),
                 spot("B2", ParkingSpotStoredStatus.AVAILABLE),
-                spot("B3", ParkingSpotStoredStatus.OCCUPIED),
+                spot("B3", ParkingSpotStoredStatus.AVAILABLE),
                 spot("B4", ParkingSpotStoredStatus.AVAILABLE),
-                spot("B5", ParkingSpotStoredStatus.OCCUPIED),
+                spot("B5", ParkingSpotStoredStatus.AVAILABLE),
                 spot("B6", ParkingSpotStoredStatus.AVAILABLE));
         initial.forEach(parkingSpotRepository::save);
     }
