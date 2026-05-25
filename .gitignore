@@ -4,10 +4,12 @@
 # Maven
 target/
 
-# Secretos locales
+# Secretos locales (tu compañera usa los suyos en copias locales, no en Git)
 application-secrets.properties
 .env
-.env.*
+.env.local
+.env.development.local
+!.env.example
 
 # Log file
 *.log

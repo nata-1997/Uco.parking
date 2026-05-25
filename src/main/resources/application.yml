@@ -16,8 +16,8 @@ spring:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};databaseName=${DB_NAME:UCOParking};encrypt=true;trustServerCertificate=true
     username: ${DB_USERNAME:sa}
-    # Valor por defecto = MSSQL_SA_PASSWORD típico en Docker; sobrescribe con DB_PASSWORD o secrets.
-    password: '${DB_PASSWORD:TuPassword#123}'
+    # Definir en application-secrets.properties (raíz del repo, gitignored) o variable DB_PASSWORD.
+    password: ${DB_PASSWORD:}
 
   jpa:
     hibernate:

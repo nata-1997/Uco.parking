@@ -1,0 +1,23 @@
+# SQL Server local para desarrollo. La contraseña NO va en Git: usa archivo `.env` en esta carpeta (gitignored).
+# Copia `.env.example` → `.env` y define MSSQL_SA_PASSWORD.
+#
+# Arranque: docker compose up -d
+# Luego crea la base (una vez): ver docs/PRUEBAS_CONEXION_FRONT.md
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-ucoparking
+    hostname: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD:?Define MSSQL_SA_PASSWORD en .env (ver .env.example)}"
+      MSSQL_PID: "Developer"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
