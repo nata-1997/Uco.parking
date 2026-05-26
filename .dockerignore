@@ -1,0 +1,10 @@
+# Contexto raíz para `docker build -f docker/backend/Dockerfile` y front con additional_contexts
+target/
+.git/
+.idea/
+*.iml
+.env
+.env.*
+!.env.example
+node_modules/
+**/.DS_Store

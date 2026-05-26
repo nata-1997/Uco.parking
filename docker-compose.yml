@@ -3,7 +3,8 @@
 #
 # Arranque: infisical run --env=dev -- docker compose up -d
 # Luego crea la base (una vez): ver docs/PRUEBAS_CONEXION_FRONT.md
-services:  sqlserver:
+services:
+  sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver-ucoparking
     hostname: sqlserver
