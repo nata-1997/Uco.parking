@@ -25,9 +25,9 @@ spring:
   # Alternativa: DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD.
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};databaseName=${DB_NAME:UCOParking};encrypt=true;trustServerCertificate=true
-    username: ${DB_USERNAME:sa}
-    password: ${DB_PASSWORD:}
+    url: ${SPRING_DATASOURCE_URL:jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};databaseName=${DB_NAME:UCOParking};encrypt=true;trustServerCertificate=true}
+    username: ${SPRING_DATASOURCE_USERNAME:${DB_USERNAME:sa}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:}}
 
   jpa:
     hibernate:
@@ -36,7 +36,6 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     database-platform: org.hibernate.dialect.SQLServerDialect
 
-  # Key Vault (Spring Cloud Azure 7). En dev suele ir en false; prod activa y define URI.
   cloud:
     azure:
       keyvault:
@@ -46,14 +45,11 @@ spring:
             - endpoint: ${AZURE_KEYVAULT_URI:}
               enabled: ${AZURE_KEYVAULT_ENABLED:false}
 
-# (Propiedades antiguas azure.keyvault.* sustituidas por spring.cloud.azure.*)
-
 server:
   # Escuchar en todas las interfaces para que Kong (Docker) llegue vía host.docker.internal:8080 en Windows/Mac.
   address: 0.0.0.0
   port: 8080
   servlet:
-    # Prefijo para MVC/Tomcat (websocket trae servlet). El front usa /uco-parking/api/v1/...
     context-path: /uco-parking
 
 # Auth0 (JWT). Ver docs/AUTH0_BACKEND.md y docs/INFISICAL_UCOPARKING.md.
@@ -64,3 +60,10 @@ uco:
     issuer-uri: ${AUTH0_ISSUER_URI:}
     domain: ${AUTH0_DOMAIN:}
     audience: ${AUTH0_AUDIENCE:}
+
+# SendGrid (remitente debe estar verificado en https://sendgrid.com — p. ej. dominio Microsoft 365 / Outlook)
+sendgrid:
+  enabled: ${SENDGRID_ENABLED:true}
+  api-key: ${SENDGRID_API_KEY:}
+  from-email: ${SENDGRID_FROM_EMAIL:}
+  from-name: ${SENDGRID_FROM_NAME:UcoParking}
