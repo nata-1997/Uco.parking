@@ -1,0 +1,127 @@
+[
+  {
+    "codigo": "UCOPARKING-AUTH0-001",
+    "textoUsuario": "El token de acceso no incluye el correo. Añade el scope email o una acción en Auth0 que agregue el email al access token.",
+    "textoTecnico": "El JWT no tiene un claim de email utilizable para este API."
+  },
+  {
+    "codigo": "UCOPARKING-AUTH0-002",
+    "textoUsuario": "El correo de la petición no coincide con el usuario autenticado.",
+    "textoTecnico": "El email del parámetro o del cuerpo difiere del claim email del JWT."
+  },
+  {
+    "codigo": "UCOPARKING-COMMON-001",
+    "textoUsuario": "Ocurrió un error inesperado. Intente nuevamente más tarde.",
+    "textoTecnico": "Excepción no controlada durante el procesamiento de la solicitud."
+  },
+  {
+    "codigo": "UCOPARKING-COMMON-002",
+    "textoUsuario": "La solicitud no pudo ser procesada.",
+    "textoTecnico": "La carga útil o los parámetros de la solicitud no son válidos."
+  },
+  {
+    "codigo": "UCOPARKING-COMMON-003",
+    "textoUsuario": "El recurso solicitado no fue encontrado.",
+    "textoTecnico": "No existe un recurso que coincida con el identificador solicitado."
+  },
+  {
+    "codigo": "UCOPARKING-COMMON-004",
+    "textoUsuario": "Se encontraron uno o más errores de validación.",
+    "textoTecnico": "La validación de la solicitud falló."
+  },
+  {
+    "codigo": "UCOPARKING-COMMON-005",
+    "textoUsuario": "Se requiere autenticación. Envía un token Bearer válido (Auth0).",
+    "textoTecnico": "El API está protegido con JWT; no se recibió autenticación válida."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-001",
+    "textoUsuario": "No se encontró el cupo solicitado.",
+    "textoTecnico": "No existe un ParkingSpot con el código indicado."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-002",
+    "textoUsuario": "El cupo no está disponible para reservar.",
+    "textoTecnico": "El estado del cupo no es AVAILABLE."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-003",
+    "textoUsuario": "La placa no cumple el formato oficial: tres letras, dos dígitos y un último carácter alfanumérico (seis caracteres en total). Ejemplos: ABC12A o XYZ99Z.",
+    "textoTecnico": "El valor de plate no cumple el patrón del API (tres letras, dos dígitos y un carácter final alfanumérico)."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-004",
+    "textoUsuario": "Solo se puede liberar un cupo reservado u ocupado.",
+    "textoTecnico": "El estado del cupo no es RESERVED ni OCCUPIED."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-005",
+    "textoUsuario": "El rango horario de la reserva no es válido.",
+    "textoTecnico": "startTime y endTime son obligatorios y endTime debe ser mayor a startTime."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-006",
+    "textoUsuario": "La hora de entrada no puede ser anterior a la fecha y hora actual (Colombia, Bogotá).",
+    "textoTecnico": "startTime interpretado en America/Bogota es anterior al instante actual en esa zona."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-007",
+    "textoUsuario": "Debe indicar el identificador del estudiante que realiza la reserva.",
+    "textoTecnico": "El campo studentId es obligatorio."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-008",
+    "textoUsuario": "No existe un estudiante con el identificador indicado.",
+    "textoTecnico": "studentId no corresponde a un registro en Student."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-009",
+    "textoUsuario": "Solo puede tener hasta dos reservas activas de cupo a la vez.",
+    "textoTecnico": "El estudiante ya tiene dos reservas cuya hora de fin aún no ha pasado (zona America/Bogota)."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-010",
+    "textoUsuario": "Solo el estudiante que reservó puede liberar este cupo.",
+    "textoTecnico": "studentId no coincide con ReservedByStudentId del cupo."
+  },
+  {
+    "codigo": "UCOPARKING-PARKING-011",
+    "textoUsuario": "Esta placa ya está en uso en otro cupo (reserva u ocupación activa). Libera ese espacio, espera a que venza la franja o usa otra placa.",
+    "textoTecnico": "Ya existe un ParkingSpot en RESERVED u OCCUPIED con la misma placa normalizada; solo se permite un cupo activo por placa."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-001",
+    "textoUsuario": "El correo electrónico no es válido.",
+    "textoTecnico": "El valor del correo del estudiante no cumple el formato esperado."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-002",
+    "textoUsuario": "Falta un campo obligatorio.",
+    "textoTecnico": "El registro del estudiante no incluye un campo obligatorio."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-003",
+    "textoUsuario": "El programa académico es obligatorio.",
+    "textoTecnico": "El campo academicProgram es obligatorio para el registro del estudiante."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-004",
+    "textoUsuario": "El tipo de identificación es obligatorio.",
+    "textoTecnico": "El campo idType es obligatorio para el registro del estudiante."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-005",
+    "textoUsuario": "El número de identificación no es válido.",
+    "textoTecnico": "El campo idNumber no cumple el formato esperado."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-006",
+    "textoUsuario": "El número de celular no es válido.",
+    "textoTecnico": "El campo mobileNumber no cumple el formato esperado."
+  },
+  {
+    "codigo": "UCOPARKING-STUDENT-007",
+    "textoUsuario": "El estudiante fue registrado correctamente.",
+    "textoTecnico": "El registro del estudiante finalizó correctamente."
+  }
+]

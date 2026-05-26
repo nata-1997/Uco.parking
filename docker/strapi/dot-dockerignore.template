@@ -1,0 +1,12 @@
+# Copia a docker/strapi/cms/.dockerignore antes del primer `docker compose build`
+# (evita copiar node_modules al contexto de build).
+
+node_modules
+.tmp
+.cache
+.git
+build
+.env
+dist
+coverage
+*.log

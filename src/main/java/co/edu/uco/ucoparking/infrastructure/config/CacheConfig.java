@@ -16,6 +16,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableCaching
+@org.springframework.context.annotation.Profile("!test")
 public class CacheConfig {
 
     private static final Duration DEFAULT_TTL = Duration.ofMinutes(10);

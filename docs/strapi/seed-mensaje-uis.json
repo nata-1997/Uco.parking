@@ -1,0 +1,498 @@
+[
+  {
+    "clave": "api.httpStatusFallback",
+    "valor": "Error HTTP {status}"
+  },
+  {
+    "clave": "api.sessionMissing",
+    "valor": "No hay estudiante en sesión: inicia sesión con un correo registrado en el API o define VITE_STUDENT_UUID en .env.local (solo desarrollo)."
+  },
+  {
+    "clave": "app.browserTitle",
+    "valor": "{page} · UcoParking"
+  },
+  {
+    "clave": "auth0.clientNotInitialized",
+    "valor": "Auth0 no está inicializado: llama a initAuth0() antes de usar el cliente."
+  },
+  {
+    "clave": "auth0.missingEnv",
+    "valor": "Faltan VITE_AUTH0_DOMAIN o VITE_AUTH0_CLIENT_ID. Copia .env.example a .env.local o define los secretos en Infisical y ejecuta npm run dev:secrets."
+  },
+  {
+    "clave": "bootstrap.configErrorTitle",
+    "valor": "Error de configuración"
+  },
+  {
+    "clave": "dashboard.cancel",
+    "valor": "Cancelar"
+  },
+  {
+    "clave": "dashboard.confirm",
+    "valor": "Confirmar"
+  },
+  {
+    "clave": "dashboard.error.loadSpots",
+    "valor": "No se pudieron cargar los cupos"
+  },
+  {
+    "clave": "dashboard.error.release",
+    "valor": "No se pudo liberar el cupo"
+  },
+  {
+    "clave": "dashboard.error.reserve",
+    "valor": "No se pudo reservar el cupo"
+  },
+  {
+    "clave": "dashboard.header.subtitle",
+    "valor": "Sistema de gestión de espacios"
+  },
+  {
+    "clave": "dashboard.header.title",
+    "valor": "Parqueadero UCO"
+  },
+  {
+    "clave": "dashboard.legend.available",
+    "valor": "Disponible"
+  },
+  {
+    "clave": "dashboard.legend.occupied",
+    "valor": "Ocupado"
+  },
+  {
+    "clave": "dashboard.legend.reserved",
+    "valor": "Reservado"
+  },
+  {
+    "clave": "dashboard.loading",
+    "valor": "Cargando cupos…"
+  },
+  {
+    "clave": "dashboard.modal.releaseBody",
+    "valor": "¿Deseas liberar el espacio {id}? (Cancela reserva u ocupación según el estado actual)."
+  },
+  {
+    "clave": "dashboard.modal.releaseTitle",
+    "valor": "Liberar espacio"
+  },
+  {
+    "clave": "dashboard.modal.reserveBody",
+    "valor": "¿Deseas reservar el espacio {id}? Indica placa y franja horaria."
+  },
+  {
+    "clave": "dashboard.modal.reserveTitle",
+    "valor": "Reservar espacio"
+  },
+  {
+    "clave": "dashboard.parkingHours",
+    "valor": "Horario del parqueadero: 7:00 a. m. – 9:40 p. m."
+  },
+  {
+    "clave": "dashboard.plate.label",
+    "valor": "Placa del vehículo"
+  },
+  {
+    "clave": "dashboard.plate.placeholder",
+    "valor": "Ej: ABC12A"
+  },
+  {
+    "clave": "dashboard.plate.registeredLabel",
+    "valor": "Placa registrada:"
+  },
+  {
+    "clave": "dashboard.plateError.enter",
+    "valor": "Ingresa la placa del vehículo"
+  },
+  {
+    "clave": "dashboard.processing",
+    "valor": "Procesando…"
+  },
+  {
+    "clave": "dashboard.release",
+    "valor": "Liberar"
+  },
+  {
+    "clave": "dashboard.releasing",
+    "valor": "Liberando…"
+  },
+  {
+    "clave": "dashboard.reserve",
+    "valor": "Reservar"
+  },
+  {
+    "clave": "dashboard.reservedScheduleLabel",
+    "valor": "Horario reservado:"
+  },
+  {
+    "clave": "dashboard.section.mapTitle",
+    "valor": "Mapa del parqueadero"
+  },
+  {
+    "clave": "dashboard.selectPlaceholder",
+    "valor": "Seleccionar"
+  },
+  {
+    "clave": "dashboard.stats.available",
+    "valor": "Espacios disponibles"
+  },
+  {
+    "clave": "dashboard.stats.occupied",
+    "valor": "Espacios ocupados"
+  },
+  {
+    "clave": "dashboard.stats.reserved",
+    "valor": "Reservados"
+  },
+  {
+    "clave": "dashboard.status.available",
+    "valor": "Libre"
+  },
+  {
+    "clave": "dashboard.status.occupied",
+    "valor": "Ocupado"
+  },
+  {
+    "clave": "dashboard.status.reserved",
+    "valor": "Reservado"
+  },
+  {
+    "clave": "dashboard.time.endLabel",
+    "valor": "Hora de salida"
+  },
+  {
+    "clave": "dashboard.time.startLabel",
+    "valor": "Hora de entrada"
+  },
+  {
+    "clave": "dashboard.timeError.endAfterStart",
+    "valor": "La hora de fin debe ser mayor a la hora de inicio"
+  },
+  {
+    "clave": "dashboard.timeError.selectBoth",
+    "valor": "Por favor selecciona la hora de inicio y fin"
+  },
+  {
+    "clave": "email.reserva.asunto",
+    "valor": "Reserva de parqueadero confirmada – UcoParking"
+  },
+  {
+    "clave": "email.reserva.cuerpoHtml",
+    "valor": "<h2>¡Hola, {{nombreEstudiante}}!</h2><p>Tu reserva en el cupo <strong>{{cupo}}</strong> ha sido confirmada.</p><ul><li><strong>Placa:</strong> {{placa}}</li><li><strong>Franja (America/Bogotá):</strong> {{horaInicio}} – {{horaFin}}</li></ul><p>Recuerda llegar a tiempo y respetar el horario.</p><p>— Equipo UcoParking · Universidad Católica de Oriente</p>"
+  },
+  {
+    "clave": "header.logout",
+    "valor": "Salir"
+  },
+  {
+    "clave": "header.userFallback",
+    "valor": "Usuario"
+  },
+  {
+    "clave": "header.userStudent",
+    "valor": "Estudiante"
+  },
+  {
+    "clave": "login.brand.sub",
+    "valor": "SISTEMA DE GESTIÓN DE PARQUEO"
+  },
+  {
+    "clave": "login.btn.login",
+    "valor": "Iniciar sesión"
+  },
+  {
+    "clave": "login.btn.redirecting",
+    "valor": "Redirigiendo…"
+  },
+  {
+    "clave": "login.btn.signup",
+    "valor": "Crear cuenta"
+  },
+  {
+    "clave": "login.error.auth0Url",
+    "valor": "Auth0: {code}{suffix}"
+  },
+  {
+    "clave": "login.error.loginFailed",
+    "valor": "No se pudo iniciar sesión."
+  },
+  {
+    "clave": "login.error.sessionVerify",
+    "valor": "No se pudo verificar la sesión."
+  },
+  {
+    "clave": "login.error.signupFailed",
+    "valor": "No se pudo abrir el registro."
+  },
+  {
+    "clave": "login.hint.auth0",
+    "valor": "Ingresa con tu cuenta institucional o personal a través de Auth0."
+  },
+  {
+    "clave": "login.hint.checking",
+    "valor": "Comprobando sesión…"
+  },
+  {
+    "clave": "login.logo.alt",
+    "valor": "Logotipo de UcoParking"
+  },
+  {
+    "clave": "login.stat.av247caption",
+    "valor": "Disponible"
+  },
+  {
+    "clave": "login.stat.av247value",
+    "valor": "24/7"
+  },
+  {
+    "clave": "login.stat.campus",
+    "valor": "Campus"
+  },
+  {
+    "clave": "login.stat.online",
+    "valor": "En línea"
+  },
+  {
+    "clave": "login.stat.percentValue",
+    "valor": "100%"
+  },
+  {
+    "clave": "login.university",
+    "valor": "Universidad Católica de Oriente"
+  },
+  {
+    "clave": "login.welcome",
+    "valor": "Bienvenido"
+  },
+  {
+    "clave": "notifications.unknown",
+    "valor": "Error desconocido"
+  },
+  {
+    "clave": "placeholder.body",
+    "valor": "Esta sección estará disponible próximamente."
+  },
+  {
+    "clave": "placeholder.subtitle",
+    "valor": "Sección en construcción"
+  },
+  {
+    "clave": "register.actions.cancel",
+    "valor": "Cancelar"
+  },
+  {
+    "clave": "register.actions.save",
+    "valor": "Registrar estudiante"
+  },
+  {
+    "clave": "register.error.postRegisterUuid",
+    "valor": "Estudiante registrado, pero no se pudo obtener el UUID. Cierra sesión e inicia de nuevo para continuar."
+  },
+  {
+    "clave": "register.error.submitPrefix",
+    "valor": "Error al registrar:"
+  },
+  {
+    "clave": "register.error.submitWithDetail",
+    "valor": "Error al registrar: {detail}"
+  },
+  {
+    "clave": "register.field.email",
+    "valor": "CORREO ELECTRÓNICO"
+  },
+  {
+    "clave": "register.field.idNumber",
+    "valor": "NÚMERO DE DOCUMENTO"
+  },
+  {
+    "clave": "register.field.idType",
+    "valor": "TIPO DE DOCUMENTO"
+  },
+  {
+    "clave": "register.field.lastName",
+    "valor": "APELLIDO"
+  },
+  {
+    "clave": "register.field.mobile",
+    "valor": "CELULAR"
+  },
+  {
+    "clave": "register.field.name",
+    "valor": "NOMBRE"
+  },
+  {
+    "clave": "register.field.program",
+    "valor": "PROGRAMA ACADÉMICO"
+  },
+  {
+    "clave": "register.header.subtitle",
+    "valor": "Completa los datos"
+  },
+  {
+    "clave": "register.header.title",
+    "valor": "Registrar estudiante"
+  },
+  {
+    "clave": "register.idType.cc",
+    "valor": "Cédula de ciudadanía"
+  },
+  {
+    "clave": "register.idType.ce",
+    "valor": "Cédula de extranjería"
+  },
+  {
+    "clave": "register.idType.passport",
+    "valor": "Pasaporte"
+  },
+  {
+    "clave": "register.idType.ti",
+    "valor": "Tarjeta de identidad"
+  },
+  {
+    "clave": "register.placeholder.email",
+    "valor": "Ej: juan@ucordoba.edu.co"
+  },
+  {
+    "clave": "register.placeholder.idNumber",
+    "valor": "Ej: 1234567890"
+  },
+  {
+    "clave": "register.placeholder.lastName",
+    "valor": "Ej: Pérez"
+  },
+  {
+    "clave": "register.placeholder.mobile",
+    "valor": "Ej: 3001234567"
+  },
+  {
+    "clave": "register.placeholder.name",
+    "valor": "Ej: Juan"
+  },
+  {
+    "clave": "register.program.business",
+    "valor": "Administración de Empresas"
+  },
+  {
+    "clave": "register.program.law",
+    "valor": "Derecho"
+  },
+  {
+    "clave": "register.program.systems",
+    "valor": "Ingeniería de Sistemas"
+  },
+  {
+    "clave": "register.requiredMark",
+    "valor": "*"
+  },
+  {
+    "clave": "register.section.academic",
+    "valor": "INFORMACIÓN ACADÉMICA"
+  },
+  {
+    "clave": "register.section.contact",
+    "valor": "INFORMACIÓN DE CONTACTO"
+  },
+  {
+    "clave": "register.section.personal",
+    "valor": "INFORMACIÓN PERSONAL"
+  },
+  {
+    "clave": "register.select.idType",
+    "valor": "Selecciona..."
+  },
+  {
+    "clave": "register.select.program",
+    "valor": "Selecciona el programa..."
+  },
+  {
+    "clave": "register.validation.email",
+    "valor": "El correo es obligatorio"
+  },
+  {
+    "clave": "register.validation.idNumber",
+    "valor": "El número de documento es obligatorio"
+  },
+  {
+    "clave": "register.validation.idType",
+    "valor": "El tipo de documento es obligatorio"
+  },
+  {
+    "clave": "register.validation.lastName",
+    "valor": "El apellido es obligatorio"
+  },
+  {
+    "clave": "register.validation.mobile",
+    "valor": "El celular es obligatorio"
+  },
+  {
+    "clave": "register.validation.name",
+    "valor": "El nombre es obligatorio"
+  },
+  {
+    "clave": "register.validation.program",
+    "valor": "El programa académico es obligatorio"
+  },
+  {
+    "clave": "router.title.apiTests",
+    "valor": "Pruebas API"
+  },
+  {
+    "clave": "router.title.dashboard",
+    "valor": "Reserva de sitio"
+  },
+  {
+    "clave": "router.title.login",
+    "valor": "Iniciar sesión"
+  },
+  {
+    "clave": "router.title.register",
+    "valor": "Registro de estudiante"
+  },
+  {
+    "clave": "router.title.settings",
+    "valor": "Configuración"
+  },
+  {
+    "clave": "router.title.students",
+    "valor": "Estudiantes"
+  },
+  {
+    "clave": "sidebar.brand.sub",
+    "valor": "GESTIÓN DE PARQUEO"
+  },
+  {
+    "clave": "sidebar.nav.apiTests",
+    "valor": "Pruebas API"
+  },
+  {
+    "clave": "sidebar.nav.register",
+    "valor": "Registrar estudiante"
+  },
+  {
+    "clave": "sidebar.nav.reserve",
+    "valor": "Reserva de sitio"
+  },
+  {
+    "clave": "sidebar.nav.settings",
+    "valor": "Configuración"
+  },
+  {
+    "clave": "sidebar.nav.students",
+    "valor": "Estudiantes"
+  },
+  {
+    "clave": "student.createFailed",
+    "valor": "Error al registrar el estudiante"
+  },
+  {
+    "clave": "toast.aria.close",
+    "valor": "Cerrar aviso {code}"
+  },
+  {
+    "clave": "toast.kind.error",
+    "valor": "ERROR"
+  },
+  {
+    "clave": "validators.plateHint",
+    "valor": "Formato: 3 letras, 2 números y 1 letra o número (6 caracteres). Ejemplos: ABC12A o XYZ99Z."
+  }
+]

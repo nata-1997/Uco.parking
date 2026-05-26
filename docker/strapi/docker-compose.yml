@@ -1,0 +1,68 @@
+# Strapi + PostgreSQL para UcoParking (desarrollo).
+# Uso: ver README.md en esta carpeta.
+#
+# Variables: copia env.example → .env y ajusta secretos.
+# El backend Spring debe apuntar a http://localhost:1337 (STRAPI_URL).
+
+services:
+  strapi:
+    container_name: ucoparking-strapi
+    build:
+      context: ./cms
+      dockerfile: ../strapi.Dockerfile
+    image: ucoparking-strapi:dev
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "1337"
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: strapiDB
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./cms/config:/opt/app/config
+      - ./cms/src:/opt/app/src
+      - ./cms/package.json:/opt/package.json
+      # Si usas npm y existe package-lock.json, puedes montarlo también (evita que Docker cree una carpeta si falta el archivo).
+      # - ./cms/package-lock.json:/opt/package-lock.json
+      - ./cms/public/uploads:/opt/app/public/uploads
+    ports:
+      - "1337:1337"
+    networks:
+      - strapi
+    depends_on:
+      strapiDB:
+        condition: service_healthy
+
+  strapiDB:
+    container_name: ucoparking-strapi-db
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: strapi
+    volumes:
+      - strapi_pg_data:/var/lib/postgresql/data
+    ports:
+      # 5433 en el host para no chocar con otro PostgreSQL local en 5432
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi -d strapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - strapi
+
+volumes:
+  strapi_pg_data:
+
+networks:
+  strapi:
+    name: ucoparking-strapi-net
+    driver: bridge

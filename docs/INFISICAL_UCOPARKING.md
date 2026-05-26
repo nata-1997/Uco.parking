@@ -41,6 +41,20 @@ En desarrollo, define **`VITE_DEV_API_PROXY_TARGET`** en Infisical para que el p
 | `AUTH0_CLIENT_ID` | Reservado para integraciones OAuth cliente (el API actual valida JWT con issuer/audience; puedes guardar el client del back en Infisical para despliegues futuros o scripts). |
 | `AUTH0_CLIENT_SECRET` | Igual; **no** lo imprimas en logs. |
 
+### Strapi (CMS — mensajes API, textos UI, correo)
+
+| Nombre | Notas |
+|--------|--------|
+| `STRAPI_URL` | Base HTTP sin barra final, p. ej. `http://127.0.0.1:1337`. |
+| `STRAPI_API_TOKEN` | Token **Read-only** del admin (Settings → API Tokens). Opcional si el rol **Public** tiene `find`/`findOne` en las colecciones. |
+| `STRAPI_REMOTE_ENABLED` | `true` para que Spring llame a Strapi; `false` deja catálogo vacío (tests). |
+| `STRAPI_FAIL_ON_STARTUP` | `false` en dev si Strapi puede estar apagado; `true` en prod cuando el CMS sea obligatorio. |
+| `STRAPI_REFRESH_MS` | Opcional; por defecto `300000` (5 min). |
+| `STRAPI_COLLECTION_API` | Opcional; plural REST mensajes API (por defecto `mensaje-apis`). |
+| `STRAPI_COLLECTION_UI` | Opcional; plural REST mensajes UI (por defecto `mensaje-uis`). |
+
+Tras guardar los secretos, con Strapi y Spring en marcha: `infisical run --env=dev -- powershell -NoProfile -File .\scripts\verify-strapi-spring.ps1` (ver [STRAPI.md](STRAPI.md)).
+
 ### Kong / Docker Compose
 
 | Nombre | Uso |

@@ -3,10 +3,14 @@ package co.edu.uco.ucoparking.initializer;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import co.edu.uco.ucoparking.infrastructure.strapi.StrapiProperties;
+
 @SpringBootApplication(scanBasePackages = "co.edu.uco")
+@EnableConfigurationProperties(StrapiProperties.class)
 @EntityScan(basePackages = "co.edu.uco.ucoparking.infrastructure.persistence.sql.entity")
 @EnableJpaRepositories(basePackages = "co.edu.uco.ucoparking.infrastructure.persistence.sql")
 public class UcoParkingApplication {

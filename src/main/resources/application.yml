@@ -14,11 +14,6 @@ spring:
   profiles:
     active: dev
 
-  messages:
-    basename: messages
-    encoding: UTF-8
-    fallback-to-system-locale: false
-
   # --- SQL Server ---
   # Secretos: Infisical (recomendado) u otras variables de entorno. Ver docs/INFISICAL_UCOPARKING.md.
   # Estándar Spring: SPRING_DATASOURCE_URL / SPRING_DATASOURCE_USERNAME / SPRING_DATASOURCE_PASSWORD
@@ -67,6 +62,16 @@ sendgrid:
   api-key: ${SENDGRID_API_KEY:}
   from-email: ${SENDGRID_FROM_EMAIL:}
   from-name: ${SENDGRID_FROM_NAME:UcoParking}
+
+# Strapi CMS: mensajes de error API, textos de interfaz y plantillas de correo (ver docs/STRAPI.md)
+strapi:
+  base-url: ${STRAPI_URL:http://localhost:1337}
+  api-token: ${STRAPI_API_TOKEN:}
+  collection-api-messages: ${STRAPI_COLLECTION_API:mensaje-apis}
+  collection-ui-messages: ${STRAPI_COLLECTION_UI:mensaje-uis}
+  fail-on-startup: ${STRAPI_FAIL_ON_STARTUP:false}
+  refresh-ms: ${STRAPI_REFRESH_MS:300000}
+  remote-enabled: ${STRAPI_REMOTE_ENABLED:true}
 
 # --- Observabilidad: trazas OpenTelemetry → OTLP (Jaeger all-in-one: 4318 HTTP) ---
 # Ver docs/JAEGER.md. Sin collector en marcha pueden verse warnings al exportar.

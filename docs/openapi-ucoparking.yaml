@@ -1,0 +1,385 @@
+openapi: 3.0.3
+info:
+  title: UcoParking API
+  description: |
+    Contrato HTTP del backend **UcoParking** (Spring Boot) consumido por la SPA.
+
+    **Sobre “documentar el front” en Swagger:** OpenAPI describe **recursos y operaciones HTTP** (lo que el navegador llama al backend).  
+    El endpoint `GET /api/v1/catalogo/textos-ui` es el que expone textos de interfaz para el front (vía Strapi en servidor).  
+    Para documentar pantallas, componentes o flujos de UI se suelen usar otras herramientas (p. ej. Storybook), no Swagger.
+
+    **Seguridad:** Con JWT activado (`uco.auth0`), la mayoría de rutas bajo `/api/v1/**` requieren `Authorization: Bearer <access_token>` de Auth0.  
+    `GET /api/v1/catalogo/**` es público. Si JWT está deshabilitado en entorno local, todas las rutas pueden ser anónimas (ver `SecurityConfig`).
+
+    **Base URL:** `server.servlet.context-path` por defecto es `/uco-parking` (puerto 8080 en `application.yml`).
+  version: 0.0.1
+  contact:
+    name: UcoParking
+
+servers:
+  - url: http://localhost:8080/uco-parking
+    description: Desarrollo local (context-path /uco-parking)
+  - url: https://{host}/uco-parking
+    description: Entorno desplegado (ajusta host)
+    variables:
+      host:
+        default: api.ejemplo.edu.co
+
+tags:
+  - name: Catálogo UI
+    description: Textos de interfaz para la SPA (sin exponer credenciales de Strapi al navegador).
+  - name: Estudiantes
+    description: Registro y resolución de identidad estudiante ↔ sesión Auth0.
+  - name: Cupos de parqueo
+    description: Listado, reserva y liberación de cupos.
+
+paths:
+  /api/v1/catalogo/textos-ui:
+    get:
+      tags: [Catálogo UI]
+      summary: Obtener mapa de textos UI
+      description: Devuelve un objeto clave-valor (`string` → `string`) con textos cargados desde Strapi.
+      operationId: getCatalogoTextosUi
+      security: []
+      responses:
+        '200':
+          description: Mapa de textos
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+              example:
+                app.title: UcoParking
+                welcome.message: Bienvenido
+
+  /api/v1/students:
+    post:
+      tags: [Estudiantes]
+      summary: Registrar nuevo estudiante
+      description: |
+        Crea el estudiante. El email del cuerpo debe estar permitido respecto al token Auth0
+        (`assertRegisterEmailAllowed`).
+      operationId: registerStudent
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterNewStudentRequest'
+      responses:
+        '201':
+          description: Registro creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterNewStudentResponse'
+        '400':
+          description: Solicitud inválida o violación de integridad
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '403':
+          description: Email no autorizado para el token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/v1/students/lookup:
+    get:
+      tags: [Estudiantes]
+      summary: Buscar UUID de estudiante por email
+      description: |
+        El email debe coincidir con el perfil Auth0 (tras normalización) y pasar `assertLookupEmailAllowed`.
+      operationId: lookupStudentByEmail
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Correo institucional o el usado en Auth0.
+      responses:
+        '200':
+          description: Estudiante encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentLookupResponse'
+        '404':
+          description: No existe estudiante con ese email
+        '401':
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '403':
+          description: Consulta de email no permitida para el token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/v1/parking-spots:
+    get:
+      tags: [Cupos de parqueo]
+      summary: Listar cupos
+      description: |
+        Lista todos los cupos. Query opcional `forStudentId` permite calcular `canRelease` según el
+        estudiante que visualiza la lista.
+      operationId: listParkingSpots
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: forStudentId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: UUID del estudiante en sesión (opcional).
+      responses:
+        '200':
+          description: Lista de cupos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParkingSpotResponse'
+        '401':
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '403':
+          description: forStudentId no permitido para el token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/v1/parking-spots/{spotCode}/reserve:
+    post:
+      tags: [Cupos de parqueo]
+      summary: Reservar cupo
+      description: El `studentId` del cuerpo debe coincidir con el permitido por el token.
+      operationId: reserveParkingSpot
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: spotCode
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Código del cupo (coincide con el campo `id` en la respuesta de listado).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReserveParkingSpotRequest'
+      responses:
+        '204':
+          description: Reserva exitosa (sin cuerpo)
+        '400':
+          description: Error de negocio o validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '403':
+          description: studentId no permitido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/v1/parking-spots/{spotCode}/release:
+    post:
+      tags: [Cupos de parqueo]
+      summary: Liberar cupo
+      description: El `studentId` del cuerpo debe coincidir con el permitido por el token.
+      operationId: releaseParkingSpot
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: spotCode
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReleaseParkingSpotRequest'
+      responses:
+        '204':
+          description: Liberación exitosa (sin cuerpo)
+        '400':
+          description: Error de negocio o validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: No autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '403':
+          description: studentId no permitido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token OAuth2 / OIDC (Auth0). Debe incluir audiencia esperada si está configurada.
+
+  schemas:
+    ApiErrorResponse:
+      type: object
+      required: [code, message, detail]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        detail:
+          type: string
+          nullable: true
+
+    RegisterNewStudentRequest:
+      type: object
+      required:
+        - academicProgram
+        - idType
+        - name
+        - lastName
+        - idNumber
+        - email
+        - mobileNumber
+      properties:
+        academicProgram:
+          type: string
+          format: uuid
+        idType:
+          type: string
+          format: uuid
+        name:
+          type: string
+        lastName:
+          type: string
+        idNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        mobileNumber:
+          type: string
+
+    RegisterNewStudentResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Código del mensaje de catálogo (p. ej. enum serializado).
+        message:
+          type: string
+          description: Mensaje localizado para el usuario.
+
+    StudentLookupResponse:
+      type: object
+      properties:
+        studentId:
+          type: string
+          format: uuid
+
+    ParkingSpotResponse:
+      type: object
+      description: |
+        Campo `id` en JSON es el código del cupo (`spotCode`). `status` puede incluir valores como
+        `available`, `reserved`, `occupied`, etc., según lógica de negocio y horario.
+      properties:
+        id:
+          type: string
+          description: Código del cupo (JSON name `id`).
+        status:
+          type: string
+        plate:
+          type: string
+          nullable: true
+        startTime:
+          type: string
+          nullable: true
+        endTime:
+          type: string
+          nullable: true
+        reservedByStudentId:
+          type: string
+          format: uuid
+          nullable: true
+        canRelease:
+          type: boolean
+
+    ReserveParkingSpotRequest:
+      type: object
+      required: [studentId, plate, startTime, endTime]
+      properties:
+        studentId:
+          type: string
+          format: uuid
+        plate:
+          type: string
+        startTime:
+          type: string
+          description: Inicio de franja (formato esperado por la aplicación).
+        endTime:
+          type: string
+          description: Fin de franja.
+
+    ReleaseParkingSpotRequest:
+      type: object
+      required: [studentId]
+      properties:
+        studentId:
+          type: string
+          format: uuid

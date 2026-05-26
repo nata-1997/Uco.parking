@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mensaje_apis",
+  "info": {
+    "singularName": "mensaje-api",
+    "pluralName": "mensaje-apis",
+    "displayName": "Mensaje Api"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "codigo": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "textoUsuario": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "textoTecnic": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}
