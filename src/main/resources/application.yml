@@ -2,6 +2,12 @@ spring:
   application:
     name: UcoParking
 
+  # Valkey/Redis (compatible API Redis). Debe quedar bajo spring.data, no bajo spring.application.
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6380}
+
   main:
     web-application-type: servlet
 

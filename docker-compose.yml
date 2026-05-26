@@ -3,8 +3,7 @@
 #
 # Arranque: infisical run --env=dev -- docker compose up -d
 # Luego crea la base (una vez): ver docs/PRUEBAS_CONEXION_FRONT.md
-services:
-  sqlserver:
+services:  sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver-ucoparking
     hostname: sqlserver
@@ -16,6 +15,13 @@ services:
       MSSQL_PID: "Developer"
     volumes:
       - sqlserver_data:/var/opt/mssql
+    restart: unless-stopped
+
+  valkey:
+    image: valkey/valkey:8-alpine
+    container_name: valkey-ucoparking
+    ports:
+      - "6380:6379"
     restart: unless-stopped
 
 volumes:

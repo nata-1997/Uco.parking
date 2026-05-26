@@ -32,10 +32,9 @@
     </scm>
 
     <properties>
-        <!-- JDK 26 no suele estar instalado en equipos de desarrollo; 21 LTS es compatible con Spring Boot 4 -->
+        <!-- Spring Boot 4 admite Java 17+; 21 LTS evita errores de release en JDKs sin Java 26. -->
         <java.version>21</java.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
-        <!-- Spring Boot 4.0.x → Spring Cloud Azure 7.x (BOM unifica versiones Azure) -->
         <spring-cloud-azure.version>7.2.0</spring-cloud-azure.version>
     </properties>
 
@@ -89,10 +88,15 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Key Vault: artefacto antiguo com.azure:azure-security-keyvault-secrets-spring-boot-starter no está en Central. -->
         <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
+        </dependency>
+
+        <!-- Caché distribuida con Valkey/Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>
