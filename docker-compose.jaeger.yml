@@ -1,0 +1,11 @@
+# Jaeger all-in-one con receptor OTLP (HTTP 4318, gRPC 4317). UI: http://localhost:16686
+# Uso: docker compose -f docker-compose.jaeger.yml up -d
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1.60
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"

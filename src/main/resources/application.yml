@@ -67,3 +67,19 @@ sendgrid:
   api-key: ${SENDGRID_API_KEY:}
   from-email: ${SENDGRID_FROM_EMAIL:}
   from-name: ${SENDGRID_FROM_NAME:UcoParking}
+
+# --- Observabilidad: trazas OpenTelemetry → OTLP (Jaeger all-in-one: 4318 HTTP) ---
+# Ver docs/JAEGER.md. Sin collector en marcha pueden verse warnings al exportar.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  tracing:
+    sampling:
+      probability: ${TRACE_SAMPLE_PROBABILITY:0.1}
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}

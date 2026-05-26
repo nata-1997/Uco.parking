@@ -17,6 +17,12 @@ logging:
     root: INFO
     org.springframework: DEBUG
 
+# Trazas completas en local (Jaeger: docker compose -f docker-compose.jaeger.yml up -d)
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
 # Opcional (misma app Auth0 que el front): descomenta y ajusta o exporta variables de entorno.
 # uco.auth0: AUTH0_ISSUER_URI o AUTH0_DOMAIN; AUTH0_AUDIENCE (opcional). Infisical: docs/INFISICAL_UCOPARKING.md
 # AUTH0_ISSUER_URI=https://tu-tenant.us.auth0.com/
