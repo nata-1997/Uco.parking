@@ -20,7 +20,11 @@ public class ValidateReserveParkingSpot {
     /** Placa: 3 letras + 2 dígitos + 1 letra o dígito (6 caracteres). Ej: ABC12A, XYZ99Z */
     private static final Pattern PLATE = Pattern.compile("^[A-Za-z]{3}\\d{2}[A-Za-z0-9]$");
     private static final LocalTime LOT_OPEN = LocalTime.of(7, 0);
-    private static final LocalTime LOT_CLOSE = LocalTime.of(21, 40);
+    /**
+     * Fin permitido de la franja de reserva (mismo día, formato HH:mm).
+     * Temporal: ampliado a 23:59 para permitir reservas hasta medianoche; revertir a 21:40 cuando lo indique negocio.
+     */
+    private static final LocalTime LOT_CLOSE = LocalTime.of(23, 59);
 
     private final StudentRepository studentRepository;
     private final ParkingSpotRepository parkingSpotRepository;
