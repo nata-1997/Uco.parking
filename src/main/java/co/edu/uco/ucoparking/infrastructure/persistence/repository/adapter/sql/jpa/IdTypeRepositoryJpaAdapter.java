@@ -1,5 +1,6 @@
 package co.edu.uco.ucoparking.infrastructure.persistence.repository.adapter.sql.jpa;
 
+import co.edu.uco.ucoparking.infrastructure.cache.CacheNames;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.IdTypeEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.mapper.IdTypeMapperJPA;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.IdTypeRepository;
@@ -23,25 +24,25 @@ public class IdTypeRepositoryJpaAdapter implements IdTypeRepository {
     }
 
     @Override
-    @CacheEvict(value = "idTypes", allEntries = true)
+    @CacheEvict(value = CacheNames.ID_TYPES, allEntries = true)
     public void create(final IdTypeEntity entity) {
         repository.save(mapper.toJPAEntity(entity));
     }
 
     @Override
-    @CacheEvict(value = "idTypes", allEntries = true)
+    @CacheEvict(value = CacheNames.ID_TYPES, allEntries = true)
     public void update(final IdTypeEntity entity) {
         repository.save(mapper.toJPAEntity(entity));
     }
 
     @Override
-    @CacheEvict(value = "idTypes", allEntries = true)
+    @CacheEvict(value = CacheNames.ID_TYPES, allEntries = true)
     public void delete(final UUID id) {
         repository.deleteById(id);
     }
 
     @Override
-    @Cacheable(value = "idTypes", key = "#id")
+    @Cacheable(value = CacheNames.ID_TYPES, key = "#id", unless = "#result == null")
     public IdTypeEntity findById(final UUID id) {
         return repository.findById(id).map(mapper::toEntity).orElse(null);
     }
@@ -52,7 +53,7 @@ public class IdTypeRepositoryJpaAdapter implements IdTypeRepository {
     }
 
     @Override
-    @Cacheable(value = "idTypes")
+    @Cacheable(value = CacheNames.ID_TYPES)
     public List<IdTypeEntity> findAll() {
         return repository.findAll().stream().map(mapper::toEntity).toList();
     }

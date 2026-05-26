@@ -1,5 +1,6 @@
 package co.edu.uco.ucoparking.infrastructure.persistence.repository.adapter.sql.jpa;
 
+import co.edu.uco.ucoparking.infrastructure.cache.CacheNames;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.AcademicProgramEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.mapper.AcademicProgramMapperJPA;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.AcademicProgramRepository;
@@ -23,25 +24,25 @@ public class AcademicProgramRepositoryJpaAdapter implements AcademicProgramRepos
     }
 
     @Override
-    @CacheEvict(value = "academicPrograms", allEntries = true)
+    @CacheEvict(value = CacheNames.ACADEMIC_PROGRAMS, allEntries = true)
     public void create(final AcademicProgramEntity entity) {
         repository.save(mapper.toJPAEntity(entity));
     }
 
     @Override
-    @CacheEvict(value = "academicPrograms", allEntries = true)
+    @CacheEvict(value = CacheNames.ACADEMIC_PROGRAMS, allEntries = true)
     public void update(final AcademicProgramEntity entity) {
         repository.save(mapper.toJPAEntity(entity));
     }
 
     @Override
-    @CacheEvict(value = "academicPrograms", allEntries = true)
+    @CacheEvict(value = CacheNames.ACADEMIC_PROGRAMS, allEntries = true)
     public void delete(final UUID id) {
         repository.deleteById(id);
     }
 
     @Override
-    @Cacheable(value = "academicPrograms", key = "#id")
+    @Cacheable(value = CacheNames.ACADEMIC_PROGRAMS, key = "#id", unless = "#result == null")
     public AcademicProgramEntity findById(final UUID id) {
         return repository.findById(id).map(mapper::toEntity).orElse(null);
     }
@@ -52,7 +53,7 @@ public class AcademicProgramRepositoryJpaAdapter implements AcademicProgramRepos
     }
 
     @Override
-    @Cacheable(value = "academicPrograms")
+    @Cacheable(value = CacheNames.ACADEMIC_PROGRAMS)
     public List<AcademicProgramEntity> findAll() {
         return repository.findAll().stream().map(mapper::toEntity).toList();
     }
