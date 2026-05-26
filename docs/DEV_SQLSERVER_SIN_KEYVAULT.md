@@ -4,17 +4,20 @@
 
 - **`spring.profiles.active=dev`** (por defecto en `application.yml`).
 - **Key Vault** queda **desactivado** (`spring.cloud.azure.keyvault.secret.enabled=false` en `application-dev.yml` y por defecto en `application.yml`).
-- La **conexión JDBC** se define en `application.yml` con valores por defecto pensados para **SQL Server en Docker** en `localhost:1433`, base **`UCOParking`**, usuario **`sa`**, contraseña por defecto **`TuPassword#123`** (ajústala si la tuya es distinta).
+- La **conexión JDBC** puede venir de variables `SPRING_DATASOURCE_*` (p. ej. `.env` exportado desde Infisical), de `DB_*` en `application.yml`, o de `application-secrets.properties` en la raíz. Si no defines nada, la URL por defecto apunta a **SQL Server en Docker** en `localhost:1433` y base **`UCOParking`** con usuario **`sa`**; la **contraseña** debes definirla (`SPRING_DATASOURCE_PASSWORD`, `DB_PASSWORD` o `spring.datasource.password` en secrets), coherente con `MSSQL_SA_PASSWORD` de Docker.
 
 ## Variables de entorno (opcional)
 
 | Variable        | Ejemplo por defecto | Descripción                          |
 |-----------------|---------------------|--------------------------------------|
+| `SPRING_DATASOURCE_URL` | — | JDBC completo (prioridad sobre la URL armada con `DB_*`). |
+| `SPRING_DATASOURCE_USERNAME` | — | Usuario SQL Server. |
+| `SPRING_DATASOURCE_PASSWORD` | — | Contraseña SQL Server. |
 | `DB_HOST`       | `localhost`         | Host del contenedor SQL              |
 | `DB_PORT`       | `1433`              | Puerto                               |
 | `DB_NAME`       | `UCOParking`        | Nombre de la base                    |
 | `DB_USERNAME`   | `sa`                | Usuario                              |
-| `DB_PASSWORD`   | (ver `application.yml`) | Contraseña; usa comillas si tiene `#` |
+| `DB_PASSWORD`   | (definir en `.env` o secrets) | Contraseña; usa comillas en `.env` si tiene `#` |
 
 ## Archivo local de secretos (opcional)
 
@@ -23,6 +26,8 @@
 3. Con perfil **dev**, `application-dev.yml` importa **`optional:file:./application-secrets.properties`**: si el archivo no existe, no falla.
 
 Ejecuta el back desde la **raíz del repo** (`mvn spring-boot:run`) para que `./application-secrets.properties` se resuelva bien.
+
+Infisical, `.env` y prioridad de variables: [SECRETOS_E_INFISICAL.md](SECRETOS_E_INFISICAL.md).
 
 ## Cuando vuelvas a Key Vault (prod)
 

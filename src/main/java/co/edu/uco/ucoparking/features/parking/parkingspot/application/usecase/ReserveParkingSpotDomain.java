@@ -3,7 +3,7 @@ package co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase;
 import java.util.UUID;
 
 /**
- * Datos de dominio para reservar un cupo disponible.
+ * Datos de dominio para reservar un cupo de parqueadero.
  */
 public final class ReserveParkingSpotDomain {
 
@@ -26,12 +26,12 @@ public final class ReserveParkingSpotDomain {
         this.endTime = endTime;
     }
 
-    public UUID getStudentId() {
-        return studentId;
-    }
-
     public String getSpotCode() {
         return spotCode;
+    }
+
+    public UUID getStudentId() {
+        return studentId;
     }
 
     public String getPlate() {

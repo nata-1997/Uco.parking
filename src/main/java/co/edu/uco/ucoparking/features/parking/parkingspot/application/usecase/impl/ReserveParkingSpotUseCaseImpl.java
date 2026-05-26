@@ -7,21 +7,35 @@ import co.edu.uco.ucoparking.features.parking.parkingspot.ParkingSpotStoredStatu
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.ReserveParkingSpotDomain;
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.domain.ReserveParkingSpotUseCase;
 import co.edu.uco.ucoparking.features.parking.parkingspot.application.usecase.domain.validator.ValidateReserveParkingSpot;
+import co.edu.uco.ucoparking.crossscutting.helper.EmailHelper;
+import co.edu.uco.ucoparking.infrastructure.notification.NotificationService;
 import co.edu.uco.ucoparking.infrastructure.persistence.entity.ParkingSpotEntity;
+import co.edu.uco.ucoparking.infrastructure.persistence.entity.StudentEntity;
 import co.edu.uco.ucoparking.infrastructure.persistence.repository.ParkingSpotRepository;
+import co.edu.uco.ucoparking.infrastructure.persistence.repository.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReserveParkingSpotUseCaseImpl implements ReserveParkingSpotUseCase {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ReserveParkingSpotUseCaseImpl.class);
+
     private final ParkingSpotRepository repository;
     private final ValidateReserveParkingSpot validateReserveParkingSpot;
+    private final StudentRepository studentRepository;
+    private final NotificationService notificationService;
 
     public ReserveParkingSpotUseCaseImpl(
             final ParkingSpotRepository repository,
-            final ValidateReserveParkingSpot validateReserveParkingSpot) {
+            final ValidateReserveParkingSpot validateReserveParkingSpot,
+            final StudentRepository studentRepository,
+            final NotificationService notificationService) {
         this.repository = repository;
         this.validateReserveParkingSpot = validateReserveParkingSpot;
+        this.studentRepository = studentRepository;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -48,6 +62,27 @@ public class ReserveParkingSpotUseCaseImpl implements ReserveParkingSpotUseCase 
         spot.setEndTime(data.getEndTime());
         spot.setReservedByStudentId(data.getStudentId());
         repository.save(spot);
+
+        try {
+            final StudentEntity student = studentRepository.findById(data.getStudentId());
+            final String mail = student != null ? student.geteMail() : null;
+            if (mail != null
+                    && !mail.isBlank()
+                    && !DefaultValues.EMAIL_SENTINEL.equalsIgnoreCase(mail.trim())
+                    && EmailHelper.isValidFormat(mail.trim())) {
+                notificationService.sendParkingReservationEmail(
+                        mail.trim(),
+                        student.getName(),
+                        data.getSpotCode(),
+                        data.getPlate(),
+                        data.getStartTime(),
+                        data.getEndTime());
+            }
+        } catch (Exception e) {
+            // La reserva ya quedó persistida; el correo es best-effort.
+            LOG.warn("Error enviando notificación de reserva: {}", e.getMessage());
+        }
+
         return null;
     }
 }

@@ -39,3 +39,9 @@ El controlador HTTP devuelve `Mono` y delega JPA en `Schedulers.boundedElastic()
 ## Registro de estudiantes
 
 `POST /api/v1/students` sigue el mismo patrón reactivo (`Mono<ResponseEntity<RegisterNewStudentResponse>>`). El cuerpo JSON debe coincidir con `RegisterNewStudentRequest`: `academicProgram` e `idType` como **UUID** existentes en las tablas catálogo. El `studentId` usado en reservas debe ser un estudiante ya registrado.
+
+## Correo al reservar (SendGrid)
+
+Tras una reserva exitosa (`204`), el API intenta enviar un correo al estudiante con el **correo registrado en la tabla `Student`** (no el de Auth0, salvo que coincidan). Requiere variables `SENDGRID_API_KEY` y `SENDGRID_FROM_EMAIL` (o equivalentes en `application-secrets.properties`; ver `application-secrets.properties.example`). El remitente debe estar **verificado en SendGrid** (remitente único o dominio; si usas correo institucional vía Microsoft 365/Outlook, autentica ese dominio en SendGrid). Con `SENDGRID_ENABLED=false` o sin API key, el envío se omite y la reserva sigue funcionando.
+
+Para pruebas locales con secretos del equipo, conviene un `.env` en la raíz del API (export desde Infisical o copia de `.env.example`): ver [SECRETOS_E_INFISICAL.md](SECRETOS_E_INFISICAL.md).

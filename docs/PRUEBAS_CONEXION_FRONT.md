@@ -4,8 +4,8 @@
 
 En la raíz del back (`Uco.parking`):
 
-1. Copia `.env.example` a `.env` y pon tu `MSSQL_SA_PASSWORD` (solo en tu máquina; no subas `.env`).
-2. Copia `application-secrets.properties.example` a `application-secrets.properties` y usa la **misma** contraseña en `spring.datasource.password`.
+1. Copia `.env.example` a `.env` y pon tu `MSSQL_SA_PASSWORD` (solo en tu máquina; no subas `.env`). **O** exporta desde **Infisical** a `.env` y asegúrate de incluir `MSSQL_SA_PASSWORD` (Docker lo exige).
+2. **Opcional:** si no llevas la contraseña de BD en el `.env`, copia `application-secrets.properties.example` a `application-secrets.properties` y define `spring.datasource.password` (y usuario si aplica). Si el `.env` ya trae `SPRING_DATASOURCE_*` desde Infisical, no hace falta duplicar la contraseña en secrets.
 3. `docker compose up -d`
 4. Crea la base **una vez** (SSMS, Azure Data Studio o `sqlcmd` contra `localhost,1433`):
 
@@ -13,7 +13,7 @@ En la raíz del back (`Uco.parking`):
 CREATE DATABASE UCOParking;
 ```
 
-5. Arranca Spring con perfil `dev` (por defecto en `application.yml`). Hibernate `ddl-auto: update` creará/actualizará tablas.
+5. Arranca Spring con perfil `dev` (por defecto en `application.yml`). Hibernate `ddl-auto: update` creará/actualizará tablas. Si existe `.env` en la raíz, la app lo carga al inicio (ver [SECRETOS_E_INFISICAL.md](SECRETOS_E_INFISICAL.md)).
 
 ## 2. Backend
 
@@ -23,7 +23,8 @@ CREATE DATABASE UCOParking;
 
 Variables útiles (alternativa al archivo secrets):
 
-- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`
+- `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` (export Infisical)
+- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD` (si no usas `SPRING_DATASOURCE_*`)
 
 Para dejar **todos los cupos libres** en la base (placa, franja y dueño en blanco): ejecuta `docs/reset-parking-spots-libres.sql` en SSMS o Azure Data Studio contra `UCOParking`.
 
